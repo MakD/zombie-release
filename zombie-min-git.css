@@ -1163,7 +1163,7 @@ fieldset {
   border: 0.22em solid rgba(var(--accent-off)) !important;
 }
 #itemDetailPage .emby-select-withcolor {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0) !important;
 }
 .itemSelectionPanel {
   border: 0.01em solid rgba(var(--accent)) !important;
@@ -1780,3 +1780,11 @@ fieldset {
   .layout-mobile .itemBackdrop:not([style*="background-image"]) {
       height: 20vw;
   }
+.detailsGroupItem, .trackSelections .selectContainer {
+  display: -webkit-flex;
+  display: flex;
+  margin: 0 0 .5em !important;
+  max-width: 42em;
+  /* flex-wrap: wrap; */
+  align-items: center;
+}
