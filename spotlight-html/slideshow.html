@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Jellyfin Featured Slideshow</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <style>
+        /* CSS styles for the slideshow elements */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            /* Indicates the element is clickable */
+            outline: none;
+            /* Custom focus style will be used */
+        }
+
+        .slide:focus {
+            outline: 2px solid #fff;
+            /* Visual focus indicator */
+        }
+
+        .backdrop {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 50px);
+            object-fit: cover;
+            object-position: center 20%;
+            z-index: 1;
+            border-radius: 13px;
+        }
+
+        .gradient-overlay {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 50px);
+            background: linear-gradient(to right, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 0.8) 30%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.3) 70%, rgba(0, 0, 0, 0) 100%);
+            z-index: 2;
+            border-radius: 13px;
+        }
+
+        .logo {
+            position: absolute;
+            top: 45%;
+            left: 10px;
+            transform: translateY(-50%);
+            max-height: 50%;
+            max-width: 60%;
+            width: auto;
+            z-index: 3;
+        }
+
+        .featured-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-color: transparent;
+            font-family: 'Quicksand', sans-serif;
+            color: #D3D3D3;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            z-index: 3;
+        }
+
+        .plot {
+            position: absolute;
+            bottom: 5%;
+            left: 0%;
+            right: 0%;
+            color: white;
+            width: 100%;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 14px;
+            background: transparent;
+            padding: 10px;
+            border-radius: 15px;
+            z-index: 4;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Container for dynamic slides -->
+    <div id="slides-container"></div>
+
+    <!-- JavaScript for fetching movies and creating the slideshow -->
+    <script>
+        // Configuration variables
+        let title = 'Spotlight'; // Default title
+        const userId = 'ENTER USERID HERE'; // Replace with your User ID
+        const token = 'ENTER API KEY HERE'; // Replace with your API token
+        const shuffleInterval = 7000; // Time in milliseconds between slide changes (25000ms = 25 seconds)
+        const listFileName = 'list.txt'; // Name of the file containing the list of movie IDs
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function truncateText(element, maxLength) {
+            var truncated = element.innerText;
+
+            if (truncated.length > maxLength) {
+                truncated = truncated.substr(0, maxLength) + '...';
+            }
+            element.innerText = truncated;
+        }
+
+        function createSlideForMovie(movie, title) {
+            const container = document.getElementById('slides-container');
+            const slideElement = createSlideElement(movie, title);
+            container.appendChild(slideElement);
+        }
+
+        function createSlideElement(movie, title) {
+            const itemId = movie.Id;
+            const plot = movie.Overview;
+
+            const slide = document.createElement('a');
+            slide.className = 'slide';
+            slide.href = `/#!/details?id=${itemId}`;
+            slide.target = '_top';
+            slide.rel = 'noreferrer';
+            slide.setAttribute('tabindex', '0'); // Make the slide focusable
+
+            // Key event listener for remote control input
+            slide.addEventListener('keydown', function (event) {
+                if (event.keyCode === 13) { // Enter key
+                    window.location.href = this.href;
+                }
+            });
+
+            const backdrop = document.createElement('img');
+            backdrop.className = 'backdrop';
+            backdrop.src = `/Items/${itemId}/Images/Backdrop/0`;
+            backdrop.alt = 'Backdrop';
+
+            const gradientOverlay = document.createElement('div');
+            gradientOverlay.className = 'gradient-overlay';
+
+            const logo = document.createElement('img');
+            logo.className = 'logo';
+            logo.src = `/Items/${itemId}/Images/Logo`;
+            logo.alt = 'Logo';
+
+            const featuredContent = document.createElement('div');
+            featuredContent.className = 'featured-content';
+            featuredContent.textContent = title;
+
+            const plotElement = document.createElement('div');
+            plotElement.className = 'plot';
+            plotElement.textContent = plot;
+
+            // Truncate the text of this specific plot element
+            truncateText(plotElement, 140); // Adjust 240 to your preferred character limit
+
+            slide.appendChild(backdrop);
+            slide.appendChild(gradientOverlay);
+            slide.appendChild(logo);
+            slide.appendChild(featuredContent);
+            slide.appendChild(plotElement);
+
+            return slide;
+        }
+
+        function initializeSlideshow() {
+            var slides = document.querySelectorAll(".slide");
+            var currentSlide = 0;
+            var shuffledIndexes = shuffleArray(Array.from({ length: slides.length }, (_, i) => i));
+
+            function showSlide(index) {
+                for (var i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                slides[shuffledIndexes[index]].style.display = "block";
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            showSlide(currentSlide);
+            setInterval(nextSlide, shuffleInterval);
+        }
+
+        function fetchMovies() {
+            const noCacheUrl = listFileName + '?' + new Date().getTime();
+
+            fetch(noCacheUrl)
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    } else {
+                        throw new Error('list.txt not found, fetching movies from server.');
+                    }
+                })
+                .then(text => {
+                    const lines = text.split('\n').filter(Boolean);
+                    title = lines.shift() || 'Spotlight'; // Set the global title
+
+                    const movieIds = lines.map(line => line.substring(0, 32));
+                    return Promise.all(movieIds.map(id => fetchMovieDetails(id)));
+                })
+                .then(movies => {
+                    movies.forEach(movie => createSlideForMovie(movie, title));
+                    initializeSlideshow();
+                })
+                .catch(error => {
+                    console.error(error);
+                    fetchMoviesFromServer(); // Fallback to fetching movies from the server
+                });
+        }
+
+        function fetchMovieDetails(movieId) {
+            return fetch(`/Users/${userId}/Items/${movieId}`, {
+                headers: {
+                    'Authorization': `MediaBrowser Client="Jellyfin Web", Device="YourDeviceName", DeviceId="YourDeviceId", Version="YourClientVersion", Token="${token}"`
+                }
+            })
+                .then(response => response.json())
+                .then(movie => {
+                    console.log("Movie Title:", movie.Name);
+                    console.log("Movie Overview:", movie.Overview);
+                    return movie;
+                });
+        }
+
+        function fetchMoviesFromServer() {
+            title = 'Spotlight'; // Reset title to 'Spotlight' when fetching from server
+            fetch(`/Users/${userId}/Items?IncludeItemTypes=Movie,Series&Recursive=true&Limit=300`, {
+                headers: {
+                    'Authorization': `MediaBrowser Client="Jellyfin Web", Device="YourDeviceName", DeviceId="YourDeviceId", Version="YourClientVersion", Token="${token}"`
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const movies = data.Items;
+                    const shuffledMovies = shuffleArray(movies);
+                    const selectedMovieIds = shuffledMovies.slice(0, 30).map(movie => movie.Id);
+                    return Promise.all(selectedMovieIds.map(id => fetchMovieDetails(id)));
+                })
+                .then(movies => {
+                    movies.forEach(movie => createSlideForMovie(movie, 'Spotlight'));
+                    initializeSlideshow();
+                })
+                .catch(error => console.error('Error fetching movies:', error));
+        }
+
+        fetchMovies();
+    </script>
+</body>
+
+</html>
