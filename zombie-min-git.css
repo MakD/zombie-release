@@ -1776,3 +1776,7 @@ fieldset {
 .cardOverlayButtonIcon {
   background-color: #00000000 !important;
 }
+/* prevents content from being out of view when there is no itemBackdrop (e.g in Actor pages) */
+  .layout-mobile .itemBackdrop:not([style*="background-image"]) {
+      height: 20vw;
+  }
