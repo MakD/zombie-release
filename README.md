@@ -7,7 +7,7 @@ Huge Thanks to all the theme creators out there for their hard work. This theme 
 Installation:
 
 ```
-@import url('https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/zombie-min-git.css');
+@import url('https://cdn.jsdelivr.net/gh/MakD/zombie-release@v4/zombie-min-git.css');
 ```
 
 ### Screenshots (Desktop)
