@@ -1,0 +1,8 @@
+:root {
+  --accent: 120, 190, 213;       /* Aqua Blue */
+  --accent-off: 90, 105, 110;    /* Smoky Gray */
+  --dark: 38, 46, 50;            /* Carbon Gray */
+  --darkest: 21, 26, 29;         /* Ebon */
+  --dark-highlight: 54, 64, 69;  /* Granite */
+  --dark-apparent: 20, 32, 36;   /* Iron Gray */
+}

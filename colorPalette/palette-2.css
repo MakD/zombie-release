@@ -1,0 +1,8 @@
+:root {
+  --accent: 162, 205, 238;       /* Light Steel Blue */
+  --accent-off: 90, 104, 110;    /* Dark Slate Gray */
+  --dark: 36, 41, 46;            /* Onyx */
+  --darkest: 18, 23, 27;         /* Eerie Black */
+  --dark-highlight: 51, 60, 66;  /* Outer Space */
+  --dark-apparent: 27, 35, 40;   /* Midnight */
+}

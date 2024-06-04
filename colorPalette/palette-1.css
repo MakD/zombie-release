@@ -1,0 +1,8 @@
+:root {
+  --accent: 173, 223, 244;       /* Powder Blue */
+  --accent-off: 112, 128, 144;   /* Slate Gray */
+  --dark: 47, 54, 59;            /* Charcoal */
+  --darkest: 28, 33, 36;         /* Jet */
+  --dark-highlight: 60, 70, 75;  /* Gunmetal */
+  --dark-apparent: 29, 38, 41;   /* Dark Slate */
+}

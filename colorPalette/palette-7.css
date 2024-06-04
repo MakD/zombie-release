@@ -1,0 +1,8 @@
+:root {
+  --accent: 110, 180, 200;       /* Pale Blue */
+  --accent-off: 78, 93, 100;     /* Cadet Gray */
+  --dark: 35, 43, 47;            /* Storm Cloud */
+  --darkest: 18, 23, 25;         /* Raven Black */
+  --dark-highlight: 50, 60, 65;  /* Charcoal Blue */
+  --dark-apparent: 19, 30, 34;   /* Lead Gray */
+}

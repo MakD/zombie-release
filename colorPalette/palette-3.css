@@ -1,0 +1,8 @@
+:root {
+  --accent: 146, 199, 230;       /* Sky Blue */
+  --accent-off: 80, 92, 99;      /* Slate Blue */
+  --dark: 40, 47, 52;            /* Space Gray */
+  --darkest: 22, 27, 31;         /* Black Charcoal */
+  --dark-highlight: 56, 66, 72;  /* Steel Gray */
+  --dark-apparent: 25, 34, 39;   /* Graphite */
+}
