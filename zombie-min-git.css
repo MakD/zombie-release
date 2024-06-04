@@ -35,10 +35,10 @@ h4 {
 }
 .adminDrawerLogo img,
 imgLogoIcon {
-  content: url(https://i.imgur.com/igegRaH.png) !important;
+  content: url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@main/logo/jellyfin-logo-light.png) !important;
 }
 .pageTitleWithLogo {
-  background-image: url(https://i.imgur.com/igegRaH.png) !important;
+  background-image: url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@main/logo/jellyfin-logo-light.png) !important;
 }
 @media only screen and (max-device-width: 767px) {
   .featurediframe {
