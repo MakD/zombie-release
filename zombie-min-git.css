@@ -1,6 +1,6 @@
 @import url(https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/header/header_transparent.css);
 @import url(https://cdn.jsdelivr.net/gh/prayag17/Jellyfin-Icons/Font%20Awesome/regular.css);
-@import url(https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap);
 .css-1jmiiw3,
 .css-1jmiiw3 .MuiDataGrid-withBorderColor {
   border-color: rgba(var(--accent), 0.25);
@@ -14,7 +14,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: Quicksand, sans-serif;
+  font-family: Figtree, sans-serif;
 }
 :root {
   --accent: 255, 255, 255;
