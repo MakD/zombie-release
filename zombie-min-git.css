@@ -1585,26 +1585,21 @@ fieldset {
   justify-content: left;
   text-align: left;
 }
-.layout-mobile .itemBackdrop::before {
-  content: "";
-  position: absolute;
-  right: 0;
-  left: 0;
-  bottom: -2px;
-  height: 50%;
-  background: linear-gradient(
-    0deg,
-    rgba(var(--dark-apparent), 1) 10%,
-    rgba(var(--dark-apparent), 0) 65%
-  );
-  pointer-events: none;
-  z-index: 1;
-}
 .layout-mobile .itemBackdrop {
   position: relative;
   background-size: cover;
   height: 40vh;
   margin-top: 0;
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    rgba(var(--dark-apparent), 1) 10%,
+    rgba(var(--dark-apparent), 0) 90%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    rgba(var(--dark-apparent), 1) 10%,
+    rgba(var(--dark-apparent), 0) 90%
+  );
 }
 .layout-mobile .detailPageWrapperContainer {
   top: -5em;
@@ -1776,16 +1771,15 @@ fieldset {
 .cardOverlayButtonIcon {
   background-color: #00000000 !important;
 }
-/* prevents content from being out of view when there is no itemBackdrop (e.g in Actor pages) */
+/* prevents content from being out of view when there is no itemBackdrop (e.g in Actor pages) 
   .layout-mobile .itemBackdrop:not([style*="background-image"]) {
       height: 20vw;
-  }
+  }*/
 .detailsGroupItem, .trackSelections .selectContainer {
   display: -webkit-flex;
   display: flex;
   margin: 0 0 .5em !important;
   max-width: 42em;
-  /* flex-wrap: wrap; */
   align-items: center;
 }
 /* fix for Media (small) cards in home screen */
