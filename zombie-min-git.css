@@ -1788,3 +1788,15 @@ fieldset {
   /* flex-wrap: wrap; */
   align-items: center;
 }
+/* fix for Media (small) cards in home screen */
+#homeTab .homeLibraryButton {
+	background: rgba(var(--accent),.4) !important;
+}
+#homeTab .homeLibraryButton:hover {
+	background: rgba(var(--accent),.6) !important;
+	color: rgba(var(--darkest),1) !important;
+	border-radius: var(--rounding) !important;
+}
+#homeTab .homeLibraryIcon {
+  margin-left: 0em;
+}
