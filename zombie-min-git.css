@@ -1794,3 +1794,26 @@ fieldset {
 #homeTab .homeLibraryIcon {
   margin-left: 0em;
 }
+
+button.emby-tab-button:nth-child(3) {
+  display: none;
+}
+
+button.emby-tab-button:nth-child(5) {
+  display: none;
+}
+
+/* Limit Custom CSS code box size */
+#txtCustomCss {
+    height: 400px !important;
+    max-height: none !important;
+    overflow-y: scroll !important;
+    resize: vertical !important;
+}
+.customCssContainer textarea {
+    height: auto !important;
+}
+
+.layout-mobile .btnShuffle {
+    display: none;
+}
