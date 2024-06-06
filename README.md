@@ -10,6 +10,12 @@ Installation:
 @import url('https://cdn.jsdelivr.net/gh/MakD/zombie-release@v6/zombie-min-git.css');
 ```
 
+### Addon (Alternate View for Mobile-Portrait) (Add below your main import)
+
+```
+@import URL('https://cdn.jsdelivr.net/gh/MakD/zombie-release@main/mobile-alt-layout.css');
+```
+
 ### Screenshots (Desktop)
 
 Login:
