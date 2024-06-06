@@ -12,6 +12,8 @@ Installation:
 
 ### Addon (Alternate View for Mobile-Portrait) (Add below your main import)
 
+![Alt Mobile Detail](https://github.com/MakD/zombie-release/blob/main/img/mobile/mobile_detail-alt.png)
+
 ```
 @import URL('https://cdn.jsdelivr.net/gh/MakD/zombie-release@main/mobile-alt-layout.css');
 ```
