@@ -1,11 +1,20 @@
 /*if the logo is present on the details page and loaded hide the title so it doesnt duplicate and look weird*/
-#itemDetailPage .itemName.infoText.parentNameLast > bdi:nth-child(1) {display: none;}
-.hide+.detailPageWrapperContainer .itemName > bdi:nth-child(1) {display: block !important;}
+#itemDetailPage .itemName.infoText.parentNameLast > bdi:nth-child(1) {
+  display: none;
+}
+.hide + .detailPageWrapperContainer .itemName > bdi:nth-child(1) {
+  display: block !important;
+}
 /*the same but for the single episodes link back title*/
-#itemDetailPage .parentName > bdi:nth-child(1) {display: none;}
-.hide+.parentName > bdi:nth-child(1) {display: block !important;}
+#itemDetailPage .parentName > bdi:nth-child(1) {
+  display: none;
+}
+.hide + .parentName > bdi:nth-child(1) {
+  display: block !important;
+}
 
-.layout-mobile .itemBackdrop {
+@media (orientation: portrait) {
+  .layout-mobile .itemBackdrop {
     position: relative;
     background-size: cover;
     height: 50vh;
@@ -21,11 +30,11 @@
       rgba(var(--dark-apparent), 0) 90%
     );
   }
-  
+
   .layout-mobile {
     position: relative;
   }
-  
+
   .layout-mobile .detailLogo {
     display: block;
     width: 25em;
@@ -34,70 +43,70 @@
     top: 30vh;
     transform: translateX(-50%);
   }
-  
+
   /* moviendo a la Izq Contenedor de botones de pelicula*/
   .layout-mobile .mainDetailButtons {
-      margin-top: 2em;
-      padding-left: 0;
-      justify-content: space-evenly;
-      flex-wrap: wrap;
+    margin-top: 2em;
+    padding-left: 0;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
   }
-  
+
   .layout-mobile .btnPlay {
     border-radius: 2em;
     width: 100% !important;
     background-color: white;
     color: black;
-    padding: 0.6em!important;
-    margin-bottom: 1em!important;
+    padding: 0.6em !important;
+    margin-bottom: 1em !important;
   }
-  
+
   .layout-mobile .btnPlay::after {
-    content : attr(title);
+    content: attr(title);
     margin: 0 10px 0 2px;
     color: black;
   }
-  
+
   .layout-mobile .btnPlay.detailButton {
     flex-direction: row;
   }
-  
+
   .layout-mobile .btnShuffle::after {
-    content : attr(title);
+    content: attr(title);
     color: white;
     font-weight: normal;
   }
-  
+
   .layout-mobile .btnPlaystate::after {
-    content : attr(title);
+    content: attr(title);
     color: white;
     font-weight: normal;
   }
-  
+
   .layout-mobile .btnUserRating::after {
-    content : attr(title);
+    content: attr(title);
     color: white;
     font-weight: normal;
   }
-  
+
   .layout-mobile .btnMoreCommands::after {
-    content : attr(title);
+    content: attr(title);
     color: white;
     font-weight: normal;
   }
-  
+
   .layout-mobile .btnPlayTrailer::after {
-    content : attr(title);
+    content: attr(title);
     color: white;
     font-weight: normal;
   }
-  
+
   .layout-mobile .btnReplay::after {
-    content : attr(title);
+    content: attr(title);
     color: white;
     font-weight: normal;
   }
-  
+
   .layout-mobile .btnShuffle .detailButton-icon,
   .layout-mobile .btnReplay .detailButton-icon,
   .layout-mobile .btnPlayTrailer .detailButton-icon,
@@ -106,7 +115,7 @@
   .layout-mobile .btnPlaystate .detailButton-icon {
     background-color: #ffffff21;
     border-radius: 50%;
-    padding: .25em;
+    padding: 0.25em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -114,3 +123,4 @@
     height: 1em;
     /*margin-bottom: .3em;*/
   }
+}
