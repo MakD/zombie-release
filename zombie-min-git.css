@@ -1912,3 +1912,8 @@ fieldset {
     align-self: center;
   }
 }
+@media (min-width: 43.75em) {
+    .layout-mobile [dir=ltr] .mainDetailButtons {
+        padding-left: 2%;
+    }
+}
