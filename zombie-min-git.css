@@ -1,14 +1,6 @@
 @import url(https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/header/header_transparent.css);
-@import url(https://cdn.jsdelivr.net/gh/prayag17/Jellyfin-Icons/Font%20Awesome/regular.css);
+@import url(https://cdn.jsdelivr.net/gh/gryffyn/Jellyfin-Icons@main/Font%20Awesome/regular.css);
 @import url(https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap);
-.css-1jmiiw3,
-.css-1jmiiw3 .MuiDataGrid-withBorderColor {
-  border-color: rgba(var(--accent), 0.25);
-}
-#btnShutdown,
-.navMenuOption-selected {
-  color: rgba(var(--darkest)) !important;
-}
 body,
 h1,
 h2,
@@ -33,6 +25,17 @@ h4 {
   --rounding-large: 24px;
   --rounding-circle: 100px;
 }
+.css-1jmiiw3,
+.css-1jmiiw3 .MuiDataGrid-withBorderColor {
+  border-color: rgba(var(--accent), 0.25);
+}
+#btnShutdown,
+#dashboardPage .notification_important,
+.itemSelectionCount,
+.navMenuOption-selected,
+.notifications_off {
+  color: rgba(var(--darkest)) !important;
+}
 .adminDrawerLogo img,
 imgLogoIcon {
   content: url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@main/logo/jellyfin-logo-light.png) !important;
@@ -46,7 +49,7 @@ imgLogoIcon {
   }
 }
 .backdropImage {
-  filter: blur(1px) saturate(120%) contrast(120%) brightness(20%);
+  filter: blur(1px) saturate(120%) contrast(120%) brightness(50%);
 }
 .card.show-animation:focus > .cardBox {
   -webkit-transform: scale(1.1);
@@ -96,7 +99,8 @@ imgLogoIcon {
 .layout-mobile .studiosGroup,
 .layout-mobile .writersGroup,
 .osdVolumeSlider.mdl-slider.mdl-js-slider.mdl-slider-hoverthumb,
-button.emby-tab-button:nth-child(3) {
+button.emby-tab-button:nth-child(3),
+button.emby-tab-button:nth-child(5) {
   display: none;
 }
 .itemExternalLinks,
@@ -146,7 +150,11 @@ a[data-role="button"]:hover {
 .css-17c09up,
 .css-17c09up.Mui-selected,
 .css-1ip8vbj,
-.css-1ip8vbj.Mui-selected {
+.css-1ip8vbj.Mui-selected,
+.css-1jmiiw3,
+.osdPoster img,
+fieldset,
+progress {
   border-radius: var(--rounding);
 }
 .serverInfo.paperList {
@@ -228,12 +236,15 @@ a[data-role="button"]:hover {
   color: rgb(var(--accent));
   background-color: rgba(var(--darkest), 0.9);
 }
+.css-122sjhb,
+.css-8vq3cg {
+  border-radius: var(--rounding-alt);
+}
 .css-r8u8y9 {
   margin: 16px;
   padding: 0;
 }
 .css-122sjhb {
-  border-radius: var(--rounding-alt);
   padding: 12px 16px;
 }
 .css-122sjhb:hover {
@@ -257,11 +268,7 @@ a[data-role="button"]:hover {
 .css-195jjve {
   background-color: rgba(var(--accent), 1);
 }
-.css-1jmiiw3 {
-  border-radius: var(--rounding);
-}
 .css-8vq3cg {
-  border-radius: var(--rounding-alt);
   border: 1px solid rgba(var(--accent), 0.12);
 }
 .css-5y4e7x.Mui-selected {
@@ -511,11 +518,6 @@ button-flat:hover {
   border: 0.01em solid rgba(var(--accent)) !important;
   background-color: rgba(var(--accent)) !important;
 }
-.osdPoster img,
-fieldset,
-progress {
-  border-radius: var(--rounding);
-}
 .mdl-spinner__layer-1 {
   border-color: rgba(var(--accent));
 }
@@ -677,6 +679,7 @@ div[data-role="controlgroup"] a[data-role="button"]:last-child {
 .layout-desktop .detailRibbon {
   background: rgba(0, 0, 0, 0);
 }
+#itemDetailPage .emby-select-withcolor,
 .itemBackdrop::after {
   background: rgba(0, 0, 0, 0) !important;
 }
@@ -1057,11 +1060,6 @@ a[data-role="button"] {
   background: rgba(var(--accent), 0.75) !important;
   color: rgba(var(--darkest), 1) !important;
 }
-#dashboardPage .notification_important,
-.itemSelectionCount,
-.notifications_off {
-  color: rgba(var(--darkest)) !important;
-}
 div[data-role="controlgroup"] a.ui-btn-active {
   background: rgb(var(--accent)) !important;
   color: rgba(var(--darkest), 1) !important;
@@ -1161,9 +1159,6 @@ fieldset {
 }
 .checkboxOutline {
   border: 0.22em solid rgba(var(--accent-off)) !important;
-}
-#itemDetailPage .emby-select-withcolor {
-  background: rgba(0, 0, 0, 0) !important;
 }
 .itemSelectionPanel {
   border: 0.01em solid rgba(var(--accent)) !important;
@@ -1665,6 +1660,10 @@ fieldset {
 }
 #txtCustomCss {
   padding: 1em !important;
+  height: 400px !important;
+  max-height: none !important;
+  overflow-y: scroll !important;
+  resize: vertical !important;
 }
 .selectArrow {
   margin-top: 1.1em;
@@ -1771,49 +1770,145 @@ fieldset {
 .cardOverlayButtonIcon {
   background-color: #00000000 !important;
 }
-/* prevents content from being out of view when there is no itemBackdrop (e.g in Actor pages) 
-  .layout-mobile .itemBackdrop:not([style*="background-image"]) {
-      height: 20vw;
-  }*/
-.detailsGroupItem, .trackSelections .selectContainer {
+.detailsGroupItem,
+.trackSelections .selectContainer {
   display: -webkit-flex;
   display: flex;
-  margin: 0 0 .5em !important;
+  margin: 0 0 0.5em !important;
   max-width: 42em;
   align-items: center;
 }
-/* fix for Media (small) cards in home screen */
 #homeTab .homeLibraryButton {
-	background: rgba(var(--accent),.4) !important;
+  background: rgba(var(--accent), 0.4) !important;
 }
 #homeTab .homeLibraryButton:hover {
-	background: rgba(var(--accent),.6) !important;
-	color: rgba(var(--darkest),1) !important;
-	border-radius: var(--rounding) !important;
+  background: rgba(var(--accent), 0.6) !important;
+  color: rgba(var(--darkest), 1) !important;
+  border-radius: var(--rounding) !important;
 }
 #homeTab .homeLibraryIcon {
-  margin-left: 0em;
-}
-
-button.emby-tab-button:nth-child(3) {
-  display: none;
-}
-
-button.emby-tab-button:nth-child(5) {
-  display: none;
-}
-
-/* Limit Custom CSS code box size */
-#txtCustomCss {
-    height: 400px !important;
-    max-height: none !important;
-    overflow-y: scroll !important;
-    resize: vertical !important;
+  margin-left: 0;
 }
 .customCssContainer textarea {
-    height: auto !important;
+  height: auto !important;
 }
-
-.layout-mobile .btnShuffle {
+.navMenuOption {
+  position: relative !important;
+  border-radius: var(--rounding) !important;
+  grid-gap: 5px !important;
+}
+.navMenuOption:hover {
+  margin-left: 10px !important;
+}
+.navMenuOption::before {
+  content: "" !important;
+  width: 5px !important;
+  height: 1.5em !important;
+  background: rgb(var(--darkest)) !important;
+  display: block !important;
+  flex: 0 0 auto !important;
+  border-radius: 10px !important;
+  opacity: 0 !important;
+  transition: 0.2s !important;
+}
+.navMenuOption:hover:before {
+  opacity: 1 !important;
+  height: 1.5em !important;
+}
+@media (orientation: landscape) {
+  .layout-mobile .itemBackdrop {
+    display: block;
+    mask-image: linear-gradient(to right, transparent, black),
+      linear-gradient(to top, transparent, black);
+    -webkit-mask-image: linear-gradient(to right, transparent, black),
+      linear-gradient(to top, transparent, black);
+    mask-composite: source-in;
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+    background-attachment: fixed;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh !important;
+    position: fixed !important;
+    top: 0;
+    margin-top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+  }
+  .layout-mobile .detailLogo {
+    display: block;
+    left: 6%;
+    top: 20vh;
+    transform: scale(1.5);
+  }
+  .layout-mobile .material-icons.detailButton-icon.check,
+  .layout-mobile .material-icons.detailButton-icon.favorite,
+  .layout-mobile .material-icons.detailButton-icon.more_vert,
+  .layout-mobile .material-icons.detailButton-icon.replay,
+  .layout-mobile .material-icons.detailButton-icon.theaters {
     display: none;
+  }
+  .layout-mobile .btnMoreCommands::after,
+  .layout-mobile .btnPlay::after,
+  .layout-mobile .btnPlayTrailer::after,
+  .layout-mobile .btnPlaystate::after,
+  .layout-mobile .btnReplay::after,
+  .layout-mobile .btnUserRating::after,
+  .layout-mobile .btntheaters::after {
+    content: attr(title);
+  }
+  .layout-mobile .detailButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: left;
+    width: auto;
+    margin: 0;
+  }
+  .layout-mobile .detailPagePrimaryContainer {
+    align-content: flex-start;
+    display: flex;
+    z-index: 2;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .layout-mobile .mainDetailButtons {
+    width: auto;
+  }
+  .layout-mobile .detailRibbon {
+    background: 0 0;
+    height: unset !important;
+    margin-top: 35vh;
+  }
+  #childrenCollapsible .padded-right {
+    padding-right: 0;
+  }
+  @media (min-width: 50em) {
+    .layout-mobile [dir="ltr"] .mainDetailButtons {
+      padding-left: 2%;
+    }
+    .layout-mobile [dir="ltr"] .infoWrapper {
+      padding-left: 1.5em !important;
+      padding-top: 10% !important;
+    }
+    .listItem-content {
+      -webkit-align-items: center;
+      align-items: center;
+      display: -webkit-flex;
+      display: flex;
+      width: 100%;
+    }
+  }
+}
+@media (max-width: 100em) {
+  .sectionTabs {
+    padding-left: 0.4em !important;
+    padding-right: 0.4em !important;
+    width: auto;
+    align-self: center;
+  }
 }
