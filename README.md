@@ -50,18 +50,18 @@ Installation:
 <table>
   <tr>
     <td>
-      <img src="https://github.com/MakD/zombie-release/blob/main/img/mobile/mobile_login.png?raw=true" width="600" height="800" />
+      <img src="https://github.com/MakD/zombie-release/blob/main/img/mobile/mobile_login.png?raw=true" width="600" height="700" />
     </td>
     <td>
-      <img src="https://github.com/MakD/zombie-release/blob/main/img/mobile/mobile_homepage.png?raw=true" width="600" height="800" />
+      <img src="https://github.com/MakD/zombie-release/blob/main/img/mobile/mobile_homepage.png?raw=true" width="600" height="700" />
     </td>
   </tr>
   <tr>
     <td>
-      <img src="https://github.com/MakD/zombie-release/blob/main/img/mobile/mobile_itempage.png?raw=true" width="600" height="800" />
+      <img src="https://github.com/MakD/zombie-release/blob/main/img/mobile/mobile_itempage.png?raw=true" width="600" height="700" />
     </td>
     <td>
-      <img src="https://github.com/MakD/zombie-release/blob/main/img/mobile/mobile_detail-alt.png?raw=true" width="600" height="800" />
+      <img src="https://github.com/MakD/zombie-release/blob/main/img/mobile/mobile_detail-alt.png?raw=true" width="600" height="700" />
     </td>
   </tr>
   <tr>
