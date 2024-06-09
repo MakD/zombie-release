@@ -1,52 +1,89 @@
-# zombie-release
+# zombie-release (10.9.x and Tablet compatible)
 
 ## A theme for Jellyfin 10.9.x combining the best from the Public Themes
 
-Huge Thanks to all the theme creators out there for their hard work. This theme takes bits and pieces from other themes, namely [Zesty](https://github.com/stpnwf/ZestyTheme/tree/main), [JellySkin](https://github.com/prayag17/JellySkin/tree/master), [Ultrachromic](https://github.com/CTalvio/Ultrachromic) and [JellyFin Landscape](https://github.com/krlsantcard/Jellyfin-10.9/tree/main). Please let me know in case I have missed out anybody.
+Huge Thanks to all the theme creators out there for their hard work. This theme takes bits and pieces from other themes, namely [Zesty](https://github.com/stpnwf/ZestyTheme/tree/main), [JellySkin](https://github.com/prayag17/JellySkin/tree/master), [Ultrachromic](https://github.com/CTalvio/Ultrachromic) and [JellyFin Landscape](https://github.com/krlsantcard/Jellyfin-10.9/tree/main). Please let me know if I have missed out anybody.
 
 Installation:
 
 ```
-@import url('https://cdn.jsdelivr.net/gh/MakD/zombie-release@v6/zombie-min-git.css');
+@import url('https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/zombie-min-git.css');
 ```
 
 ### Addon (Alternate View for Mobile-Portrait) (Add below your main import)
 
-![Alt Mobile Detail](https://github.com/MakD/zombie-release/blob/main/img/mobile/mobile_detail-alt.png)
-
 ```
-@import URL('https://cdn.jsdelivr.net/gh/MakD/zombie-release@main/mobile-alt-layout.css');
+@import URL('https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/mobile-alt-layout.css');
 ```
 
 ### Screenshots (Desktop)
 
-Login:
-
-![Login](https://github.com/MakD/zombie-release/blob/main/img/desktop/login.png)
-
-Homepage:
-
-![Homepage](https://github.com/MakD/zombie-release/blob/main/img/desktop/homepage.png)
-
-Detail Page:
-
-![Detail](https://github.com/MakD/zombie-release/blob/main/img/desktop/detail.png)
-
-Movies Page:
-
-![Movies](https://github.com/MakD/zombie-release/blob/main/img/desktop/movies.png)
-
-Season Page:
-
-![Series Season Page](https://github.com/MakD/zombie-release/blob/main/img/desktop/seasonpage.png)
-
-Dashboard:
-
-![Dashboard](https://github.com/MakD/zombie-release/blob/main/img/desktop/dashboard.png)
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/MakD/zombie-release/blob/main/img/desktop/login.png" />
+    </td>
+    <td>
+      <img src="https://github.com/MakD/zombie-release/blob/main/img/desktop/homepage.png?raw=true" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://github.com/MakD/zombie-release/blob/main/img/desktop/detail.png?raw=true" />
+    </td>
+    <td>
+      <img src="https://github.com/MakD/zombie-release/blob/main/img/desktop/sidebar.png?raw=true" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://github.com/MakD/zombie-release/blob/main/img/desktop/tv-series.png?raw=true" />
+    </td>
+    <td>
+      <img src="https://github.com/MakD/zombie-release/blob/main/img/desktop/seasonpage.png?raw=true" />
+    </td>
+  </tr>
+</table>
 
 ### Screenshots (Mobile)
 
-![Mobile](https://github.com/MakD/zombie-release/blob/main/img/mobile/combined-mobile.png)
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/MakD/zombie-release/blob/main/img/mobile/mobile_login.png?raw=true" width="600" height="900" />
+    </td>
+    <td>
+      <img src="https://github.com/MakD/zombie-release/blob/main/img/mobile/mobile_homepage.png?raw=true" width="600" height="900" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://github.com/MakD/zombie-release/blob/main/img/mobile/mobile_itempage.png?raw=true" width="600" height="900" />
+    </td>
+    <td>
+      <img src="https://github.com/MakD/zombie-release/blob/main/img/mobile/mobile_detail-alt.png?raw=true" width="600" height="900" />
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="https://github.com/MakD/zombie-release/blob/main/img/mobile/mobile_landscape.png?raw=true" style="width: 100%;" />
+    </td>
+  </tr>
+</table>
+
+### Screenshots (Tablet)
+
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/MakD/zombie-release/blob/main/img/tablet/tablet_portrait.png?raw=true" />
+    </td>
+    <td>
+      <img src="https://github.com/MakD/zombie-release/blob/main/img/tablet/tablet_landscape.png?raw=true" />
+    </td>
+  </tr>
+</table>
+
 
 ## Color Palettes
 
