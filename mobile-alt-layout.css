@@ -1,19 +1,12 @@
-/*if the logo is present on the details page and loaded hide the title so it doesnt duplicate and look weird*/
-#itemDetailPage .itemName.infoText.parentNameLast > bdi:nth-child(1) {
+#itemDetailPage .itemName.infoText.parentNameLast > bdi:first-child,
+#itemDetailPage .parentName > bdi:first-child {
   display: none;
 }
-.hide + .detailPageWrapperContainer .itemName > bdi:nth-child(1) {
+.hide + .detailPageWrapperContainer .itemName > bdi:first-child,
+.hide + .parentName > bdi:first-child {
   display: block !important;
 }
-/*the same but for the single episodes link back title*/
-#itemDetailPage .parentName > bdi:nth-child(1) {
-  display: none;
-}
-.hide + .parentName > bdi:nth-child(1) {
-  display: block !important;
-}
-
-@media (orientation: portrait) {
+@media only screen and (max-width: 480px) and (orientation: portrait) {
   .layout-mobile .itemBackdrop {
     position: relative;
     background-size: cover;
@@ -30,11 +23,9 @@
       rgba(var(--dark-apparent), 0) 90%
     );
   }
-
   .layout-mobile {
     position: relative;
   }
-
   .layout-mobile .detailLogo {
     display: block;
     width: 25em;
@@ -43,84 +34,58 @@
     top: 30vh;
     transform: translateX(-50%);
   }
-
-  /* moviendo a la Izq Contenedor de botones de pelicula*/
   .layout-mobile .mainDetailButtons {
     margin-top: 2em;
     padding-left: 0;
     justify-content: space-evenly;
     flex-wrap: wrap;
   }
-
   .layout-mobile .btnPlay {
     border-radius: 2em;
     width: 100% !important;
-    background-color: white;
-    color: black;
+    background-color: #fff;
+    color: #000;
     padding: 0.6em !important;
     margin-bottom: 1em !important;
   }
-
+  .layout-mobile .libraryPage .btnPlay {
+    margin-right: 0 !important;
+  }
   .layout-mobile .btnPlay::after {
     content: attr(title);
     margin: 0 10px 0 2px;
-    color: black;
+    color: #000;
   }
-
   .layout-mobile .btnPlay.detailButton {
     flex-direction: row;
   }
-
+  .layout-mobile .btnReplay::after,
   .layout-mobile .btnShuffle::after {
     content: attr(title);
-    color: white;
-    font-weight: normal;
+    color: #fff;
+    font-weight: 400;
   }
-
-  .layout-mobile .btnPlaystate::after {
-    content: attr(title);
-    color: white;
-    font-weight: normal;
-  }
-
+  .layout-mobile .btnMoreCommands::after,
+  .layout-mobile .btnPlayTrailer::after,
+  .layout-mobile .btnPlaystate::after,
   .layout-mobile .btnUserRating::after {
-    content: attr(title);
-    color: white;
-    font-weight: normal;
+    content: "";
+    color: #fff;
+    font-weight: 400;
   }
-
-  .layout-mobile .btnMoreCommands::after {
-    content: attr(title);
-    color: white;
-    font-weight: normal;
-  }
-
-  .layout-mobile .btnPlayTrailer::after {
-    content: attr(title);
-    color: white;
-    font-weight: normal;
-  }
-
-  .layout-mobile .btnReplay::after {
-    content: attr(title);
-    color: white;
-    font-weight: normal;
-  }
-
-  .layout-mobile .btnShuffle .detailButton-icon,
-  .layout-mobile .btnReplay .detailButton-icon,
-  .layout-mobile .btnPlayTrailer .detailButton-icon,
   .layout-mobile .btnMoreCommands .detailButton-icon,
-  .layout-mobile .btnUserRating .detailButton-icon,
-  .layout-mobile .btnPlaystate .detailButton-icon {
+  .layout-mobile .btnPlayTrailer .detailButton-icon,
+  .layout-mobile .btnPlaystate .detailButton-icon,
+  .layout-mobile .btnReplay .detailButton-icon,
+  .layout-mobile .btnShuffle .detailButton-icon,
+  .layout-mobile .btnUserRating .detailButton-icon {
     background-color: #ffffff21;
     border-radius: 50%;
     padding: 0.25em;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 1em;
-    height: 1em;
-    /*margin-bottom: .3em;*/
+    width: 1.5em;
+    height: 1.5em;
   }
 }
