@@ -1724,7 +1724,7 @@ fieldset {
     height: 38vh;
   }
   .layout-mobile #childrenCollapsible .padded-right {
-    padding-right: 0;
+    
   }
 }
 @media (orientation: landscape) and (min-width: 48.125em) {
@@ -1895,7 +1895,7 @@ fieldset {
     margin-top: 35vh;
   }
   #childrenCollapsible .padded-right {
-    padding-right: 0;
+    padding-right: 38%;
   }
   @media (min-width: 50em) {
     .layout-mobile [dir="ltr"] .mainDetailButtons {
