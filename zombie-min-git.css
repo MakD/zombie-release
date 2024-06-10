@@ -2086,3 +2086,6 @@ div[data-role="page"].page {
 #childrenCollapsible .padded-right {
   padding-right: 38%;
 }
+#searchPage {
+		margin-top: 4.4em;
+	}
