@@ -1,4 +1,3 @@
-@import url(https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/header/header_transparent.css);
 @import url(https://cdn.jsdelivr.net/gh/gryffyn/Jellyfin-Icons@main/Font%20Awesome/regular.css);
 @import url(https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap);
 body,
@@ -166,6 +165,11 @@ imgLogoIcon {
 .layout-desktop .btnShuffle,
 .layout-desktop .detailImageContainer .card,
 .layout-desktop .listViewUserDataButtons,
+.layout-desktop .material-icons.detailButton-icon.check,
+.layout-desktop .material-icons.detailButton-icon.favorite,
+.layout-desktop .material-icons.detailButton-icon.more_vert,
+.layout-desktop .material-icons.detailButton-icon.replay,
+.layout-desktop .material-icons.detailButton-icon.theaters,
 .layout-mobile .btnShuffle,
 .layout-mobile .headerHomeButton,
 .layout-mobile .headerSyncButton,
@@ -187,6 +191,10 @@ button.emby-tab-button:nth-child(5) {
   font-size: 1em;
   margin-bottom: -2px;
   margin-top: 0;
+}
+.layout-mobile .sectionTitleTextButton > .material-icons {
+  margin-bottom: 0;
+  padding-top: 0;
 }
 #indexPage .sectionTitle {
   align-items: center;
@@ -324,6 +332,18 @@ button.emby-tab-button:nth-child(5) {
 }
 .layout-desktop #scenesContent .card.itemAction.chapterCard {
   width: 27.1em !important;
+}
+.layout-desktop .btnMoreCommands::after,
+.layout-desktop .btnPlay::after,
+.layout-desktop .btnPlayTrailer::after,
+.layout-desktop .btnPlaystate::after,
+.layout-desktop .btnReplay::after,
+.layout-desktop .btnUserRating::after,
+.layout-desktop .btntheaters::after {
+  content: attr(title);
+}
+.layout-desktop .mainDetailButtons {
+  width: auto;
 }
 .chapterCard .innerCardFooter {
   background: rgba(var(--dark), 0.5);
@@ -1510,14 +1530,6 @@ fieldset {
 .layout-mobile .overview-expand {
   padding: 0 1em 0.3em;
 }
-.layout-mobile .mainDetailButtons {
-  margin-top: 1.5em;
-}
-.layout-mobile .btnPlay {
-  background-color: rgb(var(--white));
-  margin-right: 2.7em !important;
-  border-radius: 2em !important;
-}
 .layout-mobile .btnPlay::after {
   content: attr(title);
   margin: 0 10px 0 2px;
@@ -1531,6 +1543,11 @@ fieldset {
 [dir="ltr"] .listItem {
   padding: 0.55em 0.45em;
   text-align: justify;
+}
+.layout-mobile .btnPlay {
+  background-color: rgb(var(--white));
+  margin-right: 2.7em !important;
+  border-radius: 2em !important;
 }
 .layout-mobile .listItem-content .listItemBody {
   left: 110px;
@@ -2010,4 +2027,61 @@ fieldset {
 .syncPlayIconCircle {
   color: rgba(var(--accent), 1) !important;
   text-shadow: none !important;
+}
+:focus-visible {
+  outline: 0;
+}
+.layout-mobile .pageTitleWithLogo {
+  height: 40px;
+}
+.pageTitleWithLogo {
+  height: 50px;
+}
+@media all and (min-width: 100em) {
+  #indexPage,
+  #moviesPage,
+  #musicRecommendedPage,
+  #tvRecommendedPage {
+    margin-top: 68px;
+    padding-top: 0 !important;
+    overflow-y: scroll;
+  }
+}
+@media all and (max-width: 100em) {
+  #indexPage,
+  #moviesPage,
+  #musicRecommendedPage,
+  #tvRecommendedPage {
+    margin-top: 130px;
+    padding-top: 0.5em !important;
+    overflow-y: scroll;
+  }
+}
+.force-scroll {
+  overflow-y: auto;
+  overflow-x: auto;
+}
+skinHeader {
+  background: 0 0 !important;
+  position: static;
+}
+.layout-desktop,
+.layout-mobile {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow: hidden !important;
+}
+div[data-role="page"].page {
+  position: absolute;
+  overflow: hidden visible;
+  mask-image: linear-gradient(to top, black 1em calc(100% - 2em), transparent);
+  -webkit-mask-image: linear-gradient(
+    to top,
+    black 1em calc(100% - 2em),
+    transparent
+  );
+  padding: 0 !important;
+}
+#childrenCollapsible .padded-right {
+  padding-right: 38%;
 }
