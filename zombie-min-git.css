@@ -1422,10 +1422,11 @@ fieldset {
 }
 .layout-desktop .nextUpSection {
   border-radius: 34px;
-  margin: 15.5vh 2.5em 1vh 66%;
+  margin: -5.5vh 2.5em 1vh 66%;
   padding-left: 2.5em;
+  padding-right: 1.5em;
+  padding-top: 0em;
   background-color: rgba(var(--darkest), 0.8);
-  padding-top: 0.3em;
   backdrop-filter: blur(4px);
   position: absolute;
 }
@@ -1724,7 +1725,7 @@ fieldset {
     height: 38vh;
   }
   .layout-mobile #childrenCollapsible .padded-right {
-    
+    padding-right: 0;
   }
 }
 @media (orientation: landscape) and (min-width: 48.125em) {
@@ -1895,7 +1896,7 @@ fieldset {
     margin-top: 35vh;
   }
   #childrenCollapsible .padded-right {
-    padding-right: 38%;
+    padding-right: 0;
   }
   @media (min-width: 50em) {
     .layout-mobile [dir="ltr"] .mainDetailButtons {
