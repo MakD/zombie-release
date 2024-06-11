@@ -2073,19 +2073,18 @@ skinHeader {
   overflow: hidden !important;
 }
 div[data-role="page"].page {
-  position: absolute;
-  overflow: hidden visible;
-  mask-image: linear-gradient(to top, black 1em calc(100% - 2em), transparent);
-  -webkit-mask-image: linear-gradient(
-    to top,
-    black 1em calc(100% - 2em),
-    transparent
-  );
-  padding: 0 !important;
+	position: absolute;
+	overflow: hidden visible;
+mask-image: none !important;
+  -webkit-mask-image: none !important;
+	padding: 5em 0 !important;
+	&#searchPage {
+		margin-top: 4.4em;
+	}
+}
+#itemDetailPage {
+padding: 0em !important;
 }
 #childrenCollapsible .padded-right {
   padding-right: 38%;
 }
-#searchPage {
-		margin-top: 4.8em;
-	}
