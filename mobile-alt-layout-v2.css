@@ -1,0 +1,46 @@
+.layout-mobile .btnShuffle {
+    display: none !important;
+}
+@media only screen and (orientation: portrait) {
+.layout-mobile .material-icons.detailButton-icon.check,
+.layout-mobile .material-icons.detailButton-icon.favorite,
+.layout-mobile .material-icons.detailButton-icon.more_vert,
+.layout-mobile .material-icons.detailButton-icon.replay,
+.layout-mobile .material-icons.detailButton-icon.theaters {
+    display: none;
+  }
+  .layout-mobile .btnMoreCommands::after,
+  .layout-mobile .btnPlayTrailer::after,
+  .layout-mobile .btnPlaystate::after,
+  .layout-mobile .btnReplay::after,
+  .layout-mobile .btnUserRating::after,
+  .layout-mobile .btntheaters::after {
+    content: attr(title);
+font-size: 15px;
+  }
+
+  .layout-mobile .btnPlay::after {
+    content: attr(title);
+  }
+
+  .layout-mobile .detailButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: left;
+    width: auto;
+    margin: 0;
+  }
+  .layout-mobile .detailPagePrimaryContainer {
+    align-content: flex-start;
+    display: flex;
+    z-index: 2;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .layout-mobile .mainDetailButtons {
+    width: auto;
+  }
+}
