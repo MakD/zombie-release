@@ -28,7 +28,7 @@ Installation:
 ```
 OR
 ```
-@import url('https://cdn.jsdelivr.net/gh/MakD/zombie-release@main/mobile-alt-layout-v2.css');
+@import url('https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/mobile-alt-layout-v2.css');
 ```
 
 ### Screenshots (Desktop)
