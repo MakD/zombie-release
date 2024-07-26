@@ -2088,3 +2088,37 @@ padding: 0em !important;
 #childrenCollapsible .padded-right {
   padding-right: 38%;
 }
+
+/* 1440p */
+
+@media (min-width: 1930px) {
+	body {
+		font-size: 1.33em;
+	}
+	.layout-desktop .page.homePage.libraryPage.allLibraryPage.backdropPage.pageWithAbsoluteTabs.withTabs.mainAnimatedPage {
+		margin-top: 6em !important;
+	}
+	.layout-desktop .mainDrawer.transition.touch-menu-la.drawer-open {
+		width: 22em !important;
+	}
+	.layout-desktop .navMenuOption {
+		padding: 1.55em 0em 1.55em 2.4em !important;
+	}
+	.layout-desktop .overflowBackdropCard, .overflowSmallBackdropCard {
+		width: 18.73vw;
+	}
+	.layout-desktop .headerTabs.sectionTabs {
+		margin-top: -3.6em;
+	}
+	.padded-top {
+		padding-top: 2em;
+	}
+	.layout-desktop #itemDetailPage .listItemImage.listItemImage-large.itemAction.lazy {
+		height: 12.9375em;
+		width: 23em;
+	}
+	.layout-desktop #childrenContent .listItem {
+		padding: 2.5em 0.5em 2.5em 1em !important;
+		border-radius: 28px !important;
+	}
+}
