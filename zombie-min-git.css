@@ -2122,3 +2122,37 @@ padding: 0em !important;
 		border-radius: 28px !important;
 	}
 }
+
+/* 4k */
+
+@media (min-width: 2570px) {
+	body {
+		font-size: 2em;
+	}
+	.layout-desktop .page.homePage.libraryPage.allLibraryPage.backdropPage.pageWithAbsoluteTabs.withTabs.mainAnimatedPage {
+		margin-top: 6em !important;
+	}
+	.layout-desktop .mainDrawer.transition.touch-menu-la.drawer-open {
+		width: 22em !important;
+	}
+	.layout-desktop .navMenuOption {
+		padding: 1.55em 0em 1.55em 2.4em !important;
+	}
+	.layout-desktop .overflowBackdropCard, .overflowSmallBackdropCard {
+		width: 18.73vw;
+	}
+	.layout-desktop .headerTabs.sectionTabs {
+		margin-top: -3.6em;
+	}
+	.padded-top {
+		padding-top: 3em;
+	}
+	.layout-desktop #itemDetailPage .listItemImage.listItemImage-large.itemAction.lazy {
+		height: 12.9375em;
+		width: 23em;
+	}
+	.layout-desktop #childrenContent .listItem {
+		padding: 4em 0.5em 4em 1em !important;
+		border-radius: 28px !important;
+	}
+}
