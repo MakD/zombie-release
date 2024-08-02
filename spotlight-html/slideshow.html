@@ -4,6 +4,7 @@
     // Configuration variables
     let defaultTitle = 'Spotlight'; // Default title, overridden by list.txt if available
     const shuffleInterval = 10000; // Time in milliseconds between slide changes
+    const transitionDuration = 1000; // Transition duration in milliseconds
     const plotMaxLength = 200; // Maximum length of the plot text
     const numberOfMovies = 100; // Number of movies to fetch each time homescreen is called
     const randomStartMax = 1000; // Maximum value for random start index, make this roughly lower than your total number movies+series
@@ -26,7 +27,7 @@
         }
 
         .slide {
-            position: relative;
+            position: absolute;
             width: 100vw;
             height: 100vh;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
@@ -34,11 +35,17 @@
             /* Indicates the element is clickable */
             outline: none;
             /* Custom focus style will be used */
+            opacity: 0;
+            transition: opacity 1s;
         }
 
         .slide:focus {
             outline: 2px solid #fff;
             /* Visual focus indicator */
+        }
+
+        .slide.active {
+            opacity: 1;
         }
 
         .backdrop {
@@ -210,10 +217,8 @@
             var shuffledIndexes = shuffleArray(Array.from({ length: slides.length }, (_, i) => i));
 
             function showSlide(index) {
-                for (var i = 0; i < slides.length; i++) {
-                    slides[i].style.display = "none";
-                }
-                slides[shuffledIndexes[index]].style.display = "block";
+                slides.forEach(slide => slide.classList.remove('active'));
+                slides[shuffledIndexes[index]].classList.add('active');
             }
 
             function nextSlide() {
