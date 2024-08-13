@@ -16,8 +16,12 @@
 
 <head>
     <title>Spotlight: The Featured Slideshow</title>
-    <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap"
-        rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preload" href="/Items/{movieId}/Images/Backdrop/0" as="image" />
+    <link rel="preload" href="/Items/{movieId}/Images/Logo" as="image" />
     <style>
         /* CSS styles for the slideshow elements */
         body {
@@ -202,11 +206,24 @@
             // Truncate the text of this specific plot element
             truncateText(plotElement, plotMaxLength); // Use the adjustable plotMaxLength variable
 
-            slide.appendChild(backdrop);
-            slide.appendChild(gradientOverlay);
-            slide.appendChild(logo);
-            slide.appendChild(featuredContent);
-            slide.appendChild(plotElement);
+        // Wait for both the backdrop and logo to load before adding the slide to the DOM
+        Promise.all([
+          new Promise((resolve) => {
+            backdrop.onload = resolve;
+          }),
+          new Promise((resolve) => {
+            logo.onload = resolve;
+          }),
+        ]).then(() => {
+          slide.appendChild(backdrop);
+          slide.appendChild(gradientOverlay);
+          slide.appendChild(logo);
+          slide.appendChild(featuredContent);
+          slide.appendChild(plotElement);
+
+          // Append the slide to the container only after everything is loaded
+          document.getElementById("slides-container").appendChild(slide);
+        });
 
             return slide;
         }
