@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Jellyfin Featured Slideshow Remix</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preload" href="/Items/{movieId}/Images/Backdrop/0" as="image" />
+    <link rel="preload" href="/Items/{movieId}/Images/Logo" as="image" />
+    <style>
+      /* CSS styles for the slideshow elements */
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .slide {
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .slide.active {
+        opacity: 1;
+        z-index: 1;
+      }
+
+      /*.slide:focus {
+            outline: 2px solid #fff;
+        }*/
+
+      @media only screen and (min-width: 767px) {
+        .backdrop {
+          position: absolute;
+          right: 0;
+          width: 69%;
+          /*height: calc(100% - 50px);*/
+          height: calc(100% - -50px);
+          object-fit: cover;
+          object-position: center 20%;
+          border-radius: 13px;
+          z-index: 1;
+          /* Lazy loading */
+          loading: lazy;
+        }
+
+        .logo {
+          position: absolute;
+          top: 35%;
+          left: 20em;
+          transform: translate(-50%, -50%);
+          max-height: 60%;
+          max-width: 30%;
+          width: auto;
+          z-index: 3;
+          /* Lazy loading */
+          loading: lazy;
+        }
+
+        .genre {
+          position: absolute;
+          top: calc(50% + 55px);
+          /* Position the genre below the logo */
+          left: 20em;
+          /* Align with the left side of the logo */
+          transform: translateX(-50%);
+          /* Center horizontally relative to the logo */
+          text-align: center;
+          color: white;
+          font-family: "Figtree", sans-serif;
+          font-size: 14px;
+          z-index: 4;
+          /* Ensure genre text is above other elements */
+        }
+
+        .button-container {
+          position: absolute;
+          bottom: 20px;
+          right: 20px;
+          z-index: 5;
+          display: flex;
+          gap: 10px;
+        }
+
+        .play-button,
+        .trailer-button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 10px 20px;
+          color: white;
+          background-color: rgba(0, 0, 0, 0.7);
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: 300;
+          transition: background-color 0.3s;
+        }
+
+        .play-button i,
+        .trailer-button i {
+          margin-right: 8px;
+        }
+
+        .play-button:hover,
+        .trailer-button:hover {
+          background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .featured-content {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 50px;
+          background-color: transparent;
+          font-family: "Figtree", sans-serif;
+          color: #d3d3d3;
+          font-size: 22px;
+          display: none;
+          align-items: center;
+          justify-content: flex-start;
+          z-index: 2;
+        }
+
+        .plot {
+          position: absolute;
+          bottom: 10px;
+          left: 1em;
+          /* Align to the left edge */
+          /*right: 0; */
+          color: white;
+          width: 37%;
+          /* Full width */
+          font-family: "Figtree", sans-serif;
+          font-size: 15px;
+          /*background: linear-gradient(to top, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 100%);*/
+          /*padding: 10px;*/
+          border-radius: 5px;
+          z-index: 4;
+          box-sizing: border-box;
+          /* Flexbox for centering text */
+          display: flex;
+          align-items: justify;
+          /* Center vertically */
+          justify-content: justify;
+          /* Center horizontally */
+          text-align: justify;
+          /* Center text within the element */
+        }
+
+        .gradient-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 70%;
+          height: 100%;
+          background: linear-gradient(
+            to right,
+            rgb(0, 0, 0) 49%,
+            rgba(0, 0, 0, 0) 70%
+          );
+          z-index: 2;
+          border-radius: 13px;
+        }
+      }
+
+      @media only screen and (max-width: 767px) {
+        .plot {
+          position: absolute;
+          bottom: 70px;
+          left: 1em;
+          right: 1em;
+          /* Align to the left edge */
+          /*right: 0; */
+          color: white;
+          width: 92%;
+          /* Full width */
+          font-family: "Figtree", sans-serif;
+          font-size: 15px;
+          /*background: linear-gradient(to top, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 100%);*/
+          /*padding: 10px;*/
+          border-radius: 5px;
+          z-index: 4;
+          box-sizing: border-box;
+          /* Flexbox for centering text */
+          display: flex;
+          align-items: justify;
+          /* Center vertically */
+          justify-content: justify;
+          /* Center horizontally */
+          text-align: justify;
+          /* Center text within the element */
+        }
+
+        .backdrop {
+          position: absolute;
+          top: 45px;
+          left: 0;
+          width: 100%;
+          height: calc(100% - 50px);
+          object-fit: cover;
+          object-position: center 20%;
+          z-index: 1;
+          border-radius: 13px;
+          loading: lazy;
+        }
+
+        .gradient-overlay {
+          position: absolute;
+          top: 45px;
+          left: 0;
+          width: 100%;
+          height: calc(100% - 50px);
+          background-color: rgba(0, 0, 0, 0.6);
+          z-index: 1;
+          border-radius: 12px;
+        }
+
+        .logo {
+          position: absolute;
+          bottom: 30%;
+          /* Adjust as needed */
+          left: 50%;
+          transform: translateX(-50%);
+          max-height: 65%;
+          max-width: 80%;
+          width: auto;
+          z-index: 3;
+          loading: lazy;
+        }
+
+        .genre {
+          position: absolute;
+          bottom: 22%;
+          /* Adjust as needed */
+          left: 50%;
+          transform: translateX(-50%);
+          text-align: center;
+          color: white;
+          width: 90%;
+          /* Ensure the genre fits within the slide width */
+          max-width: 100%;
+          white-space: nowrap;
+          /* Prevent text wrapping */
+          overflow: hidden;
+          /* Hide overflow text */
+          text-overflow: ellipsis;
+          /* Add ellipsis for overflow text */
+          font-family: "Figtree", sans-serif;
+          font-size: 18px;
+          font-weight: 500;
+          z-index: 4;
+          box-sizing: border-box;
+        }
+
+        .button-container {
+          position: absolute;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 5;
+          display: flex;
+          gap: 20px;
+        }
+
+        .play-button,
+        .trailer-button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 10px 20px;
+          color: rgb(0, 0, 0);
+          background-color: rgb(255, 255, 255);
+          font-family: "Figtree", sans-serif;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: 600;
+          transition: background-color 0.3s;
+        }
+
+        .play-button i,
+        .trailer-button i {
+          margin-right: 8px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Container for dynamic slides -->
+    <div id="slides-container"></div>
+
+    <!-- JavaScript for fetching movies and creating the slideshow -->
+    <script>
+      // Configuration variables
+      const shuffleInterval = 10000; // Time in milliseconds between slide changes (10000ms = 10 seconds)
+      const listFileName = "list.txt"; // Name of the file containing the list of movie IDs
+
+      // Fetch credentials from sessionStorage
+      const jsonCredentials = sessionStorage.getItem("json-credentials");
+      const apiKey = sessionStorage.getItem("api-key");
+
+      let userId = null;
+      let token = null;
+
+      if (jsonCredentials) {
+        const credentials = JSON.parse(jsonCredentials);
+        userId = credentials.Servers[0].UserId;
+        token = credentials.Servers[0].AccessToken;
+      }
+
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      function truncateText(element, maxLength) {
+        var truncated = element.innerText;
+        if (truncated.length > maxLength) {
+          truncated = truncated.substr(0, maxLength) + "...";
+        }
+        element.innerText = truncated;
+      }
+
+      function createSlideForMovie(movie, title) {
+        const container = document.getElementById("slides-container");
+        const itemId = movie.Id;
+
+        // Create image URLs
+        const backdropUrl = `/Items/${itemId}/Images/Backdrop/0`;
+        const logoUrl = `/Items/${itemId}/Images/Logo`;
+
+        // Check if backdrop and logo images exist
+        return Promise.all([
+          fetch(backdropUrl, { method: "HEAD" }).then((res) => res.ok),
+          fetch(logoUrl, { method: "HEAD" }).then((res) => res.ok),
+        ]).then(([backdropExists, logoExists]) => {
+          if (backdropExists && logoExists) {
+            const slideElement = createSlideElement(movie, title);
+
+            // Add lazy loading to images
+            const backdrop = slideElement.querySelector(".backdrop");
+            const logo = slideElement.querySelector(".logo");
+
+            backdrop.setAttribute("loading", "lazy");
+            logo.setAttribute("loading", "lazy");
+
+            container.appendChild(slideElement);
+          } else {
+            console.warn(`Skipping movie ${itemId}: Missing backdrop or logo.`);
+          }
+        });
+      }
+      function fetchGenre(itemId) {
+        return fetch(`/Users/${userId}/Items/${itemId}`, {
+          headers: {
+            Authorization: `MediaBrowser Client="Jellyfin Web", Device="YourDeviceName", DeviceId="YourDeviceId", Version="YourClientVersion", Token="${token}"`,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.Genres && data.Genres.length > 0) {
+              // Join genres with 🔹 separator
+              return data.Genres.join(" 🔹 ");
+            } else {
+              return "No Genre Available";
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching genres:", error);
+            return "No Genre Available";
+          });
+      }
+
+      function createSlideElement(movie, title) {
+        const itemId = movie.Id;
+        const plot = movie.Overview;
+
+        const slide = document.createElement("a");
+        slide.className = "slide";
+        /*slide.href = `/#!/details?id=${itemId}`;*/
+        slide.target = "_top";
+        slide.rel = "noreferrer";
+        slide.setAttribute("tabindex", "0");
+
+        slide.addEventListener("keydown", function (event) {
+          if (event.keyCode === 13) {
+            window.location.href = this.href;
+          }
+        });
+
+        const backdrop = document.createElement("img");
+        backdrop.className = "backdrop";
+        backdrop.src = `/Items/${itemId}/Images/Backdrop/0`;
+        backdrop.alt = "Backdrop";
+
+        const logo = document.createElement("img");
+        logo.className = "logo";
+        logo.src = `/Items/${itemId}/Images/Logo`;
+        logo.alt = "Logo";
+
+        const featuredContent = document.createElement("div");
+        featuredContent.className = "featured-content";
+        featuredContent.textContent = title;
+
+        const plotElement = document.createElement("div");
+        plotElement.className = "plot";
+        plotElement.textContent = plot;
+
+        function truncateText(element, charLimit) {
+          let text = element.innerText;
+
+          // Find the first full stop within the character limit
+          let firstFullStopIndex = text.indexOf(".");
+
+          // If a full stop is found and it's within the character limit, truncate at that point
+          if (firstFullStopIndex !== -1 && firstFullStopIndex <= charLimit) {
+            text = text.substring(0, firstFullStopIndex + 1);
+          } else if (text.length > charLimit) {
+            // Otherwise, truncate at the character limit
+            text = text.substring(0, charLimit) + "...";
+          }
+
+          // Set the truncated text back to the element
+          element.innerText = text;
+        }
+
+        // Example usage:
+        truncateText(plotElement, 140);
+
+        const gradientOverlay = document.createElement("div");
+        gradientOverlay.className = "gradient-overlay";
+
+        const playButton = document.createElement("button");
+        playButton.className = "play-button";
+        playButton.innerHTML = '<i class="fas fa-play"></i> Play';
+        playButton.onclick = () => {
+          window.top.location.href = `/#!/details?id=${itemId}`;
+        };
+
+        const trailerButton = document.createElement("button");
+        trailerButton.className = "trailer-button";
+        trailerButton.innerHTML = '<i class="fas fa-video"></i> Trailer'; // Font Awesome film icon
+        trailerButton.onclick = function () {
+          const youtubeUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(
+            movie.Name + " trailer"
+          )}`;
+          window.open(youtubeUrl, "_blank");
+        };
+
+        const genreElement = document.createElement("div");
+        genreElement.className = "genre";
+        fetchGenre(itemId).then((genres) => {
+          genreElement.innerHTML = genres;
+        });
+
+        const buttonContainer = document.createElement("div");
+        buttonContainer.className = "button-container";
+        buttonContainer.appendChild(playButton);
+        buttonContainer.appendChild(trailerButton);
+
+        slide.appendChild(backdrop);
+        slide.appendChild(gradientOverlay);
+        slide.appendChild(logo);
+        slide.appendChild(featuredContent);
+        slide.appendChild(plotElement);
+        slide.appendChild(buttonContainer);
+        slide.appendChild(genreElement);
+
+        return slide;
+      }
+
+      function initializeSlideshow() {
+        var slides = document.querySelectorAll(".slide");
+        var currentSlide = 0;
+        var shuffledIndexes = shuffleArray(
+          Array.from({ length: slides.length }, (_, i) => i)
+        );
+
+        function showSlide(index) {
+          for (var i = 0; i < slides.length; i++) {
+            slides[i].classList.remove("active");
+          }
+          slides[shuffledIndexes[index]].classList.add("active");
+        }
+
+        function nextSlide() {
+          currentSlide = (currentSlide + 1) % slides.length;
+          showSlide(currentSlide);
+        }
+
+        showSlide(currentSlide);
+        setInterval(nextSlide, shuffleInterval);
+      }
+
+      function fetchMovies() {
+        const noCacheUrl = listFileName + "?" + new Date().getTime();
+
+        fetch(noCacheUrl)
+          .then((response) => {
+            if (response.ok) {
+              return response.text();
+            } else {
+              throw new Error(
+                "list.txt not found, fetching random items from server. This is more information than an error and doesnt need to be fixed, you can create a list.txt in the avatars folder to make this load faster and override the random nature of the user (great for a halloween list) - BobHasNoSoul"
+              );
+            }
+          })
+          .then((text) => {
+            const lines = text.split("\n").filter(Boolean);
+            /*const title = lines.shift() || 'Spotlight'; // Set the global title*/
+
+            const movieIds = lines.map((line) => line.substring(0, 32));
+            return Promise.all(movieIds.map((id) => fetchMovieDetails(id)));
+          })
+          .then((movies) => {
+            const moviePromises = movies.map((movie) =>
+              createSlideForMovie(movie /*, 'Spotlight'*/)
+            );
+            return Promise.all(moviePromises);
+          })
+          .then(() => {
+            initializeSlideshow();
+          })
+          .catch((error) => {
+            console.error(error);
+            fetchMoviesFromServer(); // Fallback to fetching movies from the server
+          });
+      }
+
+      function fetchMovieDetails(movieId) {
+        return fetch(`/Users/${userId}/Items/${movieId}`, {
+          headers: {
+            Authorization: `MediaBrowser Client="Jellyfin Web", Device="YourDeviceName", DeviceId="YourDeviceId", Version="YourClientVersion", Token="${token}"`,
+          },
+        })
+          .then((response) => response.json())
+          .then((movie) => {
+            console.log("Movie Title:", movie.Name);
+            console.log("Movie Overview:", movie.Overview);
+            return movie;
+          });
+      }
+
+      function fetchMoviesFromServer() {
+        return fetch(
+          `/Users/${userId}/Items?IncludeItemTypes=Movie,Series&Recursive=true&Limit=300`,
+          {
+            headers: {
+              Authorization: `MediaBrowser Client="Jellyfin Web", Device="YourDeviceName", DeviceId="YourDeviceId", Version="YourClientVersion", Token="${token}"`,
+            },
+          }
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            const movies = data.Items;
+            const shuffledMovies = shuffleArray(movies);
+            const selectedMovieIds = shuffledMovies
+              .slice(0, 30)
+              .map((movie) => movie.Id);
+            return Promise.all(
+              selectedMovieIds.map((id) => fetchMovieDetails(id))
+            );
+          })
+          .then((movies) => {
+            const moviePromises = movies.map((movie) =>
+              createSlideForMovie(movie /*, 'Spotlight'*/)
+            );
+            return Promise.all(moviePromises);
+          })
+          .then(() => {
+            initializeSlideshow();
+          })
+          .catch((error) => console.error("Error fetching movies:", error));
+      }
+
+      // Start fetching movies once the DOM is fully loaded
+      document.addEventListener("DOMContentLoaded", fetchMovies);
+    </script>
+  </body>
+</html>
