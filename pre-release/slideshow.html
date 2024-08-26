@@ -27,16 +27,20 @@
       .slide {
         opacity: 0;
         transition: opacity 1s ease-in-out;
+        display: block;
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
+        border-radius: 13px;
       }
 
       .slide.active {
         opacity: 1;
         z-index: 1;
+        border-radius: 13px;
+        display: block;
       }
 
       /*.slide:focus {
@@ -182,30 +186,22 @@
 
       @media only screen and (max-width: 767px) {
         .plot {
-          position: absolute;
+          display: none;
+          /*position: absolute;
           bottom: 70px;
           left: 1em;
           right: 1em;
-          /* Align to the left edge */
-          /*right: 0; */
           color: white;
           width: 92%;
-          /* Full width */
           font-family: "Figtree", sans-serif;
           font-size: 15px;
-          /*background: linear-gradient(to top, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 100%);*/
-          /*padding: 10px;*/
           border-radius: 5px;
           z-index: 4;
           box-sizing: border-box;
-          /* Flexbox for centering text */
           display: flex;
           align-items: justify;
-          /* Center vertically */
           justify-content: justify;
-          /* Center horizontally */
-          text-align: justify;
-          /* Center text within the element */
+          text-align: justify;*/
         }
 
         .backdrop {
@@ -227,14 +223,14 @@
           left: 0;
           width: 100%;
           height: calc(100% - 50px);
-          background-color: rgba(0, 0, 0, 0.6);
+          background-color: rgba(0, 0, 0, 0.75);
           z-index: 1;
           border-radius: 12px;
         }
 
         .logo {
           position: absolute;
-          bottom: 30%;
+          bottom: 20%;
           /* Adjust as needed */
           left: 50%;
           transform: translateX(-50%);
@@ -247,7 +243,7 @@
 
         .genre {
           position: absolute;
-          bottom: 22%;
+          bottom: 13%;
           /* Adjust as needed */
           left: 50%;
           transform: translateX(-50%);
@@ -263,7 +259,7 @@
           text-overflow: ellipsis;
           /* Add ellipsis for overflow text */
           font-family: "Figtree", sans-serif;
-          font-size: 18px;
+          font-size: 0.875em;
           font-weight: 500;
           z-index: 4;
           box-sizing: border-box;
@@ -286,7 +282,7 @@
           justify-content: center;
           padding: 10px 20px;
           color: rgb(0, 0, 0);
-          background-color: rgb(255, 255, 255);
+          background-color: rgba(255, 255, 255, 0.8);
           font-family: "Figtree", sans-serif;
           border: none;
           border-radius: 10px;
@@ -393,6 +389,31 @@
           });
       }
 
+      //new
+      function fetchTrailer(itemId) {
+        return fetch(`/Users/${userId}/Items/${itemId}`, {
+          headers: {
+            Authorization: `MediaBrowser Client="Jellyfin Web", Device="YourDeviceName", DeviceId="YourDeviceId", Version="YourClientVersion", Token="${token}"`,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            const remoteTrailers = data.RemoteTrailers || [];
+            if (remoteTrailers.length > 0) {
+              // Find the first YouTube trailer link
+              const trailer = remoteTrailers.find((trailer) =>
+                trailer.Url.includes("youtube.com")
+              );
+              return trailer ? trailer.Url : null;
+            }
+            return null;
+          })
+          .catch((error) => {
+            console.error("Error fetching trailer:", error);
+            return null;
+          });
+      }
+
       function createSlideElement(movie, title) {
         const itemId = movie.Id;
         const plot = movie.Overview;
@@ -431,14 +452,18 @@
         function truncateText(element, charLimit) {
           let text = element.innerText;
 
-          // Find the first full stop within the character limit
-          let firstFullStopIndex = text.indexOf(".");
+          // Find the first full stop after a reasonable number of characters (e.g., 20) to avoid abbreviations
+          let firstFullStopIndex = text.substring(20).indexOf(".") + 20;
 
-          // If a full stop is found and it's within the character limit, truncate at that point
-          if (firstFullStopIndex !== -1 && firstFullStopIndex <= charLimit) {
+          // Check if the full stop is within the character limit and not part of an abbreviation
+          if (
+            firstFullStopIndex !== -1 &&
+            firstFullStopIndex <= charLimit &&
+            text[firstFullStopIndex + 1] === " "
+          ) {
             text = text.substring(0, firstFullStopIndex + 1);
           } else if (text.length > charLimit) {
-            // Otherwise, truncate at the character limit
+            // If no suitable full stop is found, truncate at the character limit
             text = text.substring(0, charLimit) + "...";
           }
 
@@ -447,7 +472,7 @@
         }
 
         // Example usage:
-        truncateText(plotElement, 140);
+        truncateText(plotElement, 145);
 
         const gradientOverlay = document.createElement("div");
         gradientOverlay.className = "gradient-overlay";
@@ -461,13 +486,17 @@
 
         const trailerButton = document.createElement("button");
         trailerButton.className = "trailer-button";
-        trailerButton.innerHTML = '<i class="fas fa-video"></i> Trailer'; // Font Awesome film icon
-        trailerButton.onclick = function () {
-          const youtubeUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(
-            movie.Name + " trailer"
-          )}`;
-          window.open(youtubeUrl, "_blank");
-        };
+        trailerButton.innerHTML = '<i class="fas fa-video"></i> Trailer';
+        trailerButton.style.display = "none"; // Initially hide the button
+
+        fetchTrailer(itemId).then((trailerUrl) => {
+          if (trailerUrl) {
+            trailerButton.style.display = "block"; // Show the button if the link is valid
+            trailerButton.onclick = () => {
+              window.open(trailerUrl, "_blank", "noopener,noreferrer");
+            };
+          }
+        });
 
         const genreElement = document.createElement("div");
         genreElement.className = "genre";
