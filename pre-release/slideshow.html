@@ -4,11 +4,7 @@
     <title>Jellyfin Featured Slideshow Remix</title>
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      href="https://cdn.jsdelivr.net/gh/gryffyn/Jellyfin-Icons@main/Font%20Awesome/regular.css"
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap"
@@ -182,6 +178,36 @@
           z-index: 2;
           border-radius: 13px;
         }
+        #slide-indicator {
+          position: absolute;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 6;
+          display: flex;
+          gap: 5px;
+          background-color: #ffffff3d;
+          border-radius: 10px;
+          width: 105px;
+          height: 20px;
+          justify-content: center;
+          align-items: center;
+          opacity: 0; /* Initially hidden */
+          transition: opacity 0.5s ease-in-out; /* Smooth transition */
+        }
+
+        #slide-indicator .dot {
+          width: 10px;
+          height: 10px;
+          border: 2px solid white;
+          border-radius: 50%;
+          background-color: transparent;
+          transition: background-color 0.3s;
+        }
+
+        #slide-indicator .dot.active {
+          background-color: white;
+        }
       }
 
       @media only screen and (max-width: 767px) {
@@ -230,7 +256,7 @@
 
         .logo {
           position: absolute;
-          bottom: 20%;
+          bottom: 25%;
           /* Adjust as needed */
           left: 50%;
           transform: translateX(-50%);
@@ -243,7 +269,7 @@
 
         .genre {
           position: absolute;
-          bottom: 13%;
+          bottom: 18%;
           /* Adjust as needed */
           left: 50%;
           transform: translateX(-50%);
@@ -272,7 +298,7 @@
           transform: translateX(-50%);
           z-index: 5;
           display: flex;
-          gap: 20px;
+          gap: 15px;
         }
 
         .play-button,
@@ -280,21 +306,61 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 10px 20px;
+          padding: 10px 15px;
           color: rgb(0, 0, 0);
           background-color: rgba(255, 255, 255, 0.8);
           font-family: "Figtree", sans-serif;
           border: none;
-          border-radius: 10px;
+          border-radius: 7px;
           cursor: pointer;
-          font-size: 14px;
+          font-size: 0.85em;
           font-weight: 600;
           transition: background-color 0.3s;
+          text-align: center;
+          white-space: nowrap;
+          min-width: 80px;
         }
 
         .play-button i,
         .trailer-button i {
           margin-right: 8px;
+        }
+
+        /* Center the play button when trailer button is hidden */
+        .button-container:only-child {
+          justify-content: center;
+        }
+
+        #slide-indicator {
+          position: absolute;
+          bottom: 12%;
+          left: 50%;
+          transform: translateX(-50%) scale(0.65);
+          z-index: 6;
+          display: flex;
+          gap: 5px;
+          background-color: #ffffff3d;
+          border-radius: 50px;
+          width: 102px;
+          height: 25px;
+          justify-content: center;
+          align-items: center;
+          /*scale: 0.65;*/
+          opacity: 0; /* Initially hidden */
+          transition: opacity 0.5s ease-in-out; /* Smooth transition */
+        }
+
+        #slide-indicator .dot {
+          width: 10px;
+          height: 10px;
+          border: 2px solid white;
+          border-radius: 50%;
+          background-color: transparent;
+          transition: background-color 0.3s;
+        }
+
+        #slide-indicator .dot.active {
+          background-color: white;
         }
       }
     </style>
@@ -303,6 +369,13 @@
   <body>
     <!-- Container for dynamic slides -->
     <div id="slides-container"></div>
+    <div id="slide-indicator">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
 
     <!-- JavaScript for fetching movies and creating the slideshow -->
     <script>
@@ -363,6 +436,18 @@
             logo.setAttribute("loading", "lazy");
 
             container.appendChild(slideElement);
+            // Wait for the slide to load before showing the slide indicator
+            Promise.all([
+              backdrop.complete
+                ? Promise.resolve()
+                : new Promise((resolve) => (backdrop.onload = resolve)),
+              logo.complete
+                ? Promise.resolve()
+                : new Promise((resolve) => (logo.onload = resolve)),
+            ]).then(() => {
+              // Show the slide indicator once the slide is fully loaded
+              document.getElementById("slide-indicator").style.opacity = 1;
+            });
           } else {
             console.warn(`Skipping movie ${itemId}: Missing backdrop or logo.`);
           }
@@ -486,7 +571,7 @@
 
         const trailerButton = document.createElement("button");
         trailerButton.className = "trailer-button";
-        trailerButton.innerHTML = '<i class="fas fa-video"></i> Trailer';
+        trailerButton.innerHTML = '<i class="fas fa-film"></i> Trailer';
         trailerButton.style.display = "none"; // Initially hide the button
 
         fetchTrailer(itemId).then((trailerUrl) => {
@@ -528,11 +613,34 @@
         );
 
         function showSlide(index) {
+          // Your existing code to show the slide
+          const slides = document.querySelectorAll(".slide");
+
+          slides.forEach((slide, i) => {
+            slide.classList.remove("active");
+            if (i === index) {
+              slide.classList.add("active");
+              currentSlideIndex = index;
+              updateDots();
+            }
+          });
+        }
+
+        // Initialize dots for the first slide
+        updateDots();
+
+        // Example: Automatically cycle through slides
+        setInterval(() => {
+          currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
+          showSlide(currentSlideIndex);
+        }, shuffleInterval);
+
+        /*function showSlide(index) {
           for (var i = 0; i < slides.length; i++) {
             slides[i].classList.remove("active");
           }
           slides[shuffledIndexes[index]].classList.add("active");
-        }
+        }*/
 
         function nextSlide() {
           currentSlide = (currentSlide + 1) % slides.length;
@@ -622,6 +730,24 @@
             initializeSlideshow();
           })
           .catch((error) => console.error("Error fetching movies:", error));
+      }
+
+      let currentSlideIndex = 0;
+      const totalSlides = 30; // Update this to match your actual total slides
+      const visibleDots = 5;
+
+      function updateDots() {
+        const dots = document.querySelectorAll("#slide-indicator .dot");
+
+        // Calculate the active dot index within the visible 5 dots
+        const activeDotIndex = currentSlideIndex % visibleDots;
+
+        dots.forEach((dot, index) => {
+          dot.classList.remove("active");
+          if (index === activeDotIndex) {
+            dot.classList.add("active");
+          }
+        });
       }
 
       // Start fetching movies once the DOM is fully loaded
