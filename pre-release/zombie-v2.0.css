@@ -2142,3 +2142,45 @@ div#loginPage {
     width: 25em;
   }
 }
+.layout-mobile .listItem-content .listItemBody {
+  left: 0em !important;
+  position: relative !important;
+  bottom: -0.3em !important;
+  max-width: 100% !important;
+}
+
+.layout-mobile .listItem-content {
+  display: block !important;
+}
+
+.layout-mobile .listItem-content .listItemBody {
+  padding: 0.5em 0 !important;
+}
+
+.layout-mobile .listItem-content .listItemImage-large {
+  height: 40vw !important;
+  width: 80vw !important;
+}
+
+.layout-mobile .listItem-content .listItemImage-large .listItemImageButton,
+.listItemIndicators {
+  font-size: 1em !important;
+}
+
+.layout-mobile .listItem-bottomoverview {
+  font-size: 100% !important;
+}
+
+.layout-mobile .padded-top {
+  padding-top: 3em !important;
+}
+
+.layout-mobile #suggestionsTab,
+#genresTab,
+#upcomingTab {
+  padding: 3.5em 0;
+}
+.layout-mobile .sectionTitleContainer-cards {
+  margin: 0 !important;
+  padding-top: 0em !important;
+}
