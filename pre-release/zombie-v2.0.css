@@ -34,6 +34,7 @@ imgLogoIcon {
 @media only screen and (max-device-width: 767px) {
   .featurediframe {
     height: 60vh !important;
+    width: 87vw !important;
   }
 }
 .backdropImage {
