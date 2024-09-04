@@ -7,7 +7,12 @@
       href="https://cdn.jsdelivr.net/gh/gryffyn/Jellyfin-Icons@main/Font%20Awesome/regular.css"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap"
       rel="stylesheet"
     />
     <link rel="preload" href="/Items/{movieId}/Images/Backdrop/0" as="image" />
@@ -48,8 +53,8 @@
           position: absolute;
           right: 0;
           width: 69%;
-          /*height: calc(100% - 50px);*/
-          height: calc(100% - -50px);
+          height: calc(100% - 0px);
+          /*height: calc(100% - -50px);*/
           object-fit: cover;
           object-position: center 20%;
           border-radius: 13px;
@@ -60,11 +65,11 @@
 
         .logo {
           position: absolute;
-          top: 35%;
-          left: 20em;
-          transform: translate(-50%, -50%);
-          max-height: 60%;
-          max-width: 30%;
+          top: 10%;
+          left: 1em;
+          /*transform: translate(-50%, -50%);*/
+          max-height: 38%;
+          max-width: 25%;
           width: auto;
           z-index: 3;
           /* Lazy loading */
@@ -73,15 +78,15 @@
 
         .genre {
           position: absolute;
-          top: calc(50% + 55px);
+          top: calc(50% + 60px);
           /* Position the genre below the logo */
-          left: 20em;
+          left: 1em;
           /* Align with the left side of the logo */
-          transform: translateX(-50%);
+          /*transform: translateX(-50%);*/
           /* Center horizontally relative to the logo */
           text-align: center;
           color: white;
-          font-family: "Figtree", sans-serif;
+          font-family: "Titillium Web", sans-serif;
           font-size: 14px;
           z-index: 4;
           /* Ensure genre text is above other elements */
@@ -129,7 +134,7 @@
           width: 100%;
           height: 50px;
           background-color: transparent;
-          font-family: "Figtree", sans-serif;
+          font-family: "Titillium Web", sans-serif;
           color: #d3d3d3;
           font-size: 22px;
           display: none;
@@ -147,8 +152,8 @@
           color: white;
           width: 37%;
           /* Full width */
-          font-family: "Figtree", sans-serif;
-          font-size: 15px;
+          font-family: "Titillium Web", sans-serif;
+          font-size: 13px;
           /*background: linear-gradient(to top, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 100%);*/
           /*padding: 10px;*/
           border-radius: 5px;
@@ -178,11 +183,39 @@
           z-index: 2;
           border-radius: 13px;
         }
+
+        .info-container {
+          position: absolute;
+          display: flex;
+          align-items: center; /* Vertically center-aligns the content */
+          justify-content: center; /* Horizontally center-aligns the content */
+          bottom: 35%;
+          left: 0.5em;
+          /*transform: translateX(-50%);*/
+          color: white;
+          z-index: 99999;
+          /*width: 100%;*/
+        }
+
+        .rating-value,
+        .runTime {
+          font-family: "Titillium Web", sans-serif;
+          font-size: 0.875em;
+          font-weight: 500;
+          display: flex;
+          align-items: center; /* Vertically center-aligns the content */
+          margin: 0 8px; /* Space between the elements */
+        }
+
+        .rating-value img {
+          margin-right: 8px; /* Space between the image and the text */
+        }
+
         #slide-indicator {
           position: absolute;
           bottom: 20px;
           left: 50%;
-          transform: translateX(-50%);
+          transform: translateX(-50%) scale(0.8);
           z-index: 6;
           display: flex;
           gap: 5px;
@@ -256,12 +289,12 @@
 
         .logo {
           position: absolute;
-          bottom: 25%;
+          bottom: 28%;
           /* Adjust as needed */
           left: 50%;
           transform: translateX(-50%);
-          max-height: 65%;
-          max-width: 80%;
+          max-height: 50%;
+          max-width: 65%;
           width: auto;
           z-index: 3;
           loading: lazy;
@@ -269,7 +302,7 @@
 
         .genre {
           position: absolute;
-          bottom: 18%;
+          bottom: 17%;
           /* Adjust as needed */
           left: 50%;
           transform: translateX(-50%);
@@ -284,7 +317,7 @@
           /* Hide overflow text */
           text-overflow: ellipsis;
           /* Add ellipsis for overflow text */
-          font-family: "Figtree", sans-serif;
+          font-family: "Titillium Web", sans-serif;
           font-size: 0.875em;
           font-weight: 500;
           z-index: 4;
@@ -295,7 +328,7 @@
           position: absolute;
           bottom: 20px;
           left: 50%;
-          transform: translateX(-50%);
+          transform: translateX(-50%) scale(0.9);
           z-index: 5;
           display: flex;
           gap: 15px;
@@ -307,18 +340,18 @@
           align-items: center;
           justify-content: center;
           padding: 10px 15px;
-          color: rgb(0, 0, 0);
-          background-color: rgba(255, 255, 255, 0.8);
-          font-family: "Figtree", sans-serif;
+          color: black;
+          background-color: rgba(255, 255, 255, 0.4);
+          font-family: "Titillium Web", sans-serif;
           border: none;
-          border-radius: 7px;
+          border-radius: 10px;
           cursor: pointer;
           font-size: 0.85em;
           font-weight: 600;
           transition: background-color 0.3s;
           text-align: center;
           white-space: nowrap;
-          min-width: 80px;
+          min-width: 70px;
         }
 
         .play-button i,
@@ -333,9 +366,9 @@
 
         #slide-indicator {
           position: absolute;
-          bottom: 12%;
+          bottom: 11%;
           left: 50%;
-          transform: translateX(-50%) scale(0.65);
+          transform: translateX(-50%) scale(0.6);
           z-index: 6;
           display: flex;
           gap: 5px;
@@ -362,6 +395,88 @@
         #slide-indicator .dot.active {
           background-color: white;
         }
+
+        /*#communityRating {
+          display:block;
+          font-size: large;
+          z-index: 9999;
+        }*/
+
+        /*.ratingContainer {
+          position: absolute;
+          bottom: 10px;
+          left: 50%;
+          transform: translateX(-50%); 
+          z-index: 99999;
+          font-size: larger;
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+        }
+
+        .imdb-logo {
+          height: 1em;
+          margin-right: 0.3em;
+        }
+
+        .rating-value {
+          position: absolute;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: "Figtree", sans-serif;
+          font-size: 0.875em;
+          font-weight: 500;
+          z-index: 99999;
+          bottom: 10%;
+          left: 50%;
+          transform: translateX(-50%);
+          color: white;
+        }
+        .rating-value img {
+          margin-right: 8px;
+        }
+        .runTime {
+          position: absolute;
+          font-family: "Figtree", sans-serif;
+          font-size: 0.875em;
+          font-weight: 500;
+          bottom: 10%;
+          left: 50%;
+          transform: translateX(-50%);
+          color: white;
+          display: block;
+          z-index: 999999;
+        }*/
+
+        .info-container {
+          position: absolute;
+          display: flex;
+          align-items: center; /* Vertically center-aligns the content */
+          justify-content: center; /* Horizontally center-aligns the content */
+          bottom: 21%;
+          left: 50%;
+          transform: translateX(-50%);
+          color: white;
+          z-index: 99999;
+          width: 100%;
+        }
+
+        .rating-value,
+        .runTime {
+          font-family: "Titillium Web", sans-serif;
+          font-size: 0.875em;
+          font-weight: 500;
+          display: flex;
+          align-items: center; /* Vertically center-aligns the content */
+          margin: 0 8px; /* Space between the elements */
+        }
+
+        .rating-value img {
+          margin-right: 8px; /* Space between the image and the text */
+        }
       }
     </style>
   </head>
@@ -380,7 +495,7 @@
     <!-- JavaScript for fetching movies and creating the slideshow -->
     <script>
       // Configuration variables
-      const shuffleInterval = 10000; // Time in milliseconds between slide changes (10000ms = 10 seconds)
+      const shuffleInterval = 7000; // Time in milliseconds between slide changes (10000ms = 10 seconds)
       const listFileName = "list.txt"; // Name of the file containing the list of movie IDs
 
       // Fetch credentials from sessionStorage
@@ -453,55 +568,14 @@
           }
         });
       }
-      function fetchGenre(itemId) {
-        return fetch(`/Users/${userId}/Items/${itemId}`, {
-          headers: {
-            Authorization: `MediaBrowser Client="Jellyfin Web", Device="YourDeviceName", DeviceId="YourDeviceId", Version="YourClientVersion", Token="${token}"`,
-          },
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.Genres && data.Genres.length > 0) {
-              // Join genres with 🔹 separator
-              return data.Genres.join(" 🔹 ");
-            } else {
-              return "No Genre Available";
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching genres:", error);
-            return "No Genre Available";
-          });
-      }
-
-      //new
-      function fetchTrailer(itemId) {
-        return fetch(`/Users/${userId}/Items/${itemId}`, {
-          headers: {
-            Authorization: `MediaBrowser Client="Jellyfin Web", Device="YourDeviceName", DeviceId="YourDeviceId", Version="YourClientVersion", Token="${token}"`,
-          },
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            const remoteTrailers = data.RemoteTrailers || [];
-            if (remoteTrailers.length > 0) {
-              // Find the first YouTube trailer link
-              const trailer = remoteTrailers.find((trailer) =>
-                trailer.Url.includes("youtube.com")
-              );
-              return trailer ? trailer.Url : null;
-            }
-            return null;
-          })
-          .catch((error) => {
-            console.error("Error fetching trailer:", error);
-            return null;
-          });
-      }
 
       function createSlideElement(movie, title) {
         const itemId = movie.Id;
         const plot = movie.Overview;
+        const rating = movie.CommunityRating;
+        const runtime = movie.RunTimeTicks;
+        const genre = movie.Genres;
+        const youtube = movie.RemoteTrailers;
 
         const slide = document.createElement("a");
         slide.className = "slide";
@@ -529,6 +603,46 @@
         const featuredContent = document.createElement("div");
         featuredContent.className = "featured-content";
         featuredContent.textContent = title;
+
+        const runTimeElement = document.createElement("div");
+        runTimeElement.className = "runTime";
+        // Convert ticks to milliseconds if needed (here it's already in milliseconds)
+        const milliseconds = runtime / 10000; // Adjust conversion if ticks are not milliseconds
+
+        // Get the current time
+        const currentTime = new Date();
+
+        // Calculate the end time by adding the runtime in milliseconds
+        const endTime = new Date(currentTime.getTime() + milliseconds);
+
+        // Format the end time to a readable format with AM/PM
+        const options = {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        };
+        const formattedEndTime = endTime.toLocaleTimeString([], options);
+        runTimeElement.textContent = `Ends at ${formattedEndTime}`;
+
+        const ratingTest = document.createElement("div");
+        ratingTest.className = "rating-value";
+        const imdbLogo = document.createElement("img");
+        imdbLogo.src =
+          "https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg";
+        imdbLogo.alt = "IMDb Logo";
+        imdbLogo.style.width = "30px"; // Adjust the size as needed
+        imdbLogo.style.height = "30px"; // Adjust the size as needed
+
+        // Append the image and label to the ratingTest element
+        ratingTest.appendChild(imdbLogo);
+        /*ratingTest.innerHTML += "  ";*/
+        if (typeof rating === "number") {
+          const formattedRating = rating.toFixed(1);
+          ratingTest.innerHTML += `${formattedRating} ⭐`;
+        } else {
+          console.error("Rating is undefined or not a number:", rating);
+          ratingTest.innerHTML += `N/A ⭐`; // You can handle the error by showing a default value
+        }
 
         const plotElement = document.createElement("div");
         plotElement.className = "plot";
@@ -569,25 +683,57 @@
           window.top.location.href = `/#!/details?id=${itemId}`;
         };
 
+        const youtubeTrailers = movie.RemoteTrailers;
+
+        // Function to find the first YouTube trailer link
+        function getTrailerUrl(trailersArray) {
+          const remoteTrailers = trailersArray || [];
+          if (remoteTrailers.length > 0) {
+            // Find the first YouTube trailer link
+            const trailer = remoteTrailers.find((trailer) =>
+              trailer.Url.includes("youtube.com")
+            );
+            return trailer ? trailer.Url : null;
+          }
+          return null;
+        }
+
         const trailerButton = document.createElement("button");
         trailerButton.className = "trailer-button";
         trailerButton.innerHTML = '<i class="fas fa-film"></i> Trailer';
         trailerButton.style.display = "none"; // Initially hide the button
 
-        fetchTrailer(itemId).then((trailerUrl) => {
-          if (trailerUrl) {
-            trailerButton.style.display = "block"; // Show the button if the link is valid
-            trailerButton.onclick = () => {
-              window.open(trailerUrl, "_blank", "noopener,noreferrer");
-            };
-          }
-        });
+        const trailerUrl = getTrailerUrl(youtubeTrailers);
 
+        if (trailerUrl) {
+          trailerButton.style.display = "block";
+          trailerButton.onclick = () => {
+            window.open(trailerUrl, "_blank"); // The URL itself handles the deep linking
+          };
+        }
+
+        const genresArray = movie.Genres;
+
+        // Create a function to parse and format the genres
+        function parseGenres(genresArray) {
+          if (genresArray && genresArray.length > 0) {
+            // Join genres with 🔹 separator
+            return genresArray.join(" 🔹 ");
+          } else {
+            return "No Genre Available";
+          }
+        }
+        // Create the genre element
         const genreElement = document.createElement("div");
         genreElement.className = "genre";
-        fetchGenre(itemId).then((genres) => {
-          genreElement.innerHTML = genres;
-        });
+
+        // Set the inner HTML of the genre element using the parsed genres
+        genreElement.innerHTML = parseGenres(genresArray);
+
+        const infoContainer = document.createElement("div");
+        infoContainer.className = "info-container";
+        infoContainer.appendChild(ratingTest);
+        infoContainer.appendChild(runTimeElement);
 
         const buttonContainer = document.createElement("div");
         buttonContainer.className = "button-container";
@@ -600,6 +746,7 @@
         slide.appendChild(featuredContent);
         slide.appendChild(plotElement);
         slide.appendChild(buttonContainer);
+        slide.appendChild(infoContainer);
         slide.appendChild(genreElement);
 
         return slide;
@@ -635,13 +782,6 @@
           showSlide(currentSlideIndex);
         }, shuffleInterval);
 
-        /*function showSlide(index) {
-          for (var i = 0; i < slides.length; i++) {
-            slides[i].classList.remove("active");
-          }
-          slides[shuffledIndexes[index]].classList.add("active");
-        }*/
-
         function nextSlide() {
           currentSlide = (currentSlide + 1) % slides.length;
           showSlide(currentSlide);
@@ -660,13 +800,12 @@
               return response.text();
             } else {
               throw new Error(
-                "list.txt not found, fetching random items from server. This is more information than an error and doesnt need to be fixed, you can create a list.txt in the avatars folder to make this load faster and override the random nature of the user (great for a halloween list) - BobHasNoSoul"
+                "list.txt not found, fetching random items from server."
               );
             }
           })
           .then((text) => {
             const lines = text.split("\n").filter(Boolean);
-            /*const title = lines.shift() || 'Spotlight'; // Set the global title*/
 
             const movieIds = lines.map((line) => line.substring(0, 32));
             return Promise.all(movieIds.map((id) => fetchMovieDetails(id)));
@@ -696,6 +835,10 @@
           .then((movie) => {
             console.log("Movie Title:", movie.Name);
             console.log("Movie Overview:", movie.Overview);
+            console.log("Ratings:", movie.CommunityRating);
+            console.log("RuntimeTicks", movie.RunTimeTicks);
+            console.log("Genres:", movie.Genres);
+            console.log("Trailers:", movie.RemoteTrailers);
             return movie;
           });
       }
