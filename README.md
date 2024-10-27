@@ -173,7 +173,7 @@ Firstly I would like to thank [BobHasNoSoul](https://github.com/BobHasNoSoul), a
 ## Steps (Shutdown Jellyfin before proceeding)
 
 1. Download the [slideshow.html](https://github.com/MakD/zombie-release/blob/main/spotlight-html/slideshow.html)
-2. Enter your Jellyfin UserID and API key in lines 108 & 109 respectively and save it.
+2. Enter your Jellyfin UserID and API key in lines 12 & 13 respectively and save it.
 3. Create a folder `avatars` in your jellyfin-web folder.
 4. Copy the slideshow.html file to the `avatars` folder.
 5. Search for the file `home-html.RANDOMNUMBERS.chunk.js` in the jellyfin-web folder and open it.
