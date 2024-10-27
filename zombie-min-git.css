@@ -1381,9 +1381,9 @@ fieldset {
 }
 .checkboxIcon {
   color: rgba(var(--dark)) !important;
-  font-size: 1.4em;
-  margin-right: 1px;
-  margin-top: 2px;
+  font-size: 1.3em;
+  margin-left: 6px;
+  margin-top: 4px;
 }
 #itemDetailPage .emby-select-withcolor {
   background: rgba(0, 0, 0, 0) !important;
