@@ -22,7 +22,7 @@ h4 {
   --rounding: 12px;
   --rounding-alt: 9px;
   --rounding-large: 24px;
-  --rounding-circle: 9px;
+  --rounding-circle: 20px;
 }
 .adminDrawerLogo img,
 imgLogoIcon {
