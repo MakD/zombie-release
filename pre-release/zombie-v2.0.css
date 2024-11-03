@@ -1934,6 +1934,7 @@ div#loginPage {
 @media only screen and (max-device-width: 767px) {
   .featurediframe {
     height: 60vh !important;
+    margin-top: 40px !important;
   }
 }
 .headerRight,
@@ -2006,8 +2007,10 @@ div#loginPage {
     font-size: 1em;
   }
   [dir="ltr"] .infoWrapper {
-    padding-left: 2.5em !important;
+    padding-left: 0 !important;
     padding-top: 10em !important;
+    height: 60vh !important;
+    margin-top: 40px !important;
   }
   [dir="ltr"] .mainDetailButtons {
     padding-left: 2em !important;
@@ -2018,9 +2021,9 @@ div#loginPage {
   }
   .detailLogo {
     display: block;
-    left: 6% !important;
-    top: 20vh !important;
-    width: 15em !important;
+    left: 3.5% !important;
+    top: 10vh !important;
+    width: 20em !important;
   }
 }
 @media only screen and (min-width: 1001px) and (max-width: 1280px) and (orientation: landscape) {
@@ -2032,7 +2035,7 @@ div#loginPage {
     padding-top: 5em !important;
   }
   [dir="ltr"] .mainDetailButtons {
-    padding-left: 2em !important;
+    padding-left: 0 !important;
   }
   .detailPageContent {
     padding-left: 3em;
@@ -2104,11 +2107,11 @@ div#loginPage {
     font-size: 1em;
   }
   [dir="ltr"] .infoWrapper {
-    padding-left: 2.5em !important;
+    padding-left: 4.5em !important;
     padding-top: 5em !important;
   }
   [dir="ltr"] .mainDetailButtons {
-    padding-left: 2em !important;
+    padding-left: 4em !important;
   }
   .detailPageContent {
     padding-left: 3em;
