@@ -30,6 +30,103 @@ imgLogoIcon {
 .pageTitleWithLogo {
   background-image: url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@main/logo/jellyfin-logo-light.png) !important;
 }
+.layout-mobile .overflowBackdropCard {
+    width: 50vw !important; /* Full width for mobile */
+}
+.cardIndicators,
+.listItemIndicators {
+  right: 0.2em !important;
+  top: 0.2em !important;
+}
+.countIndicator,
+.playedIndicator {
+  border-radius: var(--rounding) !important;
+  border: 2px solid rgba(var(--accent), 1) !important;
+} 
+
+.countIndicator,
+.playedIndicator {
+  background: rgba(var(--accent), 0.5) !important;
+  color: white !important;
+  font-weight: 700;
+font-size: 8px;
+}
+.layout-mobile .listItemMediaInfo {
+    display: flex;
+}
+
+#itemDetailPage .itemName.infoText.parentNameLast > bdi:nth-child(1) {display: none;}
+.hide+.detailPageWrapperContainer .itemName > bdi:nth-child(1) {display: block !important;}
+#itemDetailPage .parentName > bdi:nth-child(1) {display: none;}
+.hide+.parentName > bdi:nth-child(1) {display: block !important;}
+
+#loginPage .raised.cancel.block.btnForgotPassword.emby-button {
+  display: none;
+}
+.tmla-mask.backdrop {
+    opacity: 0;
+}
+
+/*Hide the top bar when the login page is visible*/
+body:has(#loginPage:not(.hide)) .skinHeader {
+    display: none !important;
+}
+
+/*Show the top bar when the login page is hidden or absent*/
+body:not(:has(#loginPage:not(.hide))) .skinHeader {
+    display: flex !important;
+}
+
+.layout-mobile .listItem-content .listItemImage-large {
+  -webkit-tap-highlight-color: transparent; /* Disable blue tap highlight */
+}
+
+#childrenContent .listItem {
+      -webkit-tap-highlight-color: transparent; 
+}
+
+
+@media all and (min-width: 50em) {
+  #specialsCollapsible .emby-scroller,
+  #musicVideosCollapsible.emby-scroller,
+  #scenesCollapsible.emby-scroller {
+    margin-right: 0;
+  }
+
+  #specialsCollapsible .emby-scrollbuttons,
+  #musicVideosCollapsible .emby-scrollbuttons,
+  #scenesCollapsible .emby-scrollbuttons  {
+    display: none;
+  }
+
+  #specialsCollapsible .itemsContainer,
+  #musicVideosCollapsible .itemsContainer,
+  #scenesCollapsible .itemsContainer {
+    flex-wrap: wrap;
+  }
+
+  #specialsCollapsible .overflowBackdropCard,
+  #musicVideosCollapsible .overflowBackdropCard,
+  #scenesCollapsible .overflowBackdropCard {
+    max-width: 13.4vw !important;
+  }
+
+.verticalSection.section0 .textActionButton {
+  display: none;
+}
+
+}
+
+#txtCustomCss, #txtLocalCustomCss {
+	height: 400px !important;
+	max-height: none !important;
+	overflow-y: scroll !important;
+	resize: vertical !important;
+}
+
+.customCssContainer textarea {
+	height: auto !important;
+}
 @media only screen and (max-device-width: 767px) {
   .featurediframe {
     height: 60vh !important;
