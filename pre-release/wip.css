@@ -146,7 +146,7 @@ body:not(:has(#loginPage:not(.hide))) .skinHeader {
   transform: scale(1.1);
 }
 .overflowBackdropCard {
-    width: 50vw !important; /* Full width for mobile */
+    width: 50vw; /* Full width for mobile */
 }
 .formDialogFooter-clear,
 .formDialogHeader-clear,
