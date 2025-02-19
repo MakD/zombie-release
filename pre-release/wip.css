@@ -30,9 +30,6 @@ imgLogoIcon {
 .pageTitleWithLogo {
   background-image: url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@main/logo/jellyfin-logo-light.png) !important;
 }
-.layout-mobile .overflowBackdropCard {
-    width: 50vw !important; /* Full width for mobile */
-}
 .cardIndicators,
 .listItemIndicators {
   right: 0.2em !important;
@@ -147,6 +144,9 @@ body:not(:has(#loginPage:not(.hide))) .skinHeader {
 .card.show-animation:focus > .cardBox {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
+}
+.layout-mobile .overflowBackdropCard {
+    width: 50vw !important; /* Full width for mobile */
 }
 .formDialogFooter-clear,
 .formDialogHeader-clear,
