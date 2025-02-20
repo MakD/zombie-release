@@ -1,0 +1,91 @@
+#itemDetailPage .itemName.infoText.parentNameLast > bdi:first-child,
+#itemDetailPage .parentName > bdi:first-child {
+  display: none;
+}
+.hide + .detailPageWrapperContainer .itemName > bdi:first-child,
+.hide + .parentName > bdi:first-child {
+  display: block !important;
+}
+@media only screen and (orientation: portrait) {
+  .layout-mobile .itemBackdrop {
+    position: relative;
+    background-size: cover;
+    height: 50vh;
+    margin-top: 0;
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      rgba(var(--dark-apparent), 1) 10%,
+      rgba(var(--dark-apparent), 0) 90%
+    );
+    mask-image: linear-gradient(
+      180deg,
+      rgba(var(--dark-apparent), 1) 10%,
+      rgba(var(--dark-apparent), 0) 90%
+    );
+  }
+  .layout-mobile {
+    position: relative;
+  }
+  .layout-mobile .detailLogo {
+    display: block;
+    width: 25em;
+    position: absolute;
+    left: 50%;
+    top: 30vh;
+    transform: translateX(-50%);
+  }
+  .layout-mobile .mainDetailButtons {
+    margin-top: 2em;
+    padding-left: 0;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+  .layout-mobile .btnPlay {
+    border-radius: 2em;
+    width: 100% !important;
+    background-color: #fff;
+    color: #000;
+    padding: 0.6em !important;
+    margin-bottom: 1em !important;
+  }
+  .layout-mobile .libraryPage .btnPlay {
+    margin-right: 0 !important;
+  }
+  .layout-mobile .btnPlay::after {
+    content: attr(title);
+    margin: 0 10px 0 2px;
+    color: #000;
+  }
+  .layout-mobile .btnPlay.detailButton {
+    flex-direction: row;
+  }
+  .layout-mobile .btnReplay::after,
+  .layout-mobile .btnShuffle::after {
+    content: attr(title);
+    color: #fff;
+    font-weight: 400;
+  }
+  .layout-mobile .btnMoreCommands::after,
+  .layout-mobile .btnPlayTrailer::after,
+  .layout-mobile .btnPlaystate::after,
+  .layout-mobile .btnUserRating::after {
+    content: "";
+    color: #fff;
+    font-weight: 400;
+  }
+  .layout-mobile .btnMoreCommands .detailButton-icon,
+  .layout-mobile .btnPlayTrailer .detailButton-icon,
+  .layout-mobile .btnPlaystate .detailButton-icon,
+  .layout-mobile .btnReplay .detailButton-icon,
+  .layout-mobile .btnShuffle .detailButton-icon,
+  .layout-mobile .btnUserRating .detailButton-icon {
+    background-color: #ffffff21;
+    border-radius: 50%;
+    padding: 0.25em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.5em;
+    height: 1.5em;
+  }
+}

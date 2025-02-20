@@ -1,0 +1,8 @@
+:root {
+  --accent: 0, 104, 255;
+  --accent-off: 0, 82, 204;
+  --dark: 11, 20, 45;
+  --darkest: 5, 10, 22;
+  --dark-highlight: 16, 32, 64;
+  --dark-apparent: 8, 16, 32;
+}

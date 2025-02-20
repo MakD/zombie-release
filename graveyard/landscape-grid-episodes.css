@@ -1,0 +1,151 @@
+.childrenItemsContainer.itemsContainer.padded-right.vertical-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+@media all and (min-width: 2000px) {
+  .listItemImage-large {
+    height: 9.5vw;
+  }
+}
+@media all and (max-width: 2000px) {
+  .childrenItemsContainer.itemsContainer.padded-right.vertical-list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media all and (max-width: 1000px) {
+  .childrenItemsContainer.itemsContainer.padded-right.vertical-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.layout-mobile
+  .childrenItemsContainer.itemsContainer.padded-right.vertical-list {
+  grid-template-columns: 1fr;
+}
+#itemDetailPage .listItem-content {
+  border-radius: var(--rounding);
+  overflow: hidden;
+  transition: background 0.15s ease-in-out;
+  flex-flow: column;
+  -webkit-transition: background 0.15s ease-in-out;
+  -moz-transition: background 0.15s ease-in-out;
+  -ms-transition: background 0.15s ease-in-out;
+  -o-transition: background 0.15s ease-in-out;
+}
+.listItemImage.listItemImage-large {
+  width: 100%;
+  margin: 0;
+}
+.listItem-overview.listItemBodyText {
+  height: 5.5em !important;
+  font-size: 1em !important;
+}
+.layout-mobile .listItemImageButton-icon {
+  padding: 0;
+  top: 0.34em;
+  position: absolute !important;
+  font-size: 1.5em !important;
+  right: 3em;
+}
+#itemDetailPage .listItem {
+  position: relative;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  border-radius: var(--rounding);
+  padding: 0.5em;
+}
+#itemDetailPage .secondary.listItem-overview.listItemBodyText {
+  height: 100%;
+  margin: 0;
+}
+.listItem[data-mediatype="Audio"] {
+  padding: 0 1em;
+  border-radius: var(--rounding) !important;
+  -webkit-border-radius: var(--rounding) !important;
+  -moz-border-radius: var(--rounding) !important;
+  -ms-border-radius: var(--rounding) !important;
+  -o-border-radius: var(--rounding) !important;
+}
+.layout-mobile #itemDetailPage .listItemImageButton {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  color: #fff;
+}
+.layout-mobile .listItemIndicators {
+  right: 0;
+  top: 0;
+  z-index: 0;
+}
+.layout-mobile .playedIndicator {
+  width: 2em;
+  height: 2em;
+  font-size: 1.2rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  box-shadow: none;
+}
+.layout-mobile .listItemIndicators .indicatorIcon.check {
+  z-index: 2;
+}
+.layout-mobile .listItemBodyText {
+  max-width: 36vw;
+}
+@media all and (min-width: 50em) {
+  .layout-mobile .listItemBodyText {
+    max-width: 100%;
+  }
+}
+.layout-mobile .listItem .playedIndicator {
+  background: 0 0 !important;
+  color: rgba(var(--accent));
+}
+.layout-mobile .listItemImage {
+  height: 100% !important;
+  width: 100% !important;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  border-radius: var(--rounding) !important;
+}
+.layout-mobile .listItemImageButton:hover {
+  transform: scale(1);
+}
+.layout-mobile .listViewUserDataButtons {
+  position: absolute;
+  right: 0;
+  top: 1.25em;
+  padding-right: 1em;
+}
+.layout-mobile .listItemButton {
+  padding: 0 0.556em !important;
+}
+.layout-mobile #itemDetailPage .listItem-content {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  align-items: flex-start;
+  background: 0 0 !important;
+  position: unset;
+  color: #fff;
+}
+.listItemImageButton {
+  margin: auto;
+  font-size: 1.6em !important;
+}
+.listItem-bottomoverview.secondary,
+.listItemBody.itemAction {
+  z-index: 1;
+}
+.listItem-bottomoverview.secondary {
+  text-align: justify;
+  padding: 0.5em;
+  margin: 0;
+}
