@@ -1,3 +1,20 @@
+
+Installer Link - `@import url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/zombie_revived.css);`
+
+Color Schemes (Add below the first import)
+
+- Amazon Prime - `@import url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/color-schemes/amazon-prime.css)`
+- AppleTV - `@import url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/color-schemes/apple-tv.css)`
+- Disney - `@import url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/color-schemes/disney.css)`
+- HBO Max - `@import url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/color-schemes/hbo-max.css)`
+- Hulu - `@import url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/color-schemes/hulu.css)`
+- Netflix - `@import url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/color-schemes/netflix.css)`
+- Youtube - `@import url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/color-schemes/youtube.css)`
+
+
+Obsolete Info Below, Readme/Screenshots to be updated later
+<details>
+  
 # zombie-release (10.9.x and Tablet compatible)
 
 ## A theme for Jellyfin 10.9.x combining the best from the Public Themes
@@ -194,3 +211,5 @@ Firstly I would like to thank [BobHasNoSoul](https://github.com/BobHasNoSoul), a
 10. Profit.
 
 This cycles randomly through your library. You can also specify a custom list to show as a spotlight. You can visit BoBHasNoSoul's repo for further steps.
+
+</details>
