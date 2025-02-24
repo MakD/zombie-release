@@ -112,7 +112,6 @@ body:not(:has(#loginPage:not(.hide))) .skinHeader {
   margin-top: 4em !important;
   margin-left: auto;
   margin-right: auto;
-  background: rgba(var(--dark-highlight), 0.33);
   backdrop-filter: blur(1px);
   border-radius: var(--rounding-large);
   overflow: auto;
