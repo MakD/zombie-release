@@ -1,9 +1,9 @@
 @media only screen and (orientation: portrait) {
   .layout-mobile .detailPagePrimaryContainer {
     display: block !important;
-     padding: 0rem 1rem 0rem !important;
+    padding: 0rem 1rem 0rem !important;
     position: relative !important;
-}
+  }
   .layout-mobile .detailLogo {
     display: block !important;
     width: 15em !important;
@@ -71,11 +71,12 @@
   .layout-mobile .itemName.originalTitle {
     text-align: center !important;
   }
-  .layout-mobile h1.itemName, .layout-mobile h1.parentName {
+  .layout-mobile h1.itemName,
+  .layout-mobile h1.parentName {
     font-size: 1.6em !important;
     text-align: center !important;
-}
-    .layout-mobile .btnMoreCommands .detailButton-icon {
+  }
+  .layout-mobile .btnMoreCommands .detailButton-icon {
     transform: rotate(90deg);
     display: inline-block;
   }
