@@ -1,0 +1,69 @@
+@media only screen and (orientation: portrait) {
+  .layout-mobile .detailLogo {
+    display: block !important;
+    width: 15em !important;
+    position: absolute !important;
+    left: 50% !important;
+    top: 10vh !important;
+    transform: translateX(-50%) !important;
+  }
+  .layout-mobile .mainDetailButtons {
+    margin-top: 2em !important;
+    padding-left: 0 !important;
+    justify-content: space-evenly !important;
+    flex-wrap: wrap !important;
+  }
+  .layout-mobile .btnPlay {
+    border-radius: 1em !important;
+    width: 100% !important;
+    background-color: #fff !important;
+    color: #000 !important;
+    padding: 0.6em !important;
+  }
+  .layout-mobile .libraryPage .btnPlay {
+    margin-right: 0 !important;
+  }
+  .layout-mobile .btnPlay::after {
+    content: attr(title) !important;
+    margin: 0 10px 0 2px !important;
+    color: #000 !important;
+  }
+  .layout-mobile .btnPlay.detailButton {
+    flex-direction: row !important;
+  }
+  .layout-mobile .btnReplay::after,
+  .layout-mobile .btnShuffle::after {
+    content: attr(title) !important;
+    color: #fff !important;
+    font-weight: 400 !important;
+  }
+  .layout-mobile .btnMoreCommands::after,
+  .layout-mobile .btnPlayTrailer::after,
+  .layout-mobile .btnPlaystate::after,
+  .layout-mobile .btnUserRating::after {
+    content: "" !important;
+    color: #fff !important;
+    font-weight: 400 !important;
+  }
+  .layout-mobile .btnMoreCommands .detailButton-icon,
+  .layout-mobile .btnPlayTrailer .detailButton-icon,
+  .layout-mobile .btnPlaystate .detailButton-icon,
+  .layout-mobile .btnReplay .detailButton-icon,
+  .layout-mobile .btnShuffle .detailButton-icon,
+  .layout-mobile .btnUserRating .detailButton-icon {
+    background-color: transparent !important;
+    border-radius: 50% !important;
+    padding: 0.25em !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 1.5em !important;
+    height: 1.5em !important;
+  }
+  .layout-mobile .itemMiscInfo {
+    justify-content: center !important;
+  }
+  .layout-mobile .itemName.originalTitle {
+    text-align: center !important;
+  }
+}
