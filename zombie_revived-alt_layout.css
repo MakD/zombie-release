@@ -1,8 +1,13 @@
 @media only screen and (orientation: portrait) {
   .layout-mobile .detailPagePrimaryContainer {
-    display: block !important;
+    display: flex !important;
     padding: 0rem 1rem 0rem !important;
     position: relative !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    flex-direction: column !important;
+    align-content: center !important;
+    align-items: center !important;
   }
   .layout-mobile .detailLogo {
     display: block !important;
@@ -13,10 +18,11 @@
     transform: translateX(-50%) !important;
   }
   .layout-mobile .mainDetailButtons {
-    margin-top: 2em !important;
+    margin-top: 0em !important;
     padding-left: 0 !important;
     justify-content: space-evenly !important;
     flex-wrap: wrap !important;
+    width: 100% !important;
   }
   .layout-mobile .btnPlay {
     border-radius: 1em !important;
@@ -66,7 +72,9 @@
     height: 1.5em !important;
   }
   .layout-mobile .itemMiscInfo {
-    justify-content: center !important;
+    -webkit-align-items: center !important;
+    align-items: center !important;
+    padding-top: 0em !important;
   }
   .layout-mobile .itemName.originalTitle {
     text-align: center !important;
@@ -80,4 +88,12 @@
     transform: rotate(90deg);
     display: inline-block;
   }
+  .layout-mobile [dir="ltr"] .mediaInfoItem {
+    margin: 0 1em 0 1em !important;
+}
+
+.layout-mobile [dir="ltr"] .infoWrapper {
+    padding-left: 0% !important;
+    padding-top: 0% !important;
+}
 }
