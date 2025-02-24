@@ -1,7 +1,7 @@
 @media only screen and (orientation: portrait) {
   .layout-mobile .detailPagePrimaryContainer {
     display: block !important;
-     padding: 0rem 0rem 0rem !important;
+     padding: 0rem 1rem 0rem !important;
     position: relative !important;
 }
   .layout-mobile .detailLogo {
