@@ -5,9 +5,10 @@ h2,
 h3,
 h4 {
   font-family: "Archivo Narrow", sans-serif;
+  font-size: 1em;
 }
 :root {
-  --zombieFooterText: "Zombie v2.0.2";
+  --zombieFooterText: "Zombie v2.0.3";
   --accent: 255, 255, 255;
   --accent-off: 36, 36, 36;
   --dark: 24, 24, 24;
