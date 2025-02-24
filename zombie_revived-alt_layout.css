@@ -66,4 +66,8 @@
   .layout-mobile .itemName.originalTitle {
     text-align: center !important;
   }
+  .layout-mobile h1.itemName, .layout-mobile h1.parentName {
+    font-size: 1.6em !important;
+    text-align: center !important;
+}
 }
