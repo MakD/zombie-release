@@ -7,7 +7,7 @@ h4 {
   font-family: "Archivo Narrow", sans-serif;
 }
 :root {
-  --zombieFooterText: "Zombie v2.0.3";
+  --zombieFooterText: "Zombie v2.0.4";
   --accent: 255, 255, 255;
   --accent-off: 36, 36, 36;
   --dark: 24, 24, 24;
@@ -109,12 +109,11 @@ body:not(:has(#loginPage:not(.hide))) .skinHeader {
   max-width: 22em;
 }
 #loginPage .padded-left.padded-right.padded-bottom-page {
-  margin-top: 0em !important;
+  margin-top: 4em !important;
   margin-left: auto;
   margin-right: auto;
   background: rgba(var(--dark-highlight), 0.33);
   backdrop-filter: blur(1px);
-  width: 24em;
   border-radius: var(--rounding-large);
   overflow: auto;
 }
