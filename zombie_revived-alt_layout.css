@@ -1,7 +1,7 @@
-@media only screen and (orientation: portrait) {
+@media only screen and (max-device-width: 767px) and (orientation: portrait) {
   .layout-mobile .detailPagePrimaryContainer {
     display: flex !important;
-    padding: 0rem 1rem 0rem !important;
+    padding: 0 1rem !important;
     position: relative !important;
     justify-content: center !important;
     flex-wrap: wrap !important;
@@ -18,7 +18,7 @@
     transform: translateX(-50%) !important;
   }
   .layout-mobile .mainDetailButtons {
-    margin-top: 0em !important;
+    margin-top: 0 !important;
     padding-left: 0 !important;
     justify-content: space-evenly !important;
     flex-wrap: wrap !important;
@@ -34,7 +34,7 @@
   .layout-mobile .libraryPage .btnPlay {
     margin-right: 0 !important;
   }
-  .layout-mobile .btnPlay::after {
+  .layout-mobile .btnPlay:after {
     content: attr(title) !important;
     margin: 0 10px 0 2px !important;
     color: #000 !important;
@@ -42,23 +42,23 @@
   .layout-mobile .btnPlay.detailButton {
     flex-direction: row !important;
   }
-  .layout-mobile .btnReplay::after,
-  .layout-mobile .btnShuffle::after {
+  .layout-mobile .btnReplay:after,
+  .layout-mobile .btnShuffle:after {
     content: attr(title) !important;
     color: #fff !important;
     font-weight: 400 !important;
   }
-  .layout-mobile .btnMoreCommands::after,
-  .layout-mobile .btnPlayTrailer::after,
-  .layout-mobile .btnPlaystate::after,
-  .layout-mobile .btnUserRating::after {
+  .layout-mobile .btnMoreCommands:after,
+  .layout-mobile .btnPlaystate:after,
+  .layout-mobile .btnPlayTrailer:after,
+  .layout-mobile .btnUserRating:after {
     content: "" !important;
     color: #fff !important;
     font-weight: 400 !important;
   }
   .layout-mobile .btnMoreCommands .detailButton-icon,
-  .layout-mobile .btnPlayTrailer .detailButton-icon,
   .layout-mobile .btnPlaystate .detailButton-icon,
+  .layout-mobile .btnPlayTrailer .detailButton-icon,
   .layout-mobile .btnReplay .detailButton-icon,
   .layout-mobile .btnShuffle .detailButton-icon,
   .layout-mobile .btnUserRating .detailButton-icon {
@@ -74,7 +74,7 @@
   .layout-mobile .itemMiscInfo {
     -webkit-align-items: center !important;
     align-items: center !important;
-    padding-top: 0em !important;
+    padding-top: 0 !important;
   }
   .layout-mobile .itemName.originalTitle {
     text-align: center !important;
@@ -89,11 +89,10 @@
     display: inline-block;
   }
   .layout-mobile [dir="ltr"] .mediaInfoItem {
-    margin: 0 1em 0 1em !important;
-}
-
-.layout-mobile [dir="ltr"] .infoWrapper {
-    padding-left: 0% !important;
-    padding-top: 0% !important;
-}
+    margin: 0 1em !important;
+  }
+  .layout-mobile [dir="ltr"] .infoWrapper {
+    padding-left: 0 !important;
+    padding-top: 0 !important;
+  }
 }
