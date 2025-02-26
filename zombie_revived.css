@@ -7,7 +7,7 @@ h4 {
   font-family: "Archivo Narrow", sans-serif;
 }
 :root {
-  --zombieFooterText: "Zombie v2.0.7";
+  --zombieFooterText: "Zombie v2.0.8";
   --accent: 255, 255, 255;
   --accent-off: 36, 36, 36;
   --dark: 24, 24, 24;
@@ -585,36 +585,6 @@ imgLogoIcon {
 }
 .listItem-bottomoverview {
   text-align: justify;
-}
-@media (orientation: portrait) {
-  .layout-mobile .overflowBackdropCard,
-  .layout-mobile .overflowSmallBackdropCard {
-    width: 55vw;
-  }
-  .sectionTabs {
-    font-size: 0.87em;
-  }
-}
-@media (orientation: landscape) {
-  .layout-desktop .overflowBackdropCard,
-  .layout-desktop.overflowSmallBackdropCard {
-    width: 15vw;
-  }
-  .layout-desktop.overflowPortraitCard,
-  .layout-desktop.overflowSquareCard {
-    width: 9.5vw;
-  }
-  .layout-mobile .overflowBackdropCard,
-  .overflowSmallBackdropCard {
-    width: 25vw !important;
-  }
-  .layout-mobile .overflowPortraitCard,
-  .overflowSquareCard {
-    width: 15.5vw !important;
-  }
-  .layout-mobile .headerHomeButton {
-    display: none;
-  }
 }
 .skinHeader {
   background-color: transparent !important;
