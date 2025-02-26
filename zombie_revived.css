@@ -7,7 +7,7 @@ h4 {
   font-family: "Archivo Narrow", sans-serif;
 }
 :root {
-  --zombieFooterText: "Zombie v2.0.9";
+  --zombieFooterText: "Zombie v2.0.10";
   --accent: 255, 255, 255;
   --accent-off: 36, 36, 36;
   --dark: 24, 24, 24;
@@ -537,7 +537,8 @@ a[href*="themoviedb.org/collection"]::before {
   background-image: url(https://i.imgur.com/Vguav7a.png);
 }
 a[href*="thetvdb.com/movies"]::before,
-a[href*="thetvdb.com/series"]::before {
+a[href*="thetvdb.com/series"]::before,
+a[href*="thetvdb.com/?tab=series"]::before {
   background-image: url(https://www.thetvdb.com/images/logo.svg);
 }
 a[href*="tvmaze.com"]::before {
@@ -553,6 +554,7 @@ a[href*="themoviedb.org"],
 a[href*="themoviedb.org/collection"],
 a[href*="thetvdb.com/movies"],
 a[href*="thetvdb.com/series"],
+a[href*="thetvdb.com/?tab=series"],
 a[href*="tvmaze.com"],
 a[href*="anidb.net"] {
   font-size: 0;
