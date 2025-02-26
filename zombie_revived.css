@@ -509,7 +509,8 @@ a[href*="imdb.com"]::before,
 a[href*="trakt.tv"]::before,
 a[href*="themoviedb.org"]::before,
 a[href*="themoviedb.org/collection"]::before,
-a[href*="thetvdb.com"]::before,
+a[href*="thetvdb.com/movies"]::before,
+a[href*="thetvdb.com/series"]::before,
 a[href*="tvmaze.com"]::before,
 a[href*="anidb.net"]::before {
   content: "";
@@ -535,7 +536,8 @@ a[href*="themoviedb.org"]::before {
 a[href*="themoviedb.org/collection"]::before {
   background-image: url(https://i.imgur.com/Vguav7a.png);
 }
-a[href*="thetvdb.com"]::before {
+a[href*="thetvdb.com/movies"]::before,
+a[href*="thetvdb.com/series"]::before {
   background-image: url(https://www.thetvdb.com/images/logo.svg);
 }
 a[href*="tvmaze.com"]::before {
@@ -549,7 +551,8 @@ a[href*="imdb.com"],
 a[href*="trakt.tv"],
 a[href*="themoviedb.org"],
 a[href*="themoviedb.org/collection"],
-a[href*="thetvdb.com"],
+a[href*="thetvdb.com/movies"]::before,
+a[href*="thetvdb.com/series"]::before,
 a[href*="tvmaze.com"],
 a[href*="anidb.net"] {
   font-size: 0;
