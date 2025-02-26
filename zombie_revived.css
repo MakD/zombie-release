@@ -7,7 +7,7 @@ h4 {
   font-family: "Archivo Narrow", sans-serif;
 }
 :root {
-  --zombieFooterText: "Zombie v2.0.8";
+  --zombieFooterText: "Zombie v2.0.9";
   --accent: 255, 255, 255;
   --accent-off: 36, 36, 36;
   --dark: 24, 24, 24;
@@ -551,8 +551,8 @@ a[href*="imdb.com"],
 a[href*="trakt.tv"],
 a[href*="themoviedb.org"],
 a[href*="themoviedb.org/collection"],
-a[href*="thetvdb.com/movies"]::before,
-a[href*="thetvdb.com/series"]::before,
+a[href*="thetvdb.com/movies"],
+a[href*="thetvdb.com/series"],
 a[href*="tvmaze.com"],
 a[href*="anidb.net"] {
   font-size: 0;
