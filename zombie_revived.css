@@ -7,7 +7,7 @@ h4 {
   font-family: "Archivo Narrow", sans-serif;
 }
 :root {
-  --zombieFooterText: "Zombie v2.0.10";
+  --zombieFooterText: "Zombie v2.0.11";
   --accent: 255, 255, 255;
   --accent-off: 36, 36, 36;
   --dark: 24, 24, 24;
@@ -511,6 +511,8 @@ a[href*="themoviedb.org"]::before,
 a[href*="themoviedb.org/collection"]::before,
 a[href*="thetvdb.com/movies"]::before,
 a[href*="thetvdb.com/series"]::before,
+a[href*="thetvdb.com/tv"]::before,
+a[href*="thetvdb.com/?tab=series"]::before,
 a[href*="tvmaze.com"]::before,
 a[href*="anidb.net"]::before {
   content: "";
@@ -538,6 +540,7 @@ a[href*="themoviedb.org/collection"]::before {
 }
 a[href*="thetvdb.com/movies"]::before,
 a[href*="thetvdb.com/series"]::before,
+a[href*="thetvdb.com/tv"]::before,
 a[href*="thetvdb.com/?tab=series"]::before {
   background-image: url(https://www.thetvdb.com/images/logo.svg);
 }
@@ -552,9 +555,7 @@ a[href*="imdb.com"],
 a[href*="trakt.tv"],
 a[href*="themoviedb.org"],
 a[href*="themoviedb.org/collection"],
-a[href*="thetvdb.com/movies"],
-a[href*="thetvdb.com/series"],
-a[href*="thetvdb.com/?tab=series"],
+a[href*="thetvdb.com"],
 a[href*="tvmaze.com"],
 a[href*="anidb.net"] {
   font-size: 0;
@@ -596,10 +597,6 @@ imgLogoIcon {
 }
 .skinHeader-withBackground {
   background-color: #fff0;
-}
-.layout-desktop .skinHeader {
-  padding-top: 1.5em !important;
-  padding-bottom: 1.5em !important;
 }
 .headerRight,
 .layout-desktop .emby-tab-button {
@@ -703,7 +700,7 @@ imgLogoIcon {
 }
 .countIndicator,
 .playedIndicator {
-  border-radius: var(--rounding) !important;
+  border-radius: 100% !important;
   border: 2px solid rgba(var(--accent), 1) !important;
 }
 .countIndicator,
@@ -711,7 +708,7 @@ imgLogoIcon {
   background: rgba(var(--accent), 0.5) !important;
   color: white !important;
   font-weight: 700;
-  font-size: 8px;
+  font-size: 0.8em;
 }
 .layout-desktop .detailLogo {
   left: 5%;
@@ -769,7 +766,7 @@ imgLogoIcon {
   padding-left: 5%;
 }
 .layout-desktop .detailPagePrimaryContent {
-  width: 90vw;
+  width: 69vw;
 }
 .layout-desktop .detailPagePrimaryContainer {
   display: inline-table;
@@ -1794,13 +1791,6 @@ a[data-role="button"]:hover {
   border-radius: var(--rounding);
   color: rgba(var(--accent));
 }
-.btnPreviousChapter,
-.btnNextChapter,
-.btnRewind,
-.btnFastForward,
-.btnPreviousTrack {
-  display: none;
-}
 .osdHeader .headerTop {
   max-height: 3em;
   pointer-events: all;
@@ -1809,9 +1799,6 @@ a[data-role="button"]:hover {
 .videoOsdBottom .buttons {
   flex-wrap: wrap;
   padding: 0.25em 0 0;
-  font-size: 125%;
-}
-.layout-desktop .headerTop {
   font-size: 125%;
 }
 .layout-desktop .drawerContent {
@@ -2178,9 +2165,9 @@ fieldset {
 }
 .layout-desktop .nextUpSection {
   border-radius: 34px;
-  left: calc(70vw - 0.5em);
+  left: calc(70vw - -0em);
+  top: calc(50vh + -12em);
   margin-right: -30vw;
-  margin-top: 15vh;
   margin-bottom: 1vh;
   padding-left: 2.62em;
   margin-right: 5vw;
