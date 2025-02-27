@@ -7,7 +7,7 @@ h4 {
   font-family: "Archivo Narrow", sans-serif;
 }
 :root {
-  --zombieFooterText: "Zombie v2.0.11";
+  --zombieFooterText: "Zombie v2.0.12";
   --accent: 255, 255, 255;
   --accent-off: 36, 36, 36;
   --dark: 24, 24, 24;
@@ -1862,10 +1862,10 @@ a[data-role="button"]:hover {
   backdrop-filter: blur(4px) !important;
 }
 .sliderMarker.watched {
-  background-color: #fff0;
+  background-color: rgba(var(--white-off),.35) !important;
 }
 .sliderMarker.unwatched {
-  background-color: #fff0;
+  background-color: rgba(var(--white-off),.35) !important;
 }
 .mdl-slider-background-upper {
   background: rgba(var(--accent-off));
