@@ -1,4 +1,8 @@
 
+![jsDelivr hits (GitHub)](https://img.shields.io/jsdelivr/gh/hm/makd/zombie-release?style=for-the-badge&logo=css&logoColor=white&labelColor=663399&color=000000&cacheSeconds=3600)
+
+
+
 Installer Link - `@import url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/zombie_revived.css);`
 
 Color Schemes (Add below the first import. **Apart** from Amazon Prime, and netflix _somewhat_ all schemes look ugly and need to be fixed. Old color schemes [hidden below](https://github.com/MakD/zombie-release/tree/main#color-palettes), and the ones from Zesty are still compatible)
