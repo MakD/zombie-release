@@ -9,6 +9,8 @@ h4 {
 :root {
   --zombieFooterText: "Zombie v2.0.12";
   --accent: 255, 255, 255;
+  --on-accent: 12, 12, 12;
+  --bg-wash: 255, 255, 255;
   --accent-off: 36, 36, 36;
   --dark: 24, 24, 24;
   --darkest: 12, 12, 12;
@@ -25,7 +27,7 @@ h4 {
   --rounding-circle: 100px;
 }
 .backgroundContainer {
-  background-color: rgba(var(--accent), 0.17) !important;
+  background-color: rgba(var(--bg-wash), 0.17) !important;
 }
 * {
   scrollbar-width: none;
@@ -83,78 +85,342 @@ h4 {
   width: 0.25em;
   display: inline-block;
 }
-.dashboardFooter {
-  font-family: "Archivo Narrow", serif;
-  transition: transform 50ms;
-}
-.dashboardFooter::after {
-  content: var(--zombieFooterText);
-  font-size: 0.8em;
-  color: #cecece;
-}
-#loginPage h1 {
-  display: none;
-}
-#loginPage .padded-left.padded-right.padded-bottom-page {
-  margin-top: 10px;
-}
-body:has(#loginPage:not(.hide)) .skinHeader {
+body:has(#loginPage:not(.hide)) .MuiAppBar-root {
   display: none !important;
 }
 body:has(#loginPage:not(.hide)) {
   overflow: hidden !important;
 }
-body:not(:has(#loginPage:not(.hide))) .skinHeader {
-  display: flex !important;
+#loginPage {
+  position: fixed;
+  inset: 0;
+  box-sizing: border-box;
+  padding: 0 !important;
+  width: 100%;
+  height: 100%;
+  margin: 0 !important;
+  overflow: hidden;
+  z-index: 2;
+  background-image: var(--zombieLoginImage,url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@main/img/loginImg/login.jpg)),url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@main/img/loginImg/login.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  animation: zombieLoginDrift 120s ease-in-out infinite alternate;
 }
-#loginPage .readOnlyContent,
-#loginPage form {
-  max-width: 22em;
+@keyframes zombieLoginDrift {
+  from {
+    background-position:
+      44% 50%,
+      44% 50%;
+  }
+  to {
+    background-position:
+      56% 50%,
+      56% 50%;
+  }
+}
+#loginPage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  -webkit-backdrop-filter: saturate(0.78) brightness(0.92);
+  backdrop-filter: saturate(0.78) brightness(0.92);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(var(--darkest), 0.97) 0%,
+      rgba(var(--darkest), 0.66) 52%,
+      rgba(var(--darkest), 0.46) 100%
+    ),
+    radial-gradient(
+      100% 78% at 74% 50%,
+      rgba(var(--darkest), 0) 0%,
+      rgba(var(--darkest), 0.82) 100%
+    );
 }
 #loginPage .padded-left.padded-right.padded-bottom-page {
-  margin-top: 4em !important;
-  margin-left: auto;
-  margin-right: auto;
-  backdrop-filter: blur(1px);
-  border-radius: var(--rounding-large);
-  overflow: auto;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  width: min(36rem, 44vw);
+  margin: 0 !important;
+  padding: 2rem clamp(2.5rem, 4.2vw, 5.25rem) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-content: safe center;
+  overflow-y: auto;
+  background: rgb(var(--darkest));
+  border-radius: 0;
+  backdrop-filter: none;
+  overflow: visible;
+  z-index: 1;
 }
-#loginPage .squareCard {
-  width: 33%;
+#loginPage .padded-bottom-page::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 0;
+  bottom: 0;
+  width: 8rem;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgb(var(--darkest)),
+    rgba(var(--darkest), 0)
+  );
 }
-#loginPage form {
-  padding-top: 2em;
+#loginPage .padded-bottom-page::before {
+  content: var(--zombieLoginTitle, "Zombie");
+  order: -3;
+  padding-left: 2.4rem;
+  margin-bottom: 1.75rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(var(--white), 0.82);
+  background: linear-gradient(rgb(var(--accent)), rgb(var(--accent))) left
+    center / 1.6rem 2px no-repeat;
 }
-#loginPage .sectionTitle {
-  margin-left: auto !important;
-  margin-right: auto !important;
-  margin-bottom: 1.2em !important;
+#loginPage .visualLoginForm {
+  order: -2;
 }
-#loginPage .pageTitleWithDefaultLogo,
-.layout-mobile .detailImageContainer .card.portraitCard {
+#loginPage .manualLoginForm {
+  order: -1;
+}
+#loginPage .readOnlyContent {
+  order: 0;
+}
+#loginPage .visualLoginForm {
+  width: 100%;
+  margin: 0 0 1.6rem;
+}
+#loginPage .visualLoginForm h1 {
   display: none !important;
 }
-#loginPage {
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(rgb(0 0 0 / 0.5), rgb(0 0 0 / 0.5)),
-    url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@main/img/loginImg/login.jpg);
-  background-position: top left;
-  background-size: cover;
-  background-attachment: fixed;
-  animation: 150s infinite alternate backgroundAnimation;
-  z-index: 2;
-  overflow: hidden;
+#loginPage #divUsers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
 }
-#loginPage .raised.cancel.block.btnForgotPassword.emby-button {
+#loginPage .squareCard {
+  width: 4.4rem;
+  margin: 0;
+}
+#loginPage .manualLoginForm {
+  width: 100%;
+  max-width: none;
+  height: auto;
+  margin: 0 !important;
+  padding-top: 0;
+}
+#loginPage .manualLoginForm > .flex.align-items-center {
+  display: block !important;
+  padding: 0 !important;
+  margin: 0;
+}
+#loginPage .sectionTitle {
+  display: block;
+  margin: 0 0 1.6rem !important;
+  font-size: 1.6rem;
+  font-weight: 650;
+  letter-spacing: -0.018em;
+  color: rgb(var(--white));
+}
+#loginPage .inputContainer {
+  margin: 0 0 1.15rem !important;
+}
+#loginPage .inputLabel {
+  position: static !important;
+  transform: none !important;
+  display: block;
+  margin: 0 0 0.55rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(var(--white-off), 0.6);
+}
+#loginPage .emby-input {
+  width: 100%;
+  height: 3.1rem;
+  padding: 0 0.95rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: rgb(var(--white)) !important;
+  background: rgba(var(--white-off), 0.05) !important;
+  border: 1px solid rgba(var(--white-off), 0.11) !important;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+#loginPage .emby-input:focus {
+  outline: none;
+  border-color: rgba(var(--accent), 0.8) !important;
+  background: rgba(var(--white-off), 0.08) !important;
+  box-shadow: 0 0 0 3px rgba(var(--accent), 0.12);
+}
+#loginPage .checkboxContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.15rem 0 1.5rem !important;
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: rgba(var(--white), 0.82);
+}
+#loginPage .chkRememberLogin {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+#loginPage .checkboxLabel {
+  margin: 0;
+}
+#loginPage .checkboxOutline {
+  order: -1;
+  position: relative !important;
+  flex: 0 0 auto;
+  width: 2.5rem;
+  height: 1.45rem;
+  margin: 0;
+  border: 0 !important;
+  border-radius: var(--rounding-circle);
+  background: rgba(var(--white-off), 0.13);
+  box-shadow: inset 0 0 0 1px rgba(var(--white-off), 0.14);
+  transition: background-color 0.18s ease;
+}
+#loginPage .checkboxOutline::after {
+  content: "";
+  position: absolute;
+  top: 0.2rem;
+  left: 0.2rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  border-radius: 50%;
+  background: rgb(var(--white));
+  transition:
+    transform 0.18s ease,
+    background-color 0.18s ease;
+}
+#loginPage .checkboxIcon {
+  display: none !important;
+}
+#loginPage .chkRememberLogin:checked ~ .checkboxOutline {
+  background: rgb(var(--accent)) !important;
+  box-shadow: none;
+}
+#loginPage .chkRememberLogin:checked ~ .checkboxOutline::after {
+  transform: translateX(1.05rem);
+  background: rgb(var(--on-accent));
+}
+#loginPage .chkRememberLogin:focus-visible ~ .checkboxOutline {
+  box-shadow:
+    inset 0 0 0 1px rgba(var(--white-off), 0.14),
+    0 0 0 3px rgba(var(--accent), 0.25);
+}
+#loginPage .button-submit {
+  width: 100%;
+  height: 3.25rem;
+  margin: 0 !important;
+  border-radius: var(--rounding-circle) !important;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: rgb(var(--accent)) !important;
+  color: rgb(var(--on-accent)) !important;
+  box-shadow: 0 0.4rem 1.6rem rgba(var(--accent), 0.18);
+}
+#loginPage .button-submit:hover {
+  box-shadow: 0 0.5rem 2rem rgba(var(--accent), 0.28);
+}
+#loginPage .readOnlyContent {
+  width: 100%;
+  max-width: none;
+  margin: 0 !important;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+#loginPage .btnQuick {
+  order: 0;
+  flex: 0 0 100%;
+  height: 3.25rem;
+  margin: 0.7rem 0 0 !important;
+  border-radius: var(--rounding-circle) !important;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: transparent !important;
+  border: 1px solid rgba(var(--white-off), 0.2) !important;
+  color: rgba(var(--white), 0.9) !important;
+}
+#loginPage .btnQuick:hover {
+  background: rgba(var(--white-off), 0.07) !important;
+  border-color: rgba(var(--white-off), 0.38) !important;
+}
+#loginPage .readOnlyContent::before {
+  content: "";
+  order: 1;
+  flex: 0 0 100%;
+  height: 1px;
+  margin-top: 1.4rem;
+  background: rgba(var(--white-off), 0.1);
+}
+#loginPage .btnForgotPassword,
+#loginPage .btnSelectServer {
+  order: 2;
+  flex: 1 1 auto;
+  min-height: 0 !important;
+  height: auto !important;
+  margin: 1.4rem 0 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-align: left;
+  color: rgba(var(--white-off), 0.5) !important;
+}
+#loginPage .btnSelectServer {
+  order: 3;
+  text-align: right;
+}
+#loginPage .btnForgotPassword:hover,
+#loginPage .btnSelectServer:hover {
+  color: rgb(var(--white)) !important;
+}
+.layout-mobile #loginPage::before {
+  background: linear-gradient(
+    180deg,
+    rgba(var(--darkest), 0.35) 0%,
+    rgba(var(--darkest), 0.72) 26%,
+    rgba(var(--darkest), 0.95) 46%,
+    rgb(var(--darkest)) 62%
+  );
+}
+.layout-mobile #loginPage .padded-left.padded-right.padded-bottom-page {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  padding: 2rem 7% 2.5rem !important;
+  justify-content: flex-end;
+  overflow-y: auto;
+  background: #fff0;
+}
+.layout-mobile #loginPage .padded-bottom-page::after {
   display: none;
 }
-div#loginPage {
-  margin-top: 0 !important;
-}
-.manualLoginForm {
-  height: 100%;
-  width: 100%;
+.layout-mobile #loginPage .sectionTitle {
+  font-size: 1.45rem;
 }
 .layout-mobile .listItem-content .listItemImage-large {
   -webkit-tap-highlight-color: #fff0;
@@ -217,20 +483,8 @@ div#loginPage {
   line-height: 1.75;
   margin: 0 -1.3em 0 -1.8em;
 }
-#dashboardPage .sessionNowPlayingInnerContent {
-  color: rgb(var(--accent));
-  padding: 1em;
-  font-weight: 600;
-}
-#dashboardPage .sessionNowPlayingContent-withbackground {
-  filter: blur(2px);
-}
 .darkenContent {
   background: rgba(var(--darkest), 0.55);
-}
-#dashboardPage .backgroundProgress > div {
-  background-color: #fff0;
-  display: none;
 }
 .cardImageIcon,
 .cardPadder .cardImageIcon {
@@ -254,9 +508,6 @@ a[data-role="button"]:hover {
   background: linear-gradient(140deg, rgb(var(--accent)), #111) !important;
   border-radius: var(--rounding);
 }
-.navMenuOption-selected {
-  color: rgba(var(--accent));
-}
 .mdl-slider-background-lower {
   background-color: rgba(var(--accent));
 }
@@ -265,15 +516,6 @@ progress::-moz-progress-bar {
 }
 progress::-webkit-progress-value {
   background-color: rgba(var(--accent), 0.75);
-}
-.taskProgressInner {
-  background: rgba(var(--accent), 0.75) !important;
-}
-#dashboardPage .playbackProgress > div {
-  background-color: rgba(var(--accent), 0.75) !important;
-}
-#dashboardPage .transcodingProgress > div {
-  background-color: rgba(var(--accent), 0.35) !important;
 }
 .mdl-slider-background-lower {
   background-color: rgb(var(--accent));
@@ -311,12 +553,12 @@ progress::-webkit-progress-value {
   color: inherit !important;
 }
 .navMenuOption:hover,
-.actionSheetMenuItem:hover {
+.MuiMenuItem-root:hover {
   background-color: rgba(var(--accent), 0.75) !important;
   color: rgba(var(--darkest), 1) !important;
   border-radius: var(--rounding) !important;
 }
-.actionSheetMenuItem:hover .listItemBodyText.secondary {
+.MuiMenuItem-root:hover .listItemBodyText.secondary {
   color: rgba(var(--darkest), 0.85);
 }
 .navMenuOption:hover {
@@ -400,15 +642,11 @@ progress::-moz-progress-bar {
 progress::-webkit-progress-value {
   border-radius: var(--rounding);
 }
-.taskProgressOuter,
-.taskProgressInner {
-  border-radius: var(--rounding) !important;
-}
-.formDialogHeader {
+.MuiDialogTitle-root {
   border-top-left-radius: var(--rounding);
   border-top-right-radius: var(--rounding);
 }
-.formDialogFooter {
+.MuiDialogActions-root {
   border-bottom-left-radius: var(--rounding);
   border-bottom-right-radius: var(--rounding);
 }
@@ -418,12 +656,12 @@ progress::-webkit-progress-value {
 }
 .detailTable,
 .primaryImageWrapper > img,
-.toast,
+.MuiSnackbarContent-root,
 .cardContent,
 .sessionNowPlayingInnerContent,
 .listItem,
 .listItem:hover,
-.cardImage,
+.cardImageContainer,
 .fab,
 .raised,
 .itemSelectionPanel,
@@ -432,12 +670,12 @@ progress::-webkit-progress-value {
 .itemDetailImage,
 .cardImageContainer,
 .cardPadder,
-.listItemImage,
-.listItemButton,
+.listItemImageContainer,
+.MuiListItemButton-root,
 .headerButton,
 .innerCardFooter,
 .blurhash-canvas,
-.dialog,
+.MuiDialog-paper,
 .countIndicator,
 .playedIndicator,
 .listItemIcon,
@@ -449,7 +687,7 @@ progress::-webkit-progress-value {
 .chapterThumbContainer,
 .chapterThumb,
 .emby-input,
-.emby-textarea,
+.MuiInputBase-inputMultiline,
 .emby-select-withcolor,
 .nowPlayingPageImage,
 .upNextDialog-poster-img {
@@ -482,28 +720,6 @@ div[data-role="controlgroup"] a[data-role="button"]:first-child {
 div[data-role="controlgroup"] a[data-role="button"]:last-child {
   border-bottom-right-radius: var(--rounding);
   border-top-right-radius: var(--rounding);
-}
-#dashboardPage .cardContent,
-#dashboardPage .sessionNowPlayingInnerContent {
-  border-radius: var(--rounding) var(--rounding) 0 0 !important;
-}
-#divVirtualFolders .cardImageContainer,
-#divVirtualFolders .cardContent {
-  border-radius: var(--rounding) var(--rounding) 0 0 !important;
-}
-#userProfilesPage .cardImage,
-#userProfilesPage .cardContent {
-  border-radius: var(--rounding) var(--rounding) 0 0 !important;
-}
-.mainDrawer:has(.navMenuOption-selected[href^="#/movies.html"])
-  + .skinHeader
-  .emby-tab-button[data-index="2"] {
-  display: none !important;
-}
-.mainDrawer:has(.navMenuOption-selected[href^="#/tv.html"])
-  + .skinHeader
-  .emby-tab-button[data-index="4"] {
-  display: none !important;
 }
 a[href*="imdb.com"]::before,
 a[href*="trakt.tv"]::before,
@@ -569,22 +785,11 @@ a[href*="anidb.net"] {
   color: #fff0 !important;
   margin: 1.5em 0 !important;
 }
-.adminDrawerLogo img,
 imgLogoIcon {
   content: url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@main/logo/jellyfin-logo-light.png) !important;
 }
 .pageTitleWithLogo {
   background-image: url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@main/logo/jellyfin-logo-light.png) !important;
-}
-#txtCustomCss,
-#txtLocalCustomCss {
-  height: 400px !important;
-  max-height: 400px !important;
-  overflow-y: scroll !important;
-  resize: vertical !important;
-}
-.customCssContainer textarea {
-  height: auto !important;
 }
 .listItem-bottomoverview {
   text-align: justify;
@@ -753,16 +958,10 @@ imgLogoIcon {
   background-size: cover;
   opacity: 1;
 }
-.layout-desktop .detailPageWrapperContainer {
-  margin-top: -52vh;
-}
-.layout-desktop .detailImageContainer .card {
-  display: none;
-}
 .layout-desktop .cardImageIcon .material-icons .folder {
   display: block !important;
 }
-.layout-desktop .detailPageContent {
+.layout-desktop .detailPagePrimaryContent {
   padding-left: 5%;
 }
 .layout-desktop .detailPagePrimaryContent {
@@ -817,12 +1016,12 @@ imgLogoIcon {
 }
 .layout-desktop .btnPlay {
   background-color: rgb(var(--white));
-  color: rgb(var(--darkest)) !important;
+  color: rgb(var(--on-accent)) !important;
   border-radius: calc(var(--rounding) + 20px) !important;
 }
 .layout-desktop .btnPlay:hover {
   background-color: rgba(var(--accent));
-  color: rgb(var(--darkest)) !important;
+  color: rgb(var(--on-accent)) !important;
 }
 .layout-desktop .mainAnimatedPages .paging {
   margin-right: 1em !important;
@@ -830,12 +1029,12 @@ imgLogoIcon {
 .layout-desktop .detailPagePrimaryContainer .mainDetailButtons .btnPlay::after {
   content: attr(title);
   margin: 1px 11px 0 2px;
-  color: rgba(var(--darkest));
+  color: rgb(var(--on-accent));
 }
 .layout-mobile .detailPagePrimaryContainer .mainDetailButtons .btnPlay::after {
   content: attr(title);
   margin: 1px 11px 0 2px;
-  color: rgba(var(--darkest));
+  color: rgb(var(--on-accent));
 }
 .layout-desktop .detailPagePrimaryContainer .mainDetailButtons {
   margin: 0em 0;
@@ -845,7 +1044,7 @@ imgLogoIcon {
   padding-bottom: 0.2em;
 }
 .layout-desktop .material-icons.detailButton-icon.play_arrow {
-  color: rgba(var(--darkest));
+  color: rgb(var(--on-accent));
 }
 .layout-desktop .btnPlay.detailButton {
   flex-direction: row;
@@ -899,8 +1098,7 @@ a.overview-expand.emby-button {
   -webkit-line-clamp: 5 !important;
 }
 .navMenuOption,
-.navMenuOption:hover,
-.navMenuOption-selected {
+.navMenuOption:hover {
   border-radius: var(--rounding-alt) !important;
   width: 85% !important;
   margin: auto !important;
@@ -909,22 +1107,11 @@ a.overview-expand.emby-button {
   margin-top: 4px !important;
   margin-bottom: 4px !important;
 }
-.navMenuOption,
-.navMenuOption-selected {
+.navMenuOption {
   width: 86% !important;
 }
 .navMenuOption:hover {
   width: 89% !important;
-}
-.navMenuOption:hover:not(.navMenuOption-selected) {
-  backdrop-filter: blur(4px);
-  background-color: rgba(var(--accent), 0.85);
-  color: rgba(var(--darkest));
-}
-.navMenuOption-selected {
-  background: rgba(var(--accent), 0.7) !important;
-  color: rgba(var(--darkest)) !important;
-  backdrop-filter: blur(50px) !important;
 }
 .raised:hover,
 .fab:hover,
@@ -932,7 +1119,7 @@ a[data-role="button"]:hover {
   background: rgba(var(--accent), 0.95) !important;
 }
 #myPreferencesMenuPage .listItem:hover {
-  color: rgba(var(--darkest)) !important;
+  color: rgb(var(--on-accent)) !important;
   background: rgba(var(--accent), 0.8) !important;
 }
 [dir="ltr"] #myPreferencesMenuPage .listItemIcon {
@@ -947,33 +1134,9 @@ a[data-role="button"]:hover {
   background: rgba(var(--dark));
   margin: 0.6em;
 }
-.paperList:not(.listItem-button) {
+.MuiList-root:not(.listItem-button) {
   padding: 0.6em;
   border-radius: var(--rounding-large);
-}
-.serverInfo.paperList {
-  color: rgba(var(--accent), 0.8);
-  padding-top: 1.5em;
-  padding-bottom: 1.5em;
-  padding-left: 1.65em;
-}
-.css-4yt2of {
-  background-color: rgb(var(--darkest));
-  color: rgb(var(--accent));
-}
-.css-37qkju {
-  color: inherit;
-}
-.css-54jp7k {
-  color: inherit;
-}
-.css-139vfv2 {
-  background-color: rgba(var(--darkest), 1);
-  color: rgb(var(--accent));
-  background-image: linear-gradient(
-    rgba(var(--dark-highlight), 0.3),
-    rgba(var(--dark-highlight), 0.3)
-  );
 }
 #server-subheader,
 #devices-subheader,
@@ -982,565 +1145,11 @@ a[data-role="button"]:hover {
 #plugins-subheader {
   color: rgba(var(--accent), 0.7);
 }
-.css-17c09up {
-  border-radius: var(--rounding);
-  margin: 0.35em;
-}
-.css-17c09up.Mui-selected {
-  background-color: rgba(var(--accent), 1) !important;
-  color: rgb(var(--darkest)) !important;
-  border-radius: var(--rounding);
-  margin: 0.35em;
-}
-.css-17c09up:hover,
-.css-17c09up.Mui-selected:hover {
-  background-color: rgba(var(--accent), 0.85) !important;
-  color: rgb(var(--darkest)) !important;
-  border-radius: var(--rounding);
-  margin: 0.35em;
-}
-.css-1ip8vbj {
-  border-radius: var(--rounding);
-  margin: 0.35em;
-}
-.css-1ip8vbj.Mui-selected {
-  background-color: rgba(var(--accent), 1);
-  color: rgb(var(--darkest));
-  border-radius: var(--rounding);
-  margin: 0.35em;
-}
-.css-1ip8vbj:hover,
-.css-1ip8vbj.Mui-selected:hover {
-  background-color: rgba(var(--accent), 0.85) !important;
-  color: rgb(var(--darkest)) !important;
-  border-radius: var(--rounding);
-  margin: 0.35em;
-}
 .listItemIcon:not(.listItemIcon-transparent) {
   margin: 0 0.2em 0 0.1em;
 }
-.checkboxList.paperList {
+.checkboxList.MuiList-root {
   border-radius: var(--rounding);
-}
-.css-fknfom {
-  background-image: linear-gradient(
-    rgba(var(--accent), 0.08),
-    rgba(var(--accent), 0.08)
-  );
-  color: rgb(var(--accent));
-  background-color: rgba(var(--darkest), 0.8);
-  backdrop-filter: blur(7px);
-}
-.css-nc0a08 {
-  min-height: 64px;
-}
-.css-192q3pc {
-  background-color: rgb(var(--accent-off));
-  color: rgb(var(--dark));
-}
-.css-1ilo2kq {
-  border-radius: var(--rounding-large);
-  background-image: linear-gradient(
-    rgba(var(--accent), 0.08),
-    rgba(var(--accent), 0.08)
-  );
-  color: rgb(var(--accent));
-  background-color: rgba(var(--darkest), 0.9);
-  backdrop-filter: blur(7px);
-}
-.css-r8u8y9 {
-  margin: 16px;
-  padding: 0;
-}
-.css-122sjhb {
-  border-radius: var(--rounding-alt);
-  padding: 12px 16px;
-}
-.css-122sjhb:hover {
-  background-color: rgba(var(--accent), 0.75);
-  color: rgb(var(--darkest));
-}
-.css-195jjve {
-  background-color: rgba(var(--accent), 1);
-}
-.css-1jmiiw3 {
-  border-color: rgba(var(--accent), 0.25);
-  border-radius: var(--rounding);
-  color: rgb(var(--accent));
-}
-.css-1jmiiw3 .MuiDataGrid-withBorderColor {
-  border-color: rgba(var(--accent), 0.25);
-}
-.css-18gtl5v {
-  color: inherit;
-}
-.css-8vq3cg.Mui-selected {
-  color: rgb(var(--accent));
-  background-color: rgba(var(--accent), 0.2);
-}
-.css-8vq3cg {
-  border-radius: var(--rounding-alt);
-  border: 1px solid rgba(var(--accent), 0.12);
-  color: rgb(var(--accent));
-}
-.css-5y4e7x.Mui-selected:hover {
-  background-color: rgba(var(--accent), 0.2);
-}
-.css-5y4e7x.Mui-selected {
-  background-color: rgba(var(--accent), 0.4);
-}
-.css-ntyfco {
-  color: rgb(var(--accent));
-}
-.css-1xiho4e {
-  color: rgb(var(--darkest));
-  background-color: rgb(var(--cherry-red));
-}
-.css-6ci2yv {
-  color: rgb(var(--accent));
-}
-.css-8xlzg4 {
-  border-radius: var(--rounding-large);
-  background-image: linear-gradient(
-    rgba(var(--accent), 0.08),
-    rgba(var(--accent), 0.08)
-  );
-  color: rgb(var(--accent));
-  background-color: rgba(var(--darkest), 0.9);
-  backdrop-filter: blur(7px);
-  box-shadow: rgb(0 0 0 / 0.2) 0 3px 5px 2px, rgb(0 0 0 / 0.14) 0 1px 1px 1px,
-    rgb(0 0 0 / 0.12) 0 5px 3px 0;
-}
-.css-5n0m2r {
-  padding: 0 0;
-}
-.css-xfvph6 {
-  color: rgb(var(--accent));
-}
-.css-dlg340 {
-  background-color: rgba(var(--dark)) !important;
-}
-.css-13s45j6 {
-  border-radius: 10px;
-  background-color: rgba(var(--darkest)) !important;
-}
-.css-1vrqlyr {
-  border-bottom: 1px solid rgba(var(--dark-highlight));
-  text-align: left;
-}
-.css-1aaapa3 {
-  background-color: rgba(var(--darkest));
-}
-.css-t802yl {
-  backdrop-filter: blur(4px);
-  background-color: rgba(var(--accent), 0.1);
-}
-.css-1295fc2 {
-  background-color: rgba(var(--darkest));
-}
-.css-68rqdf {
-  color: rgba(var(--accent));
-  border-bottom: 1px solid rgba(var(--dark-highlight));
-}
-.css-1a8g65z,
-.css-oks7my,
-.css-b5hga1,
-.css-1iir62y,
-.css-1iv7dy2,
-.css-1eanh3q,
-.css-3fifbo,
-.css-1r0cwag,
-.css-1tahsnm,
-.css-1an0rv9,
-.css-172zye7,
-.css-12a2fyq,
-.css-pqd6ex,
-.css-udlpj8,
-.css-5c47yo,
-.css-949vxu,
-.css-1vrqlyr,
-.css-149t56k,
-.css-2j9z2c,
-.css-1g9k3fn,
-.css-1toc1g5,
-.css-1dtkjng {
-  color: rgb(var(--accent));
-  border-bottom: 1px solid rgba(var(--dark-highlight));
-}
-.css-1a8g65z:hover,
-.css-oks7my:hover,
-.css-b5hga1:hover,
-.css-1iir62y:hover,
-.css-1iv7dy2:hover,
-.css-1eanh3q:hover,
-.css-3fifbo:hover,
-.css-1r0cwag:hover,
-.css-1tahsnm:hover,
-.css-1an0rv9:hover,
-.css-172zye7:hover,
-.css-12a2fyq:hover,
-.css-pqd6ex:hover,
-.css-1q0cqx7:hover {
-  background-color: rgba(var(--accent), 0.05);
-}
-.css-l183c1 {
-  outline: rgba(var(--dark-highlight)) solid 1px;
-}
-.css-vusf8l:hover,
-.css-6ci2yv:hover {
-  background-color: rgba(var(--accent), 0.08);
-}
-.css-vusf8l {
-  color: rgb(var(--accent));
-}
-.css-1p1d6ke {
-  background-color: rgba(var(--darkest));
-}
-.css-667gdg.Mui-selected:hover {
-  background-color: rgba(var(--accent), 0.28);
-}
-.css-1q0cqx7 {
-  border-bottom: 1px solid rgba(var(--dark-highlight));
-  color: rgba(var(--accent), 0.85);
-}
-.css-piyj2q {
-  border-bottom: 1px solid rgba(var(--dark-highlight));
-  color: rgba(var(--accent), 0.85);
-}
-.css-13s45j6 {
-  color: rgba(var(--accent)) !important;
-}
-.css-adnr4p {
-  margin: 0;
-  padding: 15px 8px;
-  outline: 0;
-  background-color: rgba(var(--dark-apparent));
-}
-.css-1fv02xh {
-  color: rgb(var(--darkest));
-  background-color: rgb(var(--accent));
-  margin: 1px;
-}
-.css-1fv02xh.Mui-disabled {
-  color: rgba(var(--accent), 0.8);
-  background-color: rgba(var(--accent), 0.12);
-}
-.css-1pcx92s {
-  color: rgba(var(--accent), 0.7);
-}
-.css-1e5h596,
-.css-1js8be7 {
-  color: rgba(var(--accent));
-}
-.css-o671j5,
-.css-1ur4k8w,
-.css-upfnam,
-.css-y1yp4r,
-.css-atm4hq,
-.css-1elv40w,
-.css-1ao7rt2 {
-  color: rgba(var(--accent));
-  border-bottom: 1px solid rgba(var(--dark-highlight), 0.4);
-}
-.css-j90t4i:hover {
-  background-color: rgba(var(--accent), 0.15);
-  border-radius: var(--rounding-alt);
-}
-.css-1jrg1b8 {
-  background-color: rgba(var(--dark-highlight));
-  color: rgba(var(--darkest)) !important;
-  box-shadow: rgb(0 0 0 / 0.2) 0 2px 1px -1px, rgb(0 0 0 / 0.14) 0 1px 1px 0,
-    rgb(0 0 0 / 0.12) 0 1px 3px 0;
-  background-image: linear-gradient(
-    rgba(var(--accent), 0.15),
-    rgba(var(--accent), 0.05)
-  );
-}
-.css-agav4a {
-  background-color: rgba(var(--accent), 0.15);
-}
-.MuiGrid-root .MuiCollapse-wrapper .css-8atqhb {
-  background-color: rgba(var(--dark), 0.8);
-}
-.css-15r4jdn,
-.css-1npx6a3,
-.css-yckc1l,
-.css-2x19dy,
-.css-qyeuq0,
-.css-405fy4 {
-  color: rgb(var(--accent));
-  border-bottom: 1px solid rgb(var(--dark-highlight));
-}
-.css-1ntmlto {
-  color: rgb(var(--accent));
-}
-.css-1ntmlto::before {
-  border-bottom: 1px solid rgba(var(--accent-off), 0.7);
-}
-.css-1ntmlto:hover:not(.Mui-disabled, .Mui-error)::before {
-  border-bottom: 2px solid rgba(var(--accent), 0.8);
-}
-.css-19f3993 {
-  color: rgb(var(--accent));
-}
-.css-vusf8l:hover {
-  background-color: rgba(var(--accent), 0.08);
-}
-.css-d0cm6k.Mui-active {
-  color: rgba(var(--accent));
-}
-.css-1egpgfe {
-  color: rgba(var(--accent));
-}
-.css-667gdg.Mui-selected {
-  color: rgb(var(--darkest));
-  background-color: rgba(var(--accent), 0.66);
-}
-.css-667gdg:hover {
-  text-decoration: none;
-  background-color: rgba(var(--accent), 0.08);
-}
-.css-667gdg {
-  color: rgba(var(--accent));
-}
-.css-14oqswf {
-  color: rgba(var(--accent));
-}
-.css-nf1frv.Mui-disabled {
-  color: rgba(var(--accent), 0.3);
-}
-.css-d0cm6k .MuiTableSortLabel-icon {
-  color: rgb(var(--accent)) !important;
-}
-.css-d0cm6k.Mui-active .MuiTableSortLabel-icon {
-  opacity: 1;
-  color: rgba(var(--accent), 0.7);
-}
-.css-7sfyhx {
-  border-color: rgba(var(--accent), 0.12);
-}
-.css-10dubda::before {
-  background-color: rgba(var(--dark-highlight), 0.4);
-}
-.css-o54vul {
-  background-color: rgba(var(--accent));
-  border: 1px solid rgb(var(--accent));
-  color: rgba(var(--darkest));
-  border-radius: calc(var(--rounding) - 4px);
-}
-.css-o54vul:hover {
-  background-color: rgba(var(--accent), 0.8);
-  border: 1px solid rgb(var(--accent), 0.8);
-  color: rgba(var(--darkest));
-}
-.css-o54vul.Mui-disabled {
-  color: rgba(var(--darkest), 1);
-  border: 1px solid rgba(var(--accent-off));
-  background-color: rgba(var(--accent-off));
-}
-.css-90jypu,
-.css-83fgej {
-  border-bottom: 1px solid rgba(var(--dark-highlight), 0.4);
-  color: rgb(var(--accent));
-  background-color: rgba(var(--dark-highlight), 0.01);
-}
-.css-100ygog,
-.css-10g35kp {
-  background-color: rgba(var(--dark-highlight), 0.01);
-}
-.css-1e9ts8t {
-  background-color: rgba(var(--dark), 0.6);
-  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: var(--rounding);
-  box-shadow: rgb(0 0 0 / 0.2) 0 2px 1px -1px, rgb(0 0 0 / 0.14) 0 1px 1px 0,
-    rgb(0 0 0 / 0.12) 0 1px 3px 0;
-  background-image: linear-gradient(
-    rgba(var(--darkest), 0.65),
-    rgba(var(--darkest), 0.65)
-  );
-  color: rgb(var(--accent));
-}
-.css-10dubda:first-of-type {
-  border-top-left-radius: var(--rounding);
-  border-top-right-radius: var(--rounding);
-}
-.css-10dubda:last-of-type {
-  border-bottom-left-radius: var(--rounding);
-  border-bottom-right-radius: var(--rounding);
-}
-.css-10dubda.Mui-expanded {
-  margin: 1px 0;
-}
-.css-8atqhb {
-  background-color: rgba(var(--darkest));
-  padding: 12px;
-}
-.css-1rwymvo {
-  color: rgb(var(--darkest));
-  background-color: rgb(var(--cherry-red));
-  border-radius: calc(var(--rounding) - 4px);
-}
-.css-1rwymvo:hover {
-  background-color: rgba(var(--cherry-red), 0.7);
-}
-.css-2qp78l {
-  color: rgba(var(--accent));
-  text-decoration: underline rgba(var(--accent), 0.4);
-}
-.css-2qp78l:hover {
-  color: rgba(var(--deep-blue));
-  text-decoration: underline rgba(var(--deep-blue), 0.8);
-}
-.css-1e9ts8t {
-  color: rgb(var(--accent));
-}
-.css-g69rp1 {
-  border-radius: var(--rounding-alt);
-  background-image: linear-gradient(
-    rgba(var(--accent), 0.1),
-    rgba(var(--accent), 0.1)
-  );
-  font-weight: 600;
-  padding: 8px 16px;
-  text-shadow: 0 0 4px #fff0 !important;
-  color: rgb(var(--darkest));
-  background-color: rgb(var(--dark-highlight));
-}
-.css-g69rp1 .MuiAlert-icon {
-  color: rgb(var(--darkest));
-}
-.css-1jrg1b8 {
-  color: rgb(var(--accent));
-  border-radius: var(--rounding);
-}
-.css-10dubda,
-.css-1n3veo1 {
-  color: rgba(var(--accent));
-}
-.css-10dubda {
-  background-image: linear-gradient(
-    rgba(var(--darkest), 0.85),
-    rgba(var(--darkest), 0.85)
-  );
-  border-radius: 0;
-  color: rgba(var(--accent));
-}
-.css-p6d6nq,
-.css-p6d6nq.Mui-checked {
-  color: rgb(var(--darkest));
-}
-.css-p6d6nq.Mui-checked.Mui-disabled {
-  color: rgba(var(--darkest));
-}
-.css-ecvcn9 {
-  width: 58px;
-  height: 38px;
-  padding: 6px;
-}
-.css-p6d6nq.Mui-checked + .MuiSwitch-track {
-  background-color: rgb(var(--accent));
-}
-.css-g5sy4h {
-  background-color: rgba(var(--accent-off), 0.5);
-  opacity: 1;
-  border-radius: var(--rounding-large);
-}
-.css-p6d6nq.Mui-checked + .MuiSwitch-track {
-  opacity: 1;
-}
-.css-6zls91 {
-  background-color: rgba(var(--dark), 0.65);
-  color: rgba(var(--accent));
-  border-radius: var(--rounding);
-  background-image: linear-gradient(
-    rgba(var(--accent-off), 0.16),
-    rgba(var(--accent-off), 0.16)
-  );
-  backdrop-filter: blur(5px);
-}
-.css-11vnn2q {
-  color: rgba(var(--honey-yellow), 0.85);
-}
-.css-11vnn2q {
-  color: rgba(var(--darkest), 1);
-}
-.css-j733up {
-  border-radius: var(--rounding-alt);
-}
-.css-j733up:hover {
-  background-color: rgba(var(--accent), 0.08);
-}
-.css-j733up {
-  color: rgba(var(--accent));
-}
-.MuiBox-root .css-q6zgp2 a {
-  color: rgba(var(--accent));
-}
-.MuiBox-root .css-q6zgp2 a:hover {
-  color: rgba(var(--deep-blue));
-}
-.css-1s2cwil {
-  border-radius: var(--rounding-alt);
-  font-weight: 600;
-  color: rgba(var(--darkest));
-  background-color: rgba(var(--dark-highlight));
-  background-image: linear-gradient(
-    rgba(var(--jade-green), 0.35),
-    rgba(var(--jade-green), 0.35)
-  );
-  text-shadow: none;
-}
-.css-1fl3wau {
-  border-radius: var(--rounding-alt);
-  font-weight: 600;
-  color: rgba(var(--darkest));
-  background-color: rgba(var(--dark-highlight));
-  background-image: linear-gradient(
-    rgba(var(--honey-yellow), 0.35),
-    rgba(var(--honey-yellow), 0.35)
-  );
-  text-shadow: none;
-}
-.css-169h251 {
-  border-radius: var(--rounding-alt);
-  font-weight: 600;
-  color: rgba(var(--darkest));
-  background-color: rgba(var(--dark-highlight));
-  background-image: linear-gradient(
-    rgba(var(--cherry-red), 0.35),
-    rgba(var(--cherry-red), 0.35)
-  );
-  text-shadow: none;
-}
-.css-1s2cwil .MuiAlert-icon,
-.css-1fl3wau .MuiAlert-icon,
-.css-169h251 .MuiAlert-icon {
-  color: rgb(var(--darkest));
-}
-.css-1fv02xh {
-  color: rgb(var(--darkest));
-  background-color: rgb(var(--accent));
-  border-radius: var(--rounding-alt);
-}
-.css-77wcaa .MuiAlert-icon {
-  color: rgb(var(--accent));
-}
-.css-77wcaa {
-  border-radius: var(--rounding);
-  background-color: rgb(var(--darkest));
-  color: rgba(var(--accent), 0.75);
-}
-.css-1fv02xh:hover {
-  background-color: rgba(var(--accent), 0.75);
-}
-#pluginsPage .inputContainer .emby-input {
-  width: 50%;
-}
-#pluginsPage .inputLabel,
-#pluginsPage .inputLabelUnfocused {
-  margin-top: 1em;
-  margin-bottom: 1.6em;
-  margin-left: 1em;
 }
 .dashboardDocument .paper-icon-button-light {
   color: rgb(var(--accent-off));
@@ -1550,23 +1159,6 @@ a[data-role="button"]:hover {
 }
 .secondary.listItemBodyText > div:nth-child(1) > span:nth-child(2) {
   color: rgb(var(--accent-off)) !important;
-}
-.taskProgressOuter {
-  background: rgba(var(--accent), 0.15);
-}
-#divRunningTasks > p {
-  padding-left: 1em;
-}
-#divRunningTasks > p:nth-child(odd) > progress:nth-child(2) {
-  background-color: rgb(var(--dark-highlight)) !important;
-}
-#divRunningTasks > p:nth-child(even) > progress:nth-child(2) {
-  background-color: rgb(var(--dark-highlight)) !important;
-}
-.devicesList .cardImage {
-  filter: invert();
-  opacity: 0.65;
-  color: rgb(var(--accent)) !important;
 }
 @-webkit-keyframes pulse {
   0% {
@@ -1664,38 +1256,31 @@ a[data-role="button"]:hover {
   color: rgba(var(--accent), 1) !important;
   text-shadow: none !important;
 }
-#btnShutdown {
-  background: rgba(var(--cherry-red)) !important;
-  color: rgba(var(--darkest)) !important;
-}
 .listItem-border {
   border: 0 !important;
 }
 .playstatebutton-icon-played {
   color: rgba(var(--jade-green), 1) !important;
 }
-.dialogBackdropOpened {
+.MuiBackdrop-root {
   opacity: 0.2;
 }
-.dialogBackdrop {
+.MuiBackdrop-root {
   background-color: rgb(var(--darkest));
 }
 .tmla-mask {
   background-color: rgb(249 249 249 / 0.2);
 }
-.itemProgressBar {
+.MuiLinearProgress-root {
   backdrop-filter: blur(4px);
   background: rgba(var(--white-off), 0.35) !important;
   height: 10px;
   border-radius: 30px;
 }
-.layout-mobile .itemProgressBar {
+.layout-mobile .MuiLinearProgress-root {
   height: 8px;
 }
-#dashboardPage .itemProgressBar {
-  backdrop-filter: none;
-}
-.itemProgressBarForeground {
+.MuiLinearProgress-bar {
   background: rgb(var(--accent));
   border-radius: var(--rounding-circle);
 }
@@ -1707,15 +1292,14 @@ a[data-role="button"]:hover {
   box-shadow: 1px 1px 5px rgba(var(--dark), 0.25);
 }
 @supports (backdrop-filter: blur(15px)) {
-  .dialog,
+  .MuiDialog-paper,
   .mainDrawer,
-  .toast,
+  .MuiSnackbarContent-root,
   .appfooter {
     backdrop-filter: blur(15px);
     background-color: rgba(var(--darkest), 0.75) !important;
   }
-  #itemDetailPage .itemProgressBar,
-  #dashboardPage .backgroundProgress > div {
+  #itemDetailPage .MuiLinearProgress-root {
     backdrop-filter: blur(4px);
   }
 }
@@ -1729,7 +1313,9 @@ a[data-role="button"]:hover {
   opacity: 0;
   visibility: hidden;
   position: absolute;
-  transition: opacity 0.3s ease 1s, visibility 0s linear 1s;
+  transition:
+    opacity 0.3s ease 1s,
+    visibility 0s linear 1s;
   pointer-events: none;
   transform-origin: top left;
   transform: rotate(-90deg);
@@ -1754,7 +1340,9 @@ a[data-role="button"]:hover {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transition: opacity 0.3s ease, visibility 0s;
+  transition:
+    opacity 0.3s ease,
+    visibility 0s;
 }
 .osdVolumeSliderContainer {
   pointer-events: auto !important;
@@ -1862,10 +1450,10 @@ a[data-role="button"]:hover {
   backdrop-filter: blur(4px) !important;
 }
 .sliderMarker.watched {
-  background-color: rgba(var(--white-off),.35) !important;
+  background-color: rgba(var(--white-off), 0.35) !important;
 }
 .sliderMarker.unwatched {
-  background-color: rgba(var(--white-off),.35) !important;
+  background-color: rgba(var(--white-off), 0.35) !important;
 }
 .mdl-slider-background-upper {
   background: rgba(var(--accent-off));
@@ -1876,14 +1464,14 @@ a[data-role="button"]:hover {
   width: 0;
   border-radius: 12px;
 }
-.dialog,
+.MuiDialog-paper,
 .mainDrawer,
 .appfooter {
   backdrop-filter: blur(21px);
   background-color: rgba(var(--dark), 0.75) !important;
   box-shadow: 0 0 1.9vh #000;
 }
-.dialog,
+.MuiDialog-paper,
 .appfooter {
   border-radius: var(--rounding-large) !important;
 }
@@ -1900,27 +1488,26 @@ div.mainDrawer.transition.touch-menu-la.drawer-open {
   left: -340px !important;
   transform: translateX(340px) !important;
 }
-.toast {
+.MuiSnackbarContent-root {
   background-color: rgba(var(--accent-off), 0.75) !important;
   color: rgba(var(--darkest), 1) !important;
   text-shadow: 0 0 4px #fff0 !important;
   font-weight: 700;
 }
 .appfooter,
-.dialog,
+.MuiDialog-paper,
 .mainDrawer,
-.toast {
+.MuiSnackbarContent-root {
   backdrop-filter: blur(21px);
   box-shadow: 0 0 1.9vh #000;
 }
-.actionSheetContent {
+.MuiMenu-list {
   padding: 0.4em 0 !important;
   margin-left: 0.75em !important;
   margin-right: 0.75em !important;
   margin-top: 0.35em !important;
   margin-bottom: 0.35em !important;
 }
-.navMenuOption-selected,
 .selectionCommandsPanel {
   color: rgba(var(--darkest), 1) !important;
   background-color: rgba(var(--accent), 0.55) !important;
@@ -1940,8 +1527,6 @@ div[data-role="controlgroup"] a.ui-btn-active {
 #listGenres .material-icons.listItemIcon.live_tv,
 #listStudios .material-icons.listItemIcon.live_tv,
 #listTags .material-icons.listItemIcon.live_tv,
-#repositories .listItemIcon:not(.listItemIcon-transparent),
-#dlnaProfilesPage .listItemIcon:not(.listItemIcon-transparent),
 #homeScreenPreferencesPage .material-icons.listItemIcon.folder_open,
 .subtitleList .material-icons.listItemIcon.closed_caption,
 .subtitleResults .material-icons.listItemIcon.closed_caption {
@@ -1949,8 +1534,8 @@ div[data-role="controlgroup"] a.ui-btn-active {
   color: rgba(var(--darkest), 1) !important;
 }
 .subtitleList,
-.btnDelete.listItemButton.paper-icon-button-light,
-.subtitleResults .btnDownload.listItemButton.paper-icon-button-light {
+.btnDelete.MuiListItemButton-root.paper-icon-button-light,
+.subtitleResults .btnDownload.MuiListItemButton-root.paper-icon-button-light {
   margin-right: 1em;
 }
 .collapseContent {
@@ -1967,13 +1552,13 @@ div[data-role="controlgroup"] a.ui-btn-active {
 .navMenuOptionText {
   margin-top: 0;
 }
-.formDialogHeaderTitle {
+.MuiDialogTitle-root {
   margin-left: 1em;
 }
-.formDialogContent {
+.MuiDialogContent-root {
   margin-bottom: 1.1em;
 }
-.dialogContentInner {
+.MuiDialogContent-root {
   padding: 0.5em 1em 1em;
   padding-right: 1em;
   padding-left: 1em;
@@ -1981,29 +1566,10 @@ div[data-role="controlgroup"] a.ui-btn-active {
 .listItem-indexnumberleft {
   margin: 1em;
 }
-div.dashboardSection:nth-child(3) > div:nth-child(2) .listItem {
-  padding-left: 0em;
-}
-.activeSession .backdropCard .backdropCard-scalable {
-  padding: 0.8em;
-}
-#dashboardPage .activeSession .backgroundProgress,
-.activeSession .playbackProgress,
-.activeSession .transcodingProgress {
-  bottom: 0.6em;
-  height: 8px;
-  left: 0.7em;
-  position: absolute;
-  right: 0.7em;
-  width: 94%;
-}
-#dashboardPage .itemProgressBar {
-  background: rgba(var(--dark-highlight), 0.35) !important;
-}
 .dialogContainer .focuscontainer {
   border-radius: var(--rounding-large) !important;
 }
-.formDialogContent.smoothScrollY {
+.MuiDialogContent-root.smoothScrollY {
   padding-bottom: 3em;
   padding-top: 2em;
 }
@@ -2011,35 +1577,15 @@ div.dashboardSection:nth-child(3) > div:nth-child(2) .listItem {
   padding: 0.55em 0.45em 0.55em 0.45em;
   text-align: left;
 }
-#dashboardPage .listItemIcon,
-#serverActivityPage .listItemIcon {
-  background-color: rgba(var(--accent-off)) !important;
-  color: rgba(var(--darkest)) !important;
-}
-.listItemIcon.material-icons.notifications_active {
-  background-color: rgba(var(--accent-off)) !important;
-  color: rgba(var(--darkest)) !important;
-}
-.notifications_off {
-  background-color: rgba(var(--accent-off), 0.44) !important;
-  color: rgba(var(--darkest)) !important;
-}
 .material-icons.listItemIcon.schedule {
   background-color: rgba(var(--accent-off)) !important;
   color: rgba(var(--darkest)) !important;
-}
-#dashboardPage .notification_important {
-  background-color: rgba(var(--cherry-red), 0.75) !important;
-  color: rgba(var(--darkest)) !important;
-}
-.infoBanner {
-  background: rgba(var(--accent), 0.15) !important;
 }
 fieldset {
   border: 1px solid rgba(var(--accent), 0.3);
 }
 .emby-input,
-.emby-textarea,
+.MuiInputBase-inputMultiline,
 .emby-select-withcolor {
   border: none !important;
 }
@@ -2054,13 +1600,9 @@ fieldset {
 .itemSelectionCount {
   color: rgba(var(--darkest)) !important;
 }
-.emby-textarea {
-  background-color: rgba(var(--darkest)) !important;
-  color: rgba(var(--accent)) !important;
-}
-.emby-textarea:focus {
-  border-color: rgba(var(--accent), 0.9) !important;
-  background-color: rgba(var(--darkest)) !important;
+.MuiInputBase-inputMultiline {
+  background-color: transparent !important;
+  color: rgb(var(--white)) !important;
 }
 .emby-input:focus {
   border-color: rgba(var(--accent), 0.9) !important;
@@ -2085,7 +1627,7 @@ fieldset {
   padding: 0 0 0 3em;
 }
 .emby-input,
-.emby-textarea,
+.MuiInputBase-inputMultiline,
 .emby-select {
   padding: calc(0.8em - 4.5px) !important;
 }
@@ -2201,7 +1743,7 @@ fieldset {
 }
 .filterIndicator {
   background: rgba(var(--accent));
-  color: rgba(var(--darkest));
+  color: rgb(var(--on-accent));
   font-size: 80%;
   font-weight: 1000;
   background-image: linear-gradient(
@@ -2303,7 +1845,7 @@ fieldset {
 }
 .layout-mobile .btnPlay {
   background-color: rgb(var(--white));
-  color: rgb(var(--darkest)) !important;
+  color: rgb(var(--on-accent)) !important;
   border-radius: 25px !important;
 }
 .layout-mobile .btnShuffle,
@@ -2340,7 +1882,7 @@ fieldset {
   display: none;
 }
 .layout-mobile .material-icons.detailButton-icon.play_arrow {
-  color: rgb(var(--darkest)) !important;
+  color: rgb(var(--on-accent)) !important;
 }
 .layout-mobile .listViewUserDataButtons {
   display: none;
@@ -2358,12 +1900,6 @@ layout-mobile .detailPagePrimaryContent {
 }
 .listItemImageButton {
   display: none;
-}
-#divRunningTasks > p:nth-child(odd) > span:nth-child(3) {
-  color: rgba(var(--accent), 1) !important;
-}
-#divRunningTasks > p:nth-child(even) > span:nth-child(3) {
-  color: rgba(var(--accent), 1) !important;
 }
 .selectArrow {
   margin-top: 1.1em;
@@ -2408,7 +1944,6 @@ layout-mobile .detailPagePrimaryContent {
 }
 .detailImageContainer .card .cardBox {
   margin: 0;
-  display: none;
 }
 .layout-mobile .itemBackdrop {
   position: relative;
@@ -2456,46 +1991,6 @@ layout-mobile .detailPagePrimaryContent {
   background-color: rgba(var(--darkest));
   border-radius: var(--rounding-large);
 }
-#user_stats_chart_canvas,
-#daily_usage_chart_canvas,
-#hourly_usage_chart_canvas,
-#weekly_usage_chart_canvas,
-#duration_histogram_chart_canvas {
-  border-radius: calc(var(--rounding) + 4px);
-  background-color: rgba(var(--darkest));
-  padding: 10px;
-}
-#user_usage_report_table tr > td:first-child > img {
-  background-color: rgba(var(--dark));
-  border-radius: var(--rounding-alt);
-  color: rgba(var(--accent));
-  margin-left: 4%;
-}
-#user_usage_report_table {
-  color: rgba(var(--accent));
-  padding: 4px;
-}
-.css-cw1wz5.Mui-selected {
-  color: rgb(var(--darkest));
-  background-color: rgba(var(--accent));
-  border-radius: calc(var(--rounding) + 4px);
-}
-.css-cw1wz5 {
-  color: rgba(var(--accent), 0.8);
-}
-.css-1qbqzso {
-  display: none;
-}
-#custom_query_text {
-  width: 95%;
-  height: 100px;
-  background: rgb(var(--darkest));
-  color: rgb(var(--accent));
-  padding: 5px;
-  outline: none;
-  border-radius: 12px;
-  margin-left: 1.5em;
-}
 .layout-tv .backdropImage {
   filter: blur(16px) saturate(120%) contrast(120%) brightness(40%);
 }
@@ -2514,12 +2009,12 @@ layout-mobile .detailPagePrimaryContent {
 .layout-tv .unairedIndicator,
 .layout-tv .detailTable,
 .layout-tv .primaryImageWrapper > img,
-.layout-tv .toast,
+.layout-tv .MuiSnackbarContent-root,
 .layout-tv .cardContent,
 .layout-tv .sessionNowPlayingInnerContent,
 .layout-tv .listItem,
 .layout-tv .listItem:hover,
-.layout-tv .cardImage,
+.layout-tv .cardImageContainer,
 .layout-tv .fab,
 .layout-tv .raised,
 .layout-tv .itemSelectionPanel,
@@ -2528,12 +2023,12 @@ layout-mobile .detailPagePrimaryContent {
 .layout-tv .itemDetailImage,
 .layout-tv .cardImageContainer,
 .layout-tv .cardPadder,
-.layout-tv .listItemImage,
-.layout-tv .listItemButton,
+.layout-tv .listItemImageContainer,
+.layout-tv .MuiListItemButton-root,
 .layout-tv .headerButton,
 .layout-tv .innerCardFooter,
 .layout-tv .blurhash-canvas,
-.layout-tv .dialog,
+.layout-tv .MuiDialog-paper,
 .layout-tv .countIndicator,
 .layout-tv .playedIndicator,
 .layout-tv .listItemIcon,
@@ -2545,14 +2040,14 @@ layout-mobile .detailPagePrimaryContent {
 .layout-tv .chapterThumbContainer,
 .layout-tv .chapterThumb,
 .layout-tv .emby-input,
-.layout-tv .emby-textarea,
+.layout-tv .MuiInputBase-inputMultiline,
 .layout-tv .emby-select-withcolor,
 .layout-tv .nowPlayingPageImage,
 .layout-tv .upNextDialog-poster-img,
 .layout-tv .upNextContainer {
   border-radius: 48px !important;
 }
-.layout-tv .itemProgressBar {
+.layout-tv .MuiLinearProgress-root {
   backdrop-filter: blur(8px);
   height: 20px;
 }
@@ -2621,7 +2116,7 @@ layout-mobile .detailPagePrimaryContent {
 .layout-tv [dir="ltr"] .detailPagePrimaryContainer {
   padding-left: 4vw;
 }
-.layout-tv [dir="ltr"] .detailPageContent {
+.layout-tv [dir="ltr"] .detailPagePrimaryContent {
   padding-left: 4vw;
   padding-right: 2%;
 }
@@ -2834,7 +2329,7 @@ layout-mobile .detailPagePrimaryContent {
   [dir="ltr"] .mainDetailButtons {
     padding-left: 1em !important;
   }
-  .detailPageContent {
+  .detailPagePrimaryContent {
     padding-left: 2em !important;
     padding-right: 2em !important;
   }
@@ -2869,7 +2364,7 @@ layout-mobile .detailPagePrimaryContent {
     top: 20vh !important;
     width: 5em !important;
   }
-  .detailPageContent {
+  .detailPagePrimaryContent {
     padding-left: 3em !important;
     padding-right: 0em !important;
   }
@@ -2882,7 +2377,7 @@ layout-mobile .detailPagePrimaryContent {
   [dir="ltr"] .mainDetailButtons {
     padding-left: 2em !important;
   }
-  .detailPageContent {
+  .detailPagePrimaryContent {
     padding-left: 3em !important;
     padding-right: 0em !important;
   }
@@ -2901,7 +2396,7 @@ layout-mobile .detailPagePrimaryContent {
   [dir="ltr"] .mainDetailButtons {
     padding-left: 2em !important;
   }
-  .detailPageContent {
+  .detailPagePrimaryContent {
     padding-left: 3em;
     padding-right: 0em;
   }
@@ -2919,7 +2414,7 @@ layout-mobile .detailPagePrimaryContent {
   [dir="ltr"] .mainDetailButtons {
     padding-left: 1em !important;
   }
-  .detailPageContent {
+  .detailPagePrimaryContent {
     padding-left: 2em !important;
     padding-right: 2em !important;
   }
@@ -2948,7 +2443,7 @@ layout-mobile .detailPagePrimaryContent {
   [dir="ltr"] .mainDetailButtons {
     padding-left: 2em !important;
   }
-  .detailPageContent {
+  .detailPagePrimaryContent {
     padding-left: 3em;
     padding-right: 0em;
   }
@@ -2967,7 +2462,7 @@ layout-mobile .detailPagePrimaryContent {
   [dir="ltr"] .mainDetailButtons {
     padding-left: 2em !important;
   }
-  .detailPageContent {
+  .detailPagePrimaryContent {
     padding-left: 3em;
     padding-right: 0em;
   }
@@ -2986,7 +2481,7 @@ layout-mobile .detailPagePrimaryContent {
   [dir="ltr"] .mainDetailButtons {
     padding-left: 2em !important;
   }
-  .detailPageContent {
+  .detailPagePrimaryContent {
     padding-left: 3em;
     padding-right: 0em;
   }
@@ -2996,4 +2491,1065 @@ layout-mobile .detailPagePrimaryContent {
     top: 20vh;
     width: 25em;
   }
+}
+.MuiAppBar-root {
+  background-color: transparent !important;
+  background-image: none !important;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+.MuiAppBar-root::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 168px;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(var(--darkest), 0.78) 0%,
+    rgba(var(--darkest), 0.45) 42%,
+    rgba(var(--darkest), 0) 100%
+  );
+}
+.MuiAppBar-root > .MuiToolbar-root:first-of-type {
+  position: relative;
+  min-height: 64px !important;
+  gap: 0.5em;
+}
+.MuiAppBar-root > .MuiToolbar-root:first-of-type .MuiStack-root {
+  gap: 1.5em;
+}
+.MuiAppBar-root > .MuiToolbar-root:first-of-type .MuiButton-sizeLarge {
+  font-size: 0.88em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase !important;
+  color: rgb(var(--white)) !important;
+}
+.MuiAppBar-root > .MuiToolbar-root:first-of-type .MuiButton-root {
+  font-family: inherit;
+  font-size: 0.82em;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase !important;
+  color: rgba(var(--white), 0.62) !important;
+  border-radius: var(--rounding-circle) !important;
+  position: relative;
+  min-width: 0;
+  text-shadow: 0 1px 10px rgba(var(--darkest), 0.55);
+}
+.MuiAppBar-root > .MuiToolbar-root:first-of-type .MuiButton-root:hover {
+  color: rgb(var(--white)) !important;
+  background-color: transparent !important;
+}
+.MuiAppBar-root > .MuiToolbar-root:first-of-type .MuiButton-startIcon {
+  margin-right: 0.5em;
+  opacity: 0.85;
+}
+.MuiAppBar-root
+  > .MuiToolbar-root:first-of-type
+  .MuiButton-root:hover
+  .MuiButton-startIcon {
+  opacity: 1;
+}
+.MuiAppBar-root > .MuiToolbar-root:first-of-type .MuiButton-root::after {
+  content: "";
+  position: absolute;
+  left: 0.7em;
+  right: 0.7em;
+  bottom: 0.25em;
+  height: 2px;
+  border-radius: var(--rounding-circle);
+  background: rgb(var(--accent));
+  opacity: 0;
+  transform: scaleX(0.6);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+.MuiAppBar-root > .MuiToolbar-root:first-of-type .MuiButton-root:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+.MuiAppBar-root > .MuiToolbar-root:first-of-type .MuiButton-sizeLarge::after {
+  content: none;
+}
+.MuiAppBar-root > .MuiToolbar-root:first-of-type .MuiIconButton-root {
+  color: rgba(var(--white), 0.62) !important;
+  padding: 0.55rem;
+  filter: drop-shadow(0 1px 8px rgba(var(--darkest), 0.5));
+}
+.MuiAppBar-root
+  > .MuiToolbar-root:first-of-type
+  .MuiIconButton-root
+  .MuiSvgIcon-root {
+  font-size: 20px;
+}
+.MuiAppBar-root > .MuiToolbar-root:first-of-type .MuiIconButton-root:hover {
+  color: rgb(var(--white)) !important;
+  background-color: rgba(var(--accent), 0.12) !important;
+}
+.MuiAppBar-root > .MuiToolbar-root:first-of-type .MuiAvatar-root {
+  width: 1.9rem;
+  height: 1.9rem;
+  background-color: transparent !important;
+  color: rgba(var(--white), 0.62) !important;
+  border: 1px solid rgba(var(--white-off), 0.32);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition:
+    color 0.16s ease,
+    border-color 0.16s ease;
+}
+.MuiAppBar-root
+  > .MuiToolbar-root:first-of-type
+  .MuiIconButton-root:hover
+  .MuiAvatar-root {
+  color: rgb(var(--white)) !important;
+  border-color: rgba(var(--white-off), 0.6);
+}
+.MuiAppBar-root > .MuiToolbar-root:first-of-type .MuiBadge-badge {
+  background-color: rgb(var(--jade-green)) !important;
+}
+@media (max-width: 47.5em) {
+  .MuiAppBar-root > .MuiToolbar-root:first-of-type {
+    min-height: 56px !important;
+  }
+  .MuiAppBar-root > .MuiToolbar-root:first-of-type .MuiStack-root {
+    gap: 0.9em;
+  }
+  .MuiAppBar-root > .MuiToolbar-root:first-of-type .MuiButton-root {
+    letter-spacing: 0.1em;
+  }
+}
+.layout-desktop .itemBackdrop {
+  height: 64vh;
+}
+.layout-desktop .detailPageWrapperContainer {
+  margin-top: -20vh;
+  position: relative;
+}
+.layout-desktop .detailPageWrapperContainer {
+  background: linear-gradient(
+    180deg,
+    rgba(var(--darkest), 0) 0,
+    rgba(var(--darkest), 0.82) 9em,
+    rgba(var(--darkest), 0.94) 22em,
+    rgba(var(--darkest), 0.96) 100%
+  ) !important;
+}
+.layout-desktop .detailImageContainer .card {
+  display: block;
+  float: none;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 15.5em;
+  max-width: none;
+  max-height: none;
+  margin: -8.5em 0 -0.6em 0;
+  z-index: 3;
+}
+.layout-desktop .detailImageContainer .card .cardBox {
+  margin: 0;
+  display: block;
+}
+.layout-desktop .detailImageContainer .cardImageContainer,
+.layout-desktop .detailImageContainer .cardPadder {
+  border-radius: var(--rounding);
+}
+.layout-desktop .detailImageContainer .cardBox {
+  filter: drop-shadow(0 1.2em 2.4em rgb(0 0 0 / 0.62));
+}
+.layout-desktop .detailPagePrimaryContainer {
+  display: grid;
+  grid-template-columns: 15.5em minmax(0, 1fr);
+  grid-template-areas: "poster ribbon" "poster content";
+  column-gap: 2.2em;
+  align-items: start;
+  left: 0;
+  padding-left: 3.3%;
+  padding-right: 3.3%;
+  box-sizing: border-box;
+  width: 100%;
+}
+.layout-desktop .detailImageContainer {
+  grid-area: poster;
+  align-self: start;
+}
+.layout-desktop .detailRibbon,
+.layout-desktop [dir="ltr"] .detailRibbon,
+.layout-desktop [dir="rtl"] .detailRibbon {
+  grid-area: ribbon;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.1em;
+  height: auto;
+  margin-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+.layout-desktop .detailPagePrimaryContent {
+  grid-area: content;
+  padding-left: 0;
+  width: auto;
+  max-width: 62em;
+}
+.layout-desktop .infoWrapper,
+.layout-desktop [dir="ltr"] .infoWrapper {
+  margin-bottom: 0;
+  padding-left: 0 !important;
+  padding-top: 0 !important;
+}
+.layout-desktop .detailPagePrimaryContainer .mainDetailButtons,
+.layout-desktop [dir="ltr"] .mainDetailButtons {
+  margin: 0;
+  flex-shrink: 0;
+  padding-left: 0 !important;
+}
+.layout-desktop .detailLogo {
+  left: calc(3.3% + 15.5em + 2.2em);
+  right: auto;
+  top: calc(64vh - 20vh - 10.2em);
+  width: 20em;
+  height: 8.5em;
+  background-position: left bottom;
+  background-size: contain;
+}
+.itemMiscInfo-primary {
+  gap: 0.7em;
+  padding-top: 0;
+}
+.itemMiscInfo-primary .mediaInfoItem {
+  font-size: 0.82em;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(var(--white-off), 0.72);
+}
+.itemMiscInfo-primary .mediaInfoOfficialRating {
+  color: rgb(var(--darkest));
+  letter-spacing: 0.08em;
+}
+.layout-desktop .itemDetailsGroup {
+  display: flex;
+  flex-direction: column;
+  max-width: 46em;
+}
+.layout-desktop .detailsGroupItem {
+  display: grid;
+  grid-template-columns: 7em minmax(0, 1fr);
+  gap: 1.2em;
+  padding: 0.55em 0;
+  border-top: 1px solid rgba(var(--white-off), 0.12);
+  align-items: start;
+}
+.layout-desktop .detailsGroupItem .label {
+  font-size: 0.74em;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(var(--white-off), 0.46);
+  margin: 0;
+  padding-top: 0.35em;
+}
+.layout-desktop .mainDetailButtons {
+  align-items: center;
+  gap: 0.35em;
+}
+.layout-desktop .mainDetailButtons .detailButton {
+  height: 3em;
+  border-radius: var(--rounding-circle) !important;
+  transition:
+    background-color 0.16s ease,
+    color 0.16s ease;
+}
+.layout-desktop .mainDetailButtons .detailButton:not(.btnPlay) {
+  padding: 0 1em;
+  color: rgba(var(--white), 0.78);
+}
+.layout-desktop .mainDetailButtons .detailButton:not(.btnPlay):hover {
+  background-color: rgba(var(--accent), 0.12) !important;
+  color: rgb(var(--white));
+}
+.layout-desktop .mainDetailButtons .btnPlay {
+  padding: 0 1.5em 0 1.15em;
+}
+.MuiPaper-root:not(.MuiAppBar-root) {
+  background-color: rgb(var(--dark));
+  background-image: none;
+  color: rgb(var(--white));
+}
+.MuiPopover-paper,
+.MuiMenu-paper {
+  background-color: rgba(var(--darkest), 0.96) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(var(--white-off), 0.1);
+  border-radius: var(--rounding) !important;
+  box-shadow: 0 1em 2.4em rgb(0 0 0 / 0.55) !important;
+}
+.MuiDialog-paper {
+  background-color: rgb(var(--darkest)) !important;
+  background-image: none !important;
+  border: 1px solid rgba(var(--white-off), 0.1);
+  border-radius: var(--rounding-large) !important;
+}
+.MuiBackdrop-root {
+  background-color: rgba(var(--darkest), 0.62) !important;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+.MuiTooltip-tooltip {
+  background-color: rgb(var(--darkest)) !important;
+  color: rgb(var(--white)) !important;
+  border: 1px solid rgba(var(--white-off), 0.12);
+  border-radius: var(--rounding-alt) !important;
+  font-family: inherit;
+  font-size: 0.8em;
+}
+.MuiCard-root {
+  background-color: rgb(var(--dark)) !important;
+  background-image: none !important;
+  border-radius: var(--rounding) !important;
+}
+.MuiDivider-root {
+  border-color: rgba(var(--white-off), 0.1) !important;
+}
+.MuiMenuItem-root,
+.MuiListItemButton-root {
+  border-radius: var(--rounding-alt) !important;
+  margin: 0.1em 0.35em;
+  font-family: inherit;
+}
+.MuiMenuItem-root:hover,
+.MuiListItemButton-root:hover {
+  background-color: rgba(var(--accent), 0.12) !important;
+}
+.MuiMenuItem-root.Mui-selected,
+.MuiListItemButton-root.Mui-selected {
+  background-color: rgb(var(--accent)) !important;
+  color: rgb(var(--on-accent)) !important;
+}
+.MuiMenuItem-root.Mui-selected:hover,
+.MuiListItemButton-root.Mui-selected:hover {
+  background-color: rgba(var(--accent), 0.85) !important;
+  color: rgb(var(--on-accent)) !important;
+}
+.MuiMenuItem-root.Mui-selected .MuiListItemIcon-root,
+.MuiListItemButton-root.Mui-selected .MuiListItemIcon-root {
+  color: rgb(var(--on-accent)) !important;
+}
+.MuiListItemIcon-root {
+  color: rgba(var(--accent), 0.72);
+  min-width: 2.2em;
+}
+.MuiListItemText-primary,
+.MuiListItemText-secondary {
+  font-family: inherit;
+}
+.MuiButton-root {
+  border-radius: var(--rounding-circle) !important;
+  text-transform: none !important;
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.MuiButton-contained {
+  background-color: rgb(var(--accent)) !important;
+  color: rgb(var(--on-accent)) !important;
+  box-shadow: none !important;
+}
+.MuiButton-contained:hover {
+  background-color: rgba(var(--accent), 0.85) !important;
+}
+.MuiButton-contained .MuiSvgIcon-root {
+  color: rgb(var(--on-accent));
+}
+.MuiButton-outlined {
+  border-color: rgba(var(--accent), 0.32) !important;
+  color: rgb(var(--accent)) !important;
+}
+.MuiButton-text {
+  color: rgb(var(--accent)) !important;
+}
+.MuiButton-text:hover,
+.MuiButton-outlined:hover {
+  background-color: rgba(var(--accent), 0.12) !important;
+}
+.MuiIconButton-root:hover {
+  background-color: rgba(var(--accent), 0.12) !important;
+}
+.MuiFab-root {
+  background-color: rgb(var(--accent)) !important;
+  color: rgb(var(--on-accent)) !important;
+  box-shadow: none !important;
+}
+.MuiFilledInput-root,
+.MuiOutlinedInput-root {
+  background-color: rgba(var(--dark-highlight), 0.55) !important;
+  border-radius: var(--rounding) !important;
+  color: rgb(var(--white)) !important;
+  overflow: hidden;
+}
+.MuiFilledInput-root:hover {
+  background-color: rgba(var(--dark-highlight), 0.72) !important;
+}
+.MuiFilledInput-root.Mui-focused,
+.MuiOutlinedInput-root.Mui-focused {
+  background-color: rgba(var(--dark-highlight), 0.88) !important;
+}
+.MuiFilledInput-underline::before,
+.MuiFilledInput-underline::after {
+  display: none !important;
+}
+.MuiOutlinedInput-notchedOutline {
+  border-color: rgba(var(--white-off), 0.18) !important;
+}
+.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(var(--accent), 0.55) !important;
+}
+.MuiInputBase-input,
+.MuiSelect-select {
+  font-family: inherit;
+}
+.MuiInputLabel-root {
+  color: rgba(var(--white-off), 0.62) !important;
+  font-family: inherit;
+}
+.MuiInputLabel-root.Mui-focused {
+  color: rgb(var(--accent)) !important;
+}
+.MuiSelect-icon {
+  color: rgba(var(--accent), 0.75) !important;
+}
+.MuiFormHelperText-root {
+  color: rgba(var(--white-off), 0.55) !important;
+  font-family: inherit;
+}
+.MuiCheckbox-root,
+.MuiRadio-root {
+  color: rgba(var(--white-off), 0.5) !important;
+}
+.MuiCheckbox-root.Mui-checked,
+.MuiRadio-root.Mui-checked {
+  color: rgb(var(--accent)) !important;
+}
+.MuiFormControlLabel-label {
+  font-family: inherit;
+  color: rgb(var(--white));
+}
+.MuiSwitch-track {
+  background-color: rgba(var(--white-off), 0.3) !important;
+}
+.MuiSwitch-switchBase.Mui-checked .MuiSwitch-thumb {
+  color: rgb(var(--accent)) !important;
+}
+.MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
+  background-color: rgba(var(--accent), 0.55) !important;
+}
+.MuiLinearProgress-root {
+  background-color: rgba(var(--white-off), 0.18) !important;
+  border-radius: var(--rounding-circle) !important;
+  overflow: hidden;
+}
+.MuiLinearProgress-bar {
+  background-color: rgb(var(--accent)) !important;
+  border-radius: var(--rounding-circle) !important;
+}
+.MuiCircularProgress-root {
+  color: rgb(var(--accent)) !important;
+}
+.progressring-spiner {
+  stroke: rgb(var(--accent));
+}
+.MuiTab-root {
+  text-transform: none !important;
+  font-family: inherit;
+  color: rgba(var(--white-off), 0.65) !important;
+}
+.MuiTab-root.Mui-selected {
+  color: rgb(var(--accent)) !important;
+}
+.MuiTabs-indicator {
+  background-color: rgb(var(--accent)) !important;
+  border-radius: var(--rounding-circle);
+}
+.MuiChip-root {
+  background-color: rgba(var(--dark-highlight), 0.8) !important;
+  color: rgb(var(--white)) !important;
+  border-radius: var(--rounding-circle) !important;
+  font-family: inherit;
+}
+.MuiAlert-root {
+  background-color: rgb(var(--dark)) !important;
+  color: rgb(var(--white)) !important;
+  border-radius: var(--rounding) !important;
+  font-family: inherit;
+}
+.MuiSnackbarContent-root {
+  background-color: rgb(var(--darkest)) !important;
+  color: rgb(var(--white)) !important;
+  border-radius: var(--rounding) !important;
+  font-family: inherit;
+}
+.MuiTypography-root {
+  font-family: inherit;
+}
+.MuiLink-root {
+  color: rgb(var(--accent));
+}
+.MuiButtonGroup-root {
+  border-radius: var(--rounding-circle) !important;
+  overflow: hidden;
+}
+.MuiButtonGroup-root .MuiButton-root,
+.MuiButtonGroup-root .MuiIconButton-root {
+  border-radius: 0 !important;
+}
+.MuiButtonGroup-contained .MuiButton-root:not(:last-of-type) {
+  border-right: 1px solid rgba(var(--darkest), 0.22) !important;
+}
+.MuiButtonGroup-text {
+  background-color: rgba(var(--dark-highlight), 0.55);
+}
+.MuiButtonGroup-text .MuiButton-root {
+  color: rgba(var(--white), 0.82) !important;
+  min-width: 3em;
+}
+.MuiButtonGroup-text .MuiButton-root:hover {
+  background-color: rgba(var(--accent), 0.14) !important;
+  color: rgb(var(--white)) !important;
+}
+.MuiButtonGroup-text .MuiButton-root:not(:last-of-type) {
+  border-right: 1px solid rgba(var(--white-off), 0.12) !important;
+}
+.MuiAppBar-root > .MuiToolbar-root:nth-of-type(2) {
+  gap: 0.85em;
+}
+.MuiAppBar-root > .MuiToolbar-root:nth-of-type(2) .MuiTypography-h2 {
+  font-size: 1.15em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(var(--white));
+}
+.MuiAppBar-root
+  > .MuiToolbar-root:nth-of-type(2)
+  .MuiButton-endIcon
+  .MuiSvgIcon-root {
+  font-size: 18px;
+  opacity: 0.55;
+}
+.MuiAppBar-root
+  > .MuiToolbar-root:nth-of-type(2)
+  .MuiButton-root:hover
+  .MuiButton-endIcon
+  .MuiSvgIcon-root {
+  opacity: 1;
+}
+.MuiAppBar-root > .MuiToolbar-root:nth-of-type(2) .MuiChip-root {
+  background-color: transparent !important;
+  border: 1px solid rgba(var(--white-off), 0.28);
+  height: 1.6em;
+  font-size: 0.8em;
+}
+.MuiAppBar-root > .MuiToolbar-root:nth-of-type(2) .MuiChip-label {
+  font-size: 1em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: rgba(var(--white), 0.75);
+}
+body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(var(--darkest), 0.86) 0,
+    rgba(var(--darkest), 0.8) 14vh,
+    rgba(var(--darkest), 0.88) 45vh,
+    rgba(var(--darkest), 0.93) 100vh
+  );
+}
+.alphaPicker-fixed-right {
+  right: 0.5em !important;
+  align-items: center;
+}
+.alphaPicker-fixed-right .MuiPaper-root {
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.MuiToggleButtonGroup-root.MuiToggleButtonGroup-vertical {
+  background-color: rgba(var(--darkest), 0.68) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid rgba(var(--white-off), 0.1);
+  border-radius: var(--rounding-circle) !important;
+  overflow: hidden;
+  padding: 0.3em 0;
+}
+.MuiToggleButtonGroup-vertical .MuiToggleButton-root {
+  border: 0 !important;
+  border-radius: 0 !important;
+  min-width: 1.6em;
+  min-height: 0;
+  padding: 0.12em 0.35em;
+  margin: 0;
+  font-family: inherit;
+  font-size: 0.72em;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.04em;
+  color: rgba(var(--white), 0.5) !important;
+}
+.MuiToggleButtonGroup-vertical .MuiToggleButton-root:hover {
+  background-color: rgba(var(--accent), 0.16) !important;
+  color: rgb(var(--white)) !important;
+}
+.MuiToggleButtonGroup-vertical .MuiToggleButton-root.Mui-selected {
+  background-color: rgb(var(--accent)) !important;
+  color: rgb(var(--on-accent)) !important;
+}
+.MuiToggleButtonGroup-vertical .MuiToggleButton-root.Mui-selected:hover {
+  background-color: rgba(var(--accent), 0.85) !important;
+}
+.layout-mobile .mainDetailButtons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 0.7em;
+  row-gap: 0.9em;
+  margin-top: 1.15em;
+  width: 100%;
+}
+.layout-mobile .mainDetailButtons .btnPlay {
+  flex: 0 0 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55em;
+  height: 3.1rem;
+  padding: 0;
+  margin: 0;
+  background: rgb(var(--accent)) !important;
+  color: rgb(var(--on-accent)) !important;
+  border-radius: var(--rounding-circle) !important;
+  box-shadow: 0 0.4em 1.5em rgba(var(--accent), 0.2);
+}
+.layout-mobile .mainDetailButtons .btnPlay .material-icons.detailButton-icon {
+  display: block !important;
+  margin: 0 !important;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: rgb(var(--on-accent)) !important;
+}
+.layout-mobile .mainDetailButtons .btnPlay::after {
+  margin: 0 !important;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: rgb(var(--on-accent)) !important;
+}
+.layout-mobile .mainDetailButtons .detailButton:not(.btnPlay) {
+  height: auto;
+  width: auto;
+  min-width: 0;
+  padding: 0.25em 0;
+  gap: 0.45em;
+  flex-direction: row;
+  align-items: center;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: rgba(var(--white), 0.72) !important;
+}
+.layout-mobile
+  .mainDetailButtons
+  .detailButton:not(.btnPlay)
+  .material-icons.detailButton-icon {
+  display: block !important;
+  margin: 0 !important;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+.layout-mobile .mainDetailButtons .detailButton:not(.btnPlay)::after {
+  margin: 0 0 0 0.45em !important;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+.layout-mobile .mainDetailButtons .detailButton:not(.btnPlay):hover {
+  color: rgb(var(--white)) !important;
+}
+.layout-mobile .mainDetailButtons .btnUserRating::after,
+.layout-mobile .mainDetailButtons .btnMoreCommands::after {
+  content: none !important;
+}
+.layout-mobile .mainDetailButtons .btnUserRating {
+  margin-left: 0;
+}
+.layout-mobile .mainDetailButtons .btnPlaystate {
+  margin-right: auto !important;
+}
+.layout-mobile
+  .mainDetailButtons
+  .btnUserRating
+  .material-icons.detailButton-icon,
+.layout-mobile
+  .mainDetailButtons
+  .btnMoreCommands
+  .material-icons.detailButton-icon {
+  font-size: 1.15rem;
+}
+.layout-mobile .mainDetailButtons .playstatebutton-icon-played {
+  color: rgb(var(--jade-green)) !important;
+}
+.layout-mobile .mainDetailButtons .ratingbutton-icon-withrating {
+  color: rgb(var(--cherry-red)) !important;
+}
+.layout-mobile .overview,
+.layout-mobile .detailSectionContent,
+.layout-mobile .overview-expand {
+  text-align: left;
+  text-wrap: pretty;
+}
+.layout-mobile .detailLogo {
+  height: 22vh;
+  background-position: left bottom;
+  background-size: contain;
+}
+.layout-mobile .itemMiscInfo {
+  padding-top: 0.4em;
+}
+.layout-mobile .itemMiscInfo-primary {
+  column-gap: 0.6em;
+  row-gap: 0.2em;
+}
+.layout-mobile .infoWrapper {
+  padding-top: 0;
+  margin-bottom: 0.4em;
+}
+.layout-mobile .mainDetailButtons {
+  margin-top: 1.15em;
+}
+.layout-mobile .detailPagePrimaryContent {
+  padding-top: 0.6em;
+}
+.layout-mobile .sectionTitle,
+.layout-mobile .sectionTitleTextButton > .sectionTitle {
+  font-size: 1.12em;
+  line-height: 1.25;
+  text-align: left;
+  justify-content: flex-start;
+  text-wrap: balance;
+}
+.layout-mobile .sectionTitleTextButton {
+  justify-content: flex-start;
+  text-align: left;
+}
+.layout-mobile .overflowPortraitCard {
+  width: 30vw;
+}
+.layout-mobile .overflowBackdropCard,
+.layout-mobile .overflowSmallBackdropCard {
+  width: 52vw;
+}
+.layout-mobile .overflowSquareCard {
+  width: 30vw;
+}
+.layout-mobile .MuiAppBar-root > .MuiToolbar-root:nth-of-type(2),
+.layout-mobile
+  .MuiAppBar-root
+  > .MuiToolbar-root:nth-of-type(2)
+  .MuiStack-root {
+  flex-wrap: wrap;
+  row-gap: 0.45em;
+}
+.layout-mobile .MuiAppBar-root > .MuiToolbar-root:first-of-type {
+  flex-wrap: nowrap;
+}
+.layout-mobile .MuiAppBar-root .MuiButtonGroup-root {
+  flex-shrink: 0;
+}
+.layout-mobile .cardText-first {
+  white-space: normal;
+  line-height: 1.22;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.layout-mobile .itemDetailPage .itemBackdrop {
+  box-sizing: content-box;
+  margin-top: -76px !important;
+  padding-top: 28px;
+}
+.layout-mobile .itemDetailPage .itemBackdrop::before {
+  position: absolute;
+  inset: 0;
+  height: auto;
+  width: auto;
+}
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer,
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer.hide-mobile {
+  display: block;
+}
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer
+  .card,
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer
+  .card.portraitCard,
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer
+  .cardBox {
+  display: block !important;
+}
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .infoWrapper {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  max-width: 100vw;
+  margin: 0;
+}
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer
+  .card {
+  position: relative;
+  top: auto;
+  bottom: auto;
+  left: auto;
+  float: none;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  margin: 0;
+  z-index: 0;
+}
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer
+  .cardBox,
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer
+  .cardScalable {
+  height: 100%;
+  margin: 0;
+}
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer
+  .cardPadder {
+  padding-bottom: 0 !important;
+  height: 100%;
+}
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer
+  .cardImageContainer,
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer
+  .blurhash-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0 !important;
+  background-size: cover;
+  background-position: center top;
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    rgba(var(--dark-apparent), 1) 10%,
+    rgba(var(--dark-apparent), 0) 90%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    rgba(var(--dark-apparent), 1) 10%,
+    rgba(var(--dark-apparent), 0) 90%
+  );
+}
+.layout-mobile .itemDetailPage:not(:has(.mediaInfoItem)) .itemBackdrop {
+  height: 0;
+  min-height: 0;
+  margin-top: 0 !important;
+  padding-top: 0;
+}
+.layout-mobile
+  .itemDetailPage:not(:has(.mediaInfoItem))
+  .detailPageWrapperContainer,
+.layout-mobile
+  .itemDetailPage:not(:has(.mediaInfoItem))
+  .detailPagePrimaryContainer,
+.layout-mobile .itemDetailPage:not(:has(.mediaInfoItem)) .detailRibbon,
+.layout-mobile .itemDetailPage:not(:has(.mediaInfoItem)) .infoWrapper {
+  margin-top: 0;
+  padding-top: 0;
+}
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer {
+  margin-top: -76px;
+}
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer,
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer
+  .card,
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer
+  .cardBox,
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer
+  .cardScalable {
+  -webkit-filter: none !important;
+  filter: none !important;
+  box-shadow: none !important;
+}
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer,
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer
+  * {
+  border-radius: 0 !important;
+  background-color: transparent !important;
+}
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer {
+  margin-bottom: -7.5em;
+  position: relative;
+  z-index: 0;
+}
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailImageContainer
+  .card {
+  z-index: 0 !important;
+}
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .nameContainer,
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .mainDetailButtons,
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailPagePrimaryContent {
+  position: relative;
+  z-index: 2;
+}
+.layout-mobile .itemDetailPage .detailPagePrimaryContainer {
+  padding-left: 3.4%;
+  padding-right: 3.4%;
+  box-sizing: border-box;
+}
+.layout-mobile .itemDetailPage .detailRibbon,
+.layout-mobile .itemDetailPage .detailPagePrimaryContent,
+.layout-mobile .itemDetailPage .infoWrapper,
+.layout-mobile .itemDetailPage .itemMiscInfo,
+.layout-mobile .itemDetailPage .itemMiscInfo-primary,
+.layout-mobile .itemDetailPage .nameContainer,
+.layout-mobile .itemDetailPage .detailSection,
+.layout-mobile .itemDetailPage .detailSectionContent,
+.layout-mobile .itemDetailPage [dir="ltr"] .mainDetailButtons,
+.layout-mobile .itemDetailPage .detailPagePrimaryContainer .mainDetailButtons {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+}
+.layout-mobile .itemDetailPage .detailLogo {
+  left: 3.4%;
+}
+.MuiDrawer-root .MuiListItemIcon-root {
+  min-width: 2.6rem;
+}
+.MuiDrawer-root .MuiListItemText-multiline {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.MuiDrawer-root .MuiListItemText-primary {
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.MuiDrawer-root .MuiListItemText-secondary {
+  margin-top: 0.1rem;
+  color: rgba(var(--white-off), 0.55) !important;
+  letter-spacing: 0.08em;
+}
+.MuiDrawer-root
+  .MuiList-root
+  > .MuiListItem-root:first-of-type
+  .MuiListItemButton-root {
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+.layout-mobile .sectionTitleContainer {
+  padding-top: 0.55em;
+}
+.layout-mobile .cardBox-bottompadded {
+  margin-bottom: 0.7em !important;
+}
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .mainDetailButtons {
+  margin-left: -1em !important;
+  margin-top: 0.5em;
+}
+.layout-mobile .detailPagePrimaryContainer:not(:has(.mediaInfoItem)) .itemName {
+  margin-bottom: 0;
+}
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailPagePrimaryContent {
+  padding-top: 0 !important;
+}
+.layout-mobile
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .detailRibbon {
+  padding-bottom: 0;
+}
+.layout-desktop
+  .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
+  .mainDetailButtons {
+  margin-left: -0.85em !important;
 }

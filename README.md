@@ -168,13 +168,21 @@ Add the `@import url` below your main import.
 
 ## Palette 6
 
+![Periwinkle](https://readme-swatches.vercel.app/A3B1E0) ![Dusk Gray](https://readme-swatches.vercel.app/626C7C) ![Slate Indigo](https://readme-swatches.vercel.app/2A2D38) ![Deep Indigo](https://readme-swatches.vercel.app/171920) ![Muted Indigo](https://readme-swatches.vercel.app/3A3E4C) ![Night Indigo](https://readme-swatches.vercel.app/1A1C25)
+
+```
+@import url('https://cdn.jsdelivr.net/gh/MakD/zombie-release@main/colorPalette/palette-6.css');
+```
+
+## Palette 7
+
 ![Pale Blue](https://readme-swatches.vercel.app/6EB4C8) ![Cadet Gray](https://readme-swatches.vercel.app/4E5D64) ![Storm Cloud](https://readme-swatches.vercel.app/232B2F) ![Raven Black](https://readme-swatches.vercel.app/121719) ![Charcoal Blue](https://readme-swatches.vercel.app/323C41) ![Lead Gray](https://readme-swatches.vercel.app/131E22)
 
 ```
 @import url('https://cdn.jsdelivr.net/gh/MakD/zombie-release@main/colorPalette/palette-7.css');
 ```
 
-## Palette 7
+## Palette 8
 
 ![Color1](https://readme-swatches.vercel.app/AAAAAA) ![Color2](https://readme-swatches.vercel.app/828282) ![Color3](https://readme-swatches.vercel.app/555555) ![Color4](https://readme-swatches.vercel.app/323232) ![Color5](https://readme-swatches.vercel.app/414141) ![Color6](https://readme-swatches.vercel.app/2D2D2D)
 

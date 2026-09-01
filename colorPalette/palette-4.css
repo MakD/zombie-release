@@ -1,8 +1,10 @@
 :root {
-  --accent: 128, 203, 196;       /* Teal */
-  --accent-off: 100, 124, 131;   /* Storm Gray */
-  --dark: 45, 52, 54;            /* Gunmetal Gray */
-  --darkest: 25, 29, 31;         /* Jet Black */
-  --dark-highlight: 60, 71, 73;  /* Dark Slate */
-  --dark-apparent: 22, 34, 33;   /* Charcoal Gray */
+  --accent: 128, 203, 196;
+  --accent-off: 100, 124, 131;
+  --dark: 45, 52, 54;
+  --darkest: 25, 29, 31;
+  --dark-highlight: 60, 71, 73;
+  --dark-apparent: 22, 34, 33;
+  --on-accent: 12, 12, 12;
+  --bg-wash: 128, 203, 196;
 }
