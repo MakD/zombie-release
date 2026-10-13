@@ -251,7 +251,3 @@ Taken on Jellyfin 12 with the Netflix scheme. More screens for every device are 
 ## Older Jellyfin versions
 
 The theme for Jellyfin 10.9 and its add-ons are no longer maintained. The files are kept in [`graveyard`](graveyard).
-
-## Credits
-
-Huge thanks to the theme creators whose work this builds on: [Zesty](https://github.com/stpnwf/ZestyTheme/tree/main), [JellySkin](https://github.com/prayag17/JellySkin/tree/master), [Ultrachromic](https://github.com/CTalvio/Ultrachromic) and [Jellyfin Landscape](https://github.com/krlsantcard/Jellyfin-10.9/tree/main). Please let me know if I have missed anybody.
