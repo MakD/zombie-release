@@ -1713,6 +1713,17 @@ fieldset {
 .sectionTitleTextButton > .material-icons.chevron_right {
   display: none;
 }
+.MuiLink-root.sectionTitleTextButton {
+  align-items: center;
+}
+.sectionTitleTextButton > .MuiSvgIcon-root {
+  padding: 0;
+  font-size: 1.5em;
+}
+.layout-mobile .sectionTitleTextButton > .MuiSvgIcon-root {
+  margin-bottom: 0.43em;
+  font-size: 1.3em;
+}
 .homePage .sectionTitleTextButton {
   left: -0.6em;
 }
