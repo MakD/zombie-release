@@ -10,10 +10,10 @@ h4 {
   --zombieFooterText: "Zombie v2.0.12";
   --accent: 255, 255, 255;
   --on-accent: 12, 12, 12;
-  --bg-wash: 255, 255, 255;
+  --bg-wash: 0, 0, 0;
   --accent-off: 36, 36, 36;
   --dark: 24, 24, 24;
-  --darkest: 12, 12, 12;
+  --darkest: 0, 0, 0;
   --dark-highlight: 48, 48, 48;
   --dark-apparent: 43, 43, 43;
   --white: 243, 242, 243;
@@ -25,6 +25,9 @@ h4 {
   --rounding-alt: 9px;
   --rounding-large: 24px;
   --rounding-circle: 100px;
+}
+html {
+  background-color: rgb(var(--darkest)) !important;
 }
 .backgroundContainer {
   background-color: rgba(var(--bg-wash), 0.17) !important;
@@ -432,11 +435,6 @@ body:has(#loginPage:not(.hide)) {
 .backdropImage {
   filter: blur(5px) saturate(120%) contrast(120%) brightness(50%);
   animation: 0.2s ease-in-out both backdrop-fadein;
-}
-.layout-mobile .backgroundContainer,
-.layout-desktop .backgroundContainer {
-  background: url(https://cdn.jsdelivr.net/gh/stpnwf/ZestyTheme@latest/images/gradients/blue.png)
-    no-repeat center center;
 }
 .sectionTitleContainer-cards {
   margin: 0;
@@ -1015,12 +1013,12 @@ imgLogoIcon {
   border: #fff0;
 }
 .layout-desktop .btnPlay {
-  background-color: rgb(var(--white));
+  background-color: rgb(var(--accent));
   color: rgb(var(--on-accent)) !important;
   border-radius: calc(var(--rounding) + 20px) !important;
 }
 .layout-desktop .btnPlay:hover {
-  background-color: rgba(var(--accent));
+  background-color: rgba(var(--accent), 0.85);
   color: rgb(var(--on-accent)) !important;
 }
 .layout-desktop .mainAnimatedPages .paging {
@@ -1707,16 +1705,43 @@ fieldset {
 }
 .layout-desktop .nextUpSection {
   border-radius: 34px;
-  left: calc(70vw - -0em);
-  top: calc(50vh + -12em);
-  margin-right: -30vw;
-  margin-bottom: 1vh;
+  margin: 0;
   padding-left: 2.62em;
-  margin-right: 5vw;
   background-color: rgba(var(--darkest), 0.77);
   padding-top: 0.3em;
   backdrop-filter: blur(10px);
-  position: absolute;
+}
+.layout-desktop .detailPagePrimaryContent:has(.nextUpSection:not(.hide)) {
+  max-width: none;
+}
+.layout-desktop .detailSection:has(> .nextUpSection:not(.hide)) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 2.4em;
+  align-items: start;
+}
+.layout-desktop .detailSection:has(> .nextUpSection:not(.hide)) > * {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+.layout-desktop
+  .detailSection:has(> .nextUpSection:not(.hide))
+  > .detailSectionContent {
+  grid-column: 1;
+  grid-row: 1;
+  max-width: 62em;
+}
+.layout-desktop
+  .detailSection:has(> .nextUpSection:not(.hide))
+  > .itemDetailsGroup {
+  grid-column: 1;
+  grid-row: 2;
+}
+.layout-desktop
+  .detailSection:has(> .nextUpSection:not(.hide))
+  > .nextUpSection {
+  grid-column: 2;
+  grid-row: 1 / span 2;
 }
 [dir="ltr"] .upNextContainer {
   margin: 0 2em 2em 0;
@@ -1844,7 +1869,7 @@ fieldset {
   margin-top: 1.5em;
 }
 .layout-mobile .btnPlay {
-  background-color: rgb(var(--white));
+  background-color: rgb(var(--accent));
   color: rgb(var(--on-accent)) !important;
   border-radius: 25px !important;
 }
@@ -2246,10 +2271,6 @@ layout-mobile .detailPagePrimaryContent {
   }
 }
 @media (orientation: landscape) {
-  .layout-mobile .backgroundContainer {
-    background: url(https://cdn.jsdelivr.net/gh/stpnwf/ZestyTheme@latest/images/gradients/blue.png)
-      no-repeat center center;
-  }
   .layout-mobile .itemBackdrop {
     display: block;
     background-attachment: fixed;
@@ -2694,6 +2715,7 @@ layout-mobile .detailPagePrimaryContent {
   margin-top: 0;
   padding-left: 0;
   padding-right: 0;
+  background: none;
 }
 .layout-desktop .detailPagePrimaryContent {
   grid-area: content;
@@ -3552,4 +3574,2504 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   .detailPagePrimaryContainer:not(:has(.mediaInfoItem))
   .mainDetailButtons {
   margin-left: -0.85em !important;
+}
+@media (orientation: landscape) {
+  :root {
+    --zgl-gutter: 3.4vw;
+    --zgl-top: 8px;
+    --zgl-card-w: min(51vw, calc(85.2vw - 278px));
+    --zgl-card-h: min(calc(var(--zgl-card-w) * 9 / 16), 66vh);
+    --zgl-poster-h: calc(var(--zgl-card-h) * 0.5);
+    --zgl-poster-w: calc(var(--zgl-poster-h) * 2 / 3);
+    --zgl-logo-h: calc(var(--zgl-card-h) * 0.3);
+    --zgl-stage: calc(var(--zgl-top) + var(--zgl-card-h) + 34px);
+  }
+  .layout-mobile body:has(.itemDetailPage:not(.hide) > .itemBackdrop[style*="url"]) .backgroundContainer {
+    background-color: rgb(var(--darkest)) !important;
+    background-image: none !important;
+  }
+  .layout-mobile body:has(.itemDetailPage:not(.hide) > .itemBackdrop[style*="url"]) .MuiAppBar-root {
+    background-color: rgb(var(--darkest)) !important;
+  }
+  .layout-mobile
+    body:has(.itemDetailPage:not(.hide) > .itemBackdrop[style*="url"])
+    .MuiAppBar-root::before {
+    display: none !important;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemBackdrop {
+    position: absolute !important;
+    top: var(--zgl-top) !important;
+    right: var(--zgl-gutter);
+    left: auto;
+    width: var(--zgl-card-w);
+    height: var(--zgl-card-h) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background-size: 0 0;
+    background-position: center 30%;
+    background-attachment: scroll;
+    filter: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+    animation: none;
+    pointer-events: none;
+    z-index: 0 !important;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemBackdrop::before,
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemBackdrop::after {
+    content: "";
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: auto;
+    height: auto;
+    background: inherit;
+    background-size: cover;
+    border-radius: 22px;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemBackdrop::before {
+    inset: -3%;
+    filter: blur(44px) saturate(1.7);
+    opacity: 0.5;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailLogo {
+    position: absolute !important;
+    left: var(--zgl-gutter) !important;
+    top: calc(var(--zgl-top) + 14px) !important;
+    width: 24vw !important;
+    height: var(--zgl-logo-h) !important;
+    background-position: left center;
+    background-size: contain;
+    z-index: 1;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailPageWrapperContainer,
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailPagePrimaryContainer {
+    position: static;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailPagePrimaryContainer {
+    display: block;
+    background: none;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailRibbon {
+    position: static;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start !important;
+    align-items: flex-start;
+    width: calc(
+      100vw - var(--zgl-card-w) - 2 * var(--zgl-gutter) - var(--zgl-poster-w) /
+        2 - 14px
+    );
+    min-height: var(--zgl-stage);
+    height: auto !important;
+    margin: 0 !important;
+    padding: calc(var(--zgl-top) + var(--zgl-logo-h) + 22px) 0 20px !important;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .infoWrapper {
+    flex: 0 0 auto !important;
+    height: auto !important;
+    padding: 0 !important;
+  }
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .detailLogo.hide
+    ~ .detailPageWrapperContainer
+    .detailRibbon {
+    justify-content: center !important;
+    padding-top: var(--zgl-top) !important;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .nameContainer,
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemMiscInfo,
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .mainDetailButtons,
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailPagePrimaryContent,
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailPageSecondaryContainer {
+    position: relative;
+    z-index: 1;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .infoWrapper .detailImageContainer {
+    display: block !important;
+    position: absolute;
+    z-index: 2;
+    left: calc(
+      100vw - var(--zgl-gutter) - var(--zgl-card-w) - var(--zgl-poster-w) / 2
+    );
+    top: calc(var(--zgl-top) + var(--zgl-card-h) + 22px);
+    transform: translateY(-100%);
+    width: var(--zgl-poster-w);
+    height: auto;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 5px solid rgb(var(--darkest));
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.6);
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .infoWrapper .detailImageContainer .card {
+    display: block !important;
+    position: static !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: none;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .infoWrapper .detailImageContainer .cardBox {
+    margin: 0 !important;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .infoWrapper
+    .detailImageContainer:has(.backdropCard) {
+    width: calc(var(--zgl-poster-w) * 1.9);
+  }
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .infoWrapper
+    .detailImageContainer:has(.squareCard) {
+    width: calc(var(--zgl-poster-w) * 1.3);
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .mainDetailButtons {
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 2px;
+    width: auto;
+    margin: 14px 0 0 !important;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .mainDetailButtons .btnPlay {
+    flex: 0 0 auto;
+    width: auto;
+    height: 48px;
+    margin-right: 6px;
+    padding: 0 22px 0 16px;
+    border-radius: 24px !important;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .mainDetailButtons .detailButton:not(.btnPlay) {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    margin: 0 !important;
+    justify-content: center;
+  }
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .mainDetailButtons
+    .detailButton:not(.btnPlay)::after {
+    content: none;
+  }
+}
+@media (orientation: landscape) and (min-width: 73em) and (min-height: 34.01em) {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .detailPagePrimaryContainer {
+    display: flow-root;
+  }
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .detailPagePrimaryContainer::before {
+    content: "";
+    float: right;
+    width: calc(var(--zgl-card-w) + var(--zgl-poster-w) / 2 + 13px);
+    height: var(--zgl-stage);
+  }
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .detailRibbon {
+    width: auto;
+    min-height: 0;
+    padding-bottom: 4px !important;
+  }
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
+      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .detailPagePrimaryContent
+    .verticalSection {
+    clear: both;
+  }
+}
+@media (orientation: landscape) {
+  .layout-mobile .overflowPortraitCard {
+    width: clamp(110px, 14vw, 190px) !important;
+  }
+  .layout-mobile .overflowSquareCard {
+    width: clamp(120px, 16vw, 210px) !important;
+  }
+  .layout-mobile .overflowBackdropCard {
+    width: clamp(190px, 26vw, 340px) !important;
+  }
+}
+@media (orientation: landscape) and (max-height: 34em) {
+  .layout-mobile .vertical-wrap .portraitCard,
+  .layout-mobile .vertical-wrap .squareCard {
+    width: 14.2857%;
+  }
+  .layout-mobile .vertical-wrap .backdropCard {
+    width: 25%;
+  }
+}
+@media (max-width: 68em) {
+  .MuiAppBar-root .MuiToolbar-root > .MuiStack-root {
+    gap: 0.35em;
+    min-width: 0;
+  }
+  .MuiAppBar-root .MuiToolbar-root > .MuiStack-root .MuiButton-root {
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+}
+.layout-mobile .overflowPortraitCard {
+  max-width: 190px;
+}
+.layout-mobile .overflowSquareCard {
+  max-width: 210px;
+}
+.layout-mobile .overflowBackdropCard {
+  max-width: 340px;
+}
+@media (orientation: landscape), (min-width: 37.5em) {
+  .layout-mobile .listItem-largeImage .listItem-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.1em;
+  }
+  .layout-mobile .listItem-largeImage .listItemImage-large {
+    flex: 0 0 auto;
+    width: clamp(180px, 28vw, 340px) !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9;
+    margin-right: 0;
+  }
+  .layout-mobile .listItem-largeImage .listItemBody {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+  }
+  .layout-mobile
+    .listItem-largeImage
+    .listItemBody
+    .listItemMediaInfo:not(.hide) {
+    display: flex !important;
+  }
+  .layout-mobile
+    .listItem-largeImage
+    .listItemBody
+    .listItem-overview:not(.hide) {
+    display: block !important;
+  }
+  .layout-mobile .listItem-largeImage .listItem-bottomoverview {
+    display: none !important;
+  }
+}
+.layout-desktop #childrenContent .listItem {
+  width: min(80vw, calc(100vw - 23em));
+}
+.guide-date-tab-button .emby-button-foreground {
+  color: rgba(var(--white), 0.7);
+}
+.guide-date-tab-button.emby-tab-button-active .emby-button-foreground,
+.guide-date-tab-button:hover .emby-button-foreground {
+  color: rgb(var(--on-accent)) !important;
+}
+@media (orientation: landscape) {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop[style*="/Images/Primary"])
+    .itemBackdrop::after {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop[style*="/Images/Primary"])
+    .infoWrapper
+    .detailImageContainer {
+    display: none !important;
+  }
+}
+.recordingButton,
+.recordingButton .recordingIcon {
+  color: rgb(var(--on-accent)) !important;
+}
+.recordingButton .recordingIcon {
+  margin-right: 0.35em;
+}
+.layout-desktop
+  body:has(.itemDetailPage:not(.hide) .musicParentName):has(
+    .itemDetailPage:not(.hide) #childrenContent .listItem[data-type="Audio"]
+  )
+  .backgroundContainer {
+  background-color: rgb(var(--darkest)) !important;
+  background-image: none !important;
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  .itemBackdrop,
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  .detailLogo {
+  display: none !important;
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  .detailPageWrapperContainer {
+  margin-top: 0 !important;
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  .detailPagePrimaryContainer {
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "ribbon poster" "content content";
+  column-gap: 3em;
+  align-items: end;
+  padding-top: 2.2em;
+  background: none;
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  .detailImageContainer {
+  width: clamp(170px, 18vw, 264px);
+  height: auto;
+  margin: 0 0.8em 0.8em 0;
+  transform: rotate(3deg);
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  .detailImageContainer
+  .card {
+  width: 100% !important;
+  margin: 0 !important;
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  .detailImageContainer
+  .cardBox {
+  margin: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.7);
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  .detailRibbon {
+  width: auto;
+  min-width: 0;
+  height: auto;
+  padding: 0 !important;
+  background: none !important;
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  .infoWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  .itemMiscInfo-primary {
+  order: -1;
+  width: auto;
+  margin: 0 0 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(var(--white), 0.6);
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  .nameContainer {
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  .itemName {
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  font-size: clamp(52px, 7.6vw, 104px);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: rgb(var(--white));
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  .itemName
+  > bdi:nth-child(1) {
+  display: block !important;
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  .parentName {
+  margin: 18px 0 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  .mainDetailButtons {
+  margin-top: 18px;
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  .detailPagePrimaryContent {
+  max-width: none;
+  margin-top: 26px;
+  padding: 16px 0 0;
+  border-top: 1px solid rgba(var(--white), 0.16);
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  #childrenContent
+  .itemsContainer {
+  display: block;
+  columns: 2;
+  column-gap: 56px;
+  padding: 0;
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  #childrenContent
+  .listItem {
+  width: auto;
+  margin: 0;
+  padding: 5px 0;
+  break-inside: avoid;
+  border-bottom: 1px solid rgba(var(--white), 0.09) !important;
+  border-radius: 0 !important;
+  background: none;
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  .listItem-indexnumberleft {
+  flex: none;
+  width: 58px;
+  margin: 0;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+  color: rgba(var(--white), 0.3);
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  #childrenContent
+  .listItem:hover
+  .listItem-indexnumberleft {
+  color: rgb(var(--accent));
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  #childrenContent
+  .listItemBodyText:not(.secondary) {
+  font-size: 19px;
+  font-weight: 600;
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  #childrenContent
+  .secondary.listItemBodyText {
+  font-size: 13px;
+  color: rgba(var(--white), 0.55);
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  #childrenContent
+  .listItemMediaInfo {
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  color: rgba(var(--white), 0.6);
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  #childrenContent
+  .listItemBody {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  .itemGenres:empty {
+  display: none;
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  .detailSection {
+  display: flex;
+  flex-direction: column;
+}
+.layout-desktop
+  .itemDetailPage:has(.musicParentName):has(
+    #childrenContent .listItem[data-type="Audio"]
+  )
+  .detailSectionContent {
+  order: 2;
+}
+:root {
+  --zln-cover: clamp(120px, 19vw, 264px);
+}
+.layout-mobile body:has(.itemDetailPage:not(.hide) .musicParentName):has(.itemDetailPage:not(.hide) #childrenContent .listItem[data-type="Audio"]) .backgroundContainer {
+  background-color: rgb(var(--darkest)) !important;
+  background-image: none !important;
+}
+.layout-mobile body:has(.itemDetailPage:not(.hide) .musicParentName):has(.itemDetailPage:not(.hide) #childrenContent .listItem[data-type="Audio"]) .MuiAppBar-root {
+  background-color: rgb(var(--darkest)) !important;
+}
+.layout-mobile body:has(.itemDetailPage:not(.hide) .musicParentName):has(.itemDetailPage:not(.hide) #childrenContent .listItem[data-type="Audio"]) .MuiAppBar-root::before {
+  display: none !important;
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .itemBackdrop,
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .detailLogo {
+  display: none !important;
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .detailPageWrapperContainer,
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .detailPagePrimaryContainer {
+  position: static;
+  display: block;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  background: none;
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .detailRibbon {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end !important;
+  align-items: flex-start;
+  width: auto;
+  height: auto !important;
+  min-height: calc(var(--zln-cover) + 12px);
+  margin: 18px 0 0 !important;
+  padding: 0 calc(var(--zln-cover) + 30px) 0 0 !important;
+  background: none !important;
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .infoWrapper {
+  position: static !important;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto !important;
+  width: 100%;
+  height: auto !important;
+  padding: 0 !important;
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .infoWrapper .detailImageContainer {
+  display: block !important;
+  position: absolute !important;
+  right: 8px;
+  bottom: 8px;
+  width: var(--zln-cover);
+  height: auto;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: rotate(3deg);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.7);
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .infoWrapper .detailImageContainer .card {
+  display: block !important;
+  position: static !important;
+  transform: none !important;
+  width: 100% !important;
+  max-width: none;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .infoWrapper .detailImageContainer .cardBox {
+  margin: 0 !important;
+  border-radius: 0;
+  box-shadow: none;
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .itemMiscInfo-primary {
+  order: -1;
+  width: auto;
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(var(--white), 0.6);
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .nameContainer {
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin: 0;
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .itemName {
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  font-size: clamp(40px, 8.2vw, 104px);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: rgb(var(--white));
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .itemName > bdi:nth-child(1) {
+  display: block !important;
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .parentName {
+  margin: 14px 0 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .mainDetailButtons {
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 2px;
+  width: auto;
+  margin: 16px 0 0 !important;
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .mainDetailButtons .btnPlay {
+  flex: 0 0 auto;
+  width: auto;
+  height: 48px;
+  margin-right: 6px;
+  padding: 0 22px 0 16px;
+  border-radius: 24px !important;
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .mainDetailButtons .detailButton:not(.btnPlay) {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin: 0 !important;
+  justify-content: center;
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .mainDetailButtons .detailButton:not(.btnPlay)::after {
+  content: none;
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .detailPagePrimaryContent {
+  margin-top: 22px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(var(--white), 0.16);
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .detailSection {
+  display: flex;
+  flex-direction: column;
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .detailSectionContent {
+  order: 2;
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) #childrenContent .itemsContainer {
+  display: block;
+  padding: 0;
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) #childrenContent .listItem {
+  width: auto;
+  margin: 0;
+  padding: 4px 0;
+  break-inside: avoid;
+  border-bottom: 1px solid rgba(var(--white), 0.09) !important;
+  border-radius: 0 !important;
+  background: none;
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .listItem-indexnumberleft {
+  flex: none;
+  width: 50px;
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+  color: rgba(var(--white), 0.3);
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) #childrenContent .listItemBody {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) #childrenContent .listItemBodyText:not(.secondary) {
+  font-size: 18px;
+  font-weight: 600;
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) #childrenContent .secondary.listItemBodyText {
+  font-size: 13px;
+  color: rgba(var(--white), 0.55);
+}
+.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) #childrenContent .listItemMediaInfo {
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  color: rgba(var(--white), 0.6);
+}
+@media (min-width: 43.75em) {
+  .layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) #childrenContent .itemsContainer {
+    columns: 2;
+    column-gap: 44px;
+  }
+}
+@media (max-width: 37.49em) and (orientation: portrait) {
+  :root {
+    --zln-cover: 46vw;
+  }
+  .layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .detailRibbon {
+    justify-content: flex-start !important;
+    padding: calc(var(--zln-cover) + 30px) 0 0 !important;
+  }
+  .layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .infoWrapper .detailImageContainer {
+    top: 6px;
+    right: auto;
+    bottom: auto;
+    left: 8px;
+  }
+  .layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .itemName {
+    font-size: clamp(38px, 12.5vw, 64px);
+  }
+}
+:root {
+  --zcr-s: clamp(84px, 10.3vw, 150px);
+  --zcr-gap: 16px;
+}
+#musicPage > .verticalSection:first-child .sectionTitle {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(var(--white), 0.6);
+}
+#musicPage > .verticalSection:first-child {
+  margin-bottom: 28px;
+}
+#musicPage > .verticalSection:first-child .emby-scroller {
+  overflow: hidden !important;
+}
+#musicPage > .verticalSection:first-child .itemsContainer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) repeat(3, var(--zcr-s));
+  grid-template-rows: repeat(2, var(--zcr-s));
+  gap: var(--zcr-gap);
+  width: auto !important;
+  margin-top: 10px;
+  transform: none !important;
+  white-space: normal;
+}
+#musicPage > .verticalSection:first-child .card {
+  width: auto !important;
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+}
+#musicPage > .verticalSection:first-child .card:nth-child(n + 8) {
+  display: none;
+}
+#musicPage > .verticalSection:first-child .card .cardBox {
+  margin: 0;
+}
+#musicPage > .verticalSection:first-child .card:not(:first-child) .cardText {
+  display: none;
+}
+#musicPage > .verticalSection:first-child .card:first-child {
+  grid-row: 1 / span 2;
+}
+#musicPage > .verticalSection:first-child .card:first-child .cardBox {
+  display: grid;
+  grid-template-columns: calc(var(--zcr-s) * 2 + var(--zcr-gap)) minmax(0, 1fr);
+  grid-template-rows: 1fr auto auto 1fr;
+  column-gap: clamp(18px, 2.8vw, 36px);
+  height: 100%;
+}
+#musicPage > .verticalSection:first-child .card:first-child .cardScalable {
+  grid-row: 1 / -1;
+}
+#musicPage > .verticalSection:first-child .card:first-child .cardText {
+  grid-column: 2;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  text-align: left !important;
+  white-space: normal;
+}
+#musicPage > .verticalSection:first-child .card:first-child .cardText-first {
+  grid-row: 2;
+  font-size: clamp(26px, 3.6vw, 46px);
+  font-weight: 700;
+  line-height: 1.04;
+}
+#musicPage > .verticalSection:first-child .card:first-child .cardText:not(.cardText-first) {
+  grid-row: 3;
+  margin-top: 10px;
+  font-size: 17px;
+  color: rgba(var(--white), 0.78);
+}
+@media (max-width: 37.49em) and (orientation: portrait) {
+  #musicPage > .verticalSection:first-child .itemsContainer {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: auto;
+  }
+  #musicPage > .verticalSection:first-child .card:first-child {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+  #musicPage > .verticalSection:first-child .card:first-child .cardBox {
+    grid-template-columns: 42vw minmax(0, 1fr);
+  }
+}
+#liveTvPage > .verticalSection:first-child {
+  margin-bottom: 28px;
+}
+#liveTvPage > .verticalSection:first-child .emby-scroller {
+  overflow: hidden !important;
+}
+#liveTvPage > .verticalSection:first-child .itemsContainer {
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+  column-gap: clamp(16px, 2.2vw, 28px);
+  row-gap: 12px;
+  width: auto !important;
+  margin-top: 10px;
+  transform: none !important;
+  white-space: normal;
+}
+#liveTvPage > .verticalSection:first-child .card {
+  width: auto !important;
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+}
+#liveTvPage > .verticalSection:first-child .card:nth-child(n + 7) {
+  display: none;
+}
+#liveTvPage > .verticalSection:first-child .card .cardBox {
+  display: grid;
+  margin: 0;
+}
+#liveTvPage > .verticalSection:first-child .card .cardText {
+  height: auto;
+  margin: 0;
+  overflow: hidden;
+  text-align: left !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#liveTvPage > .verticalSection:first-child .card .cardText:nth-child(2) {
+  grid-row: 2;
+}
+#liveTvPage > .verticalSection:first-child .card .cardText:nth-child(3) {
+  grid-row: 3;
+}
+#liveTvPage > .verticalSection:first-child .card .cardText:nth-child(4) {
+  grid-row: 4;
+}
+#liveTvPage > .verticalSection:first-child .card:first-child {
+  grid-row: 1 / span 5;
+}
+#liveTvPage > .verticalSection:first-child .card:first-child .cardBox {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 1fr auto auto auto 20px;
+  border-radius: 22px;
+  overflow: hidden;
+}
+#liveTvPage > .verticalSection:first-child .card:first-child .cardScalable {
+  grid-column: 1;
+  grid-row: 1 / -1;
+}
+#liveTvPage > .verticalSection:first-child .card:first-child .cardImageContainer::after {
+  content: "";
+  position: absolute;
+  inset: 40% 0 0;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
+  pointer-events: none;
+}
+#liveTvPage > .verticalSection:first-child .card:first-child .itemLinearProgress {
+  z-index: 1;
+}
+#liveTvPage > .verticalSection:first-child .card:first-child .cardText {
+  grid-column: 1;
+  z-index: 2;
+  padding: 0 clamp(14px, 2vw, 24px);
+  font-size: 15px;
+  color: rgba(var(--white), 0.86);
+}
+#liveTvPage > .verticalSection:first-child .card:first-child .cardText-first {
+  padding-bottom: 6px;
+  font-size: clamp(20px, 2.4vw, 30px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: rgb(var(--white));
+}
+#liveTvPage > .verticalSection:first-child .card:not(:first-child) .cardBox {
+  grid-template-columns: clamp(86px, 27%, 128px) minmax(0, 1fr);
+  grid-template-rows: 1fr auto auto auto 1fr;
+  column-gap: 14px;
+}
+#liveTvPage > .verticalSection:first-child .card:not(:first-child) .cardScalable {
+  grid-column: 1;
+  grid-row: 1 / -1;
+  border-radius: 10px;
+  overflow: hidden;
+}
+#liveTvPage > .verticalSection:first-child .card:not(:first-child) .cardText {
+  grid-column: 2;
+  padding: 0;
+  font-size: 13px;
+  color: rgba(var(--white), 0.65);
+}
+#liveTvPage > .verticalSection:first-child .card:not(:first-child) .cardText-first {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgb(var(--white));
+}
+@media (max-width: 37.49em) and (orientation: portrait) {
+  #liveTvPage > .verticalSection:first-child .itemsContainer {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #liveTvPage > .verticalSection:first-child .card:first-child {
+    grid-row: auto;
+  }
+}
+@media (orientation: landscape) and (max-height: 34em) {
+  #liveTvPage > .verticalSection:first-child .itemsContainer {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  }
+  #liveTvPage > .verticalSection:first-child .card:nth-child(n + 6) {
+    display: none;
+  }
+  #liveTvPage > .verticalSection:first-child .card:first-child {
+    grid-row: 1 / span 4;
+  }
+}
+#liveTvPage .vertical-wrap .card:has(.coveredImage-contain) {
+  display: flex;
+  width: 25% !important;
+  max-width: none;
+}
+#liveTvPage .vertical-wrap .card:has(.coveredImage-contain) .cardBox {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0 16px 16px 0;
+  padding: 0 0 14px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(var(--white), 0.07);
+  transition: box-shadow 120ms;
+}
+W:hover .cardBox,
+W:focus-within .cardBox {
+  box-shadow: 0 0 0 2px rgb(var(--accent));
+}
+#liveTvPage .vertical-wrap .card:has(.coveredImage-contain) .cardScalable {
+  margin-bottom: 12px;
+  border-radius: 0;
+  background: rgba(var(--white), 0.04);
+}
+#liveTvPage .vertical-wrap .card:has(.coveredImage-contain) .cardPadder {
+  padding-bottom: 58%;
+}
+#liveTvPage .vertical-wrap .card:has(.coveredImage-contain) .cardImageContainer {
+  border-radius: 0;
+}
+#liveTvPage .vertical-wrap .card:has(.coveredImage-contain) .cardImageContainer img {
+  box-sizing: border-box;
+  padding: 9% 20%;
+}
+#liveTvPage .vertical-wrap .card:has(.coveredImage-contain) .cardText {
+  height: auto;
+  margin: 0;
+  padding: 2px 16px;
+  overflow: hidden;
+  text-align: left !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  color: rgba(var(--white), 0.65);
+}
+#liveTvPage .vertical-wrap .card:has(.coveredImage-contain) .cardText-first {
+  font-size: 17px;
+  font-weight: 700;
+  color: rgb(var(--white));
+}
+#liveTvPage .vertical-wrap .card:has(.coveredImage-contain) .cardText:empty {
+  display: none;
+}
+#liveTvPage .vertical-wrap .card:has(.coveredImage-contain) .cardText:nth-child(4) {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(var(--white), 0.9);
+}
+#liveTvPage .vertical-wrap .card:has(.coveredImage-contain) .cardText:nth-child(4)::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: rgb(var(--accent));
+}
+@media (min-width: 75em) {
+  .layout-desktop #liveTvPage .vertical-wrap .card:has(.coveredImage-contain) {
+    width: 20% !important;
+  }
+}
+@media (min-width: 100em) {
+  .layout-desktop #liveTvPage .vertical-wrap .card:has(.coveredImage-contain) {
+    width: 16.6667% !important;
+  }
+}
+@media (max-width: 62em) and (orientation: portrait) {
+  #liveTvPage .vertical-wrap .card:has(.coveredImage-contain) {
+    width: 33.3333% !important;
+  }
+}
+@media (max-width: 37.49em) and (orientation: portrait) {
+  #liveTvPage .vertical-wrap .card:has(.coveredImage-contain) {
+    width: 50% !important;
+  }
+  #liveTvPage .vertical-wrap .card:has(.coveredImage-contain) .cardBox {
+    margin: 0 10px 10px 0;
+  }
+}
+#liveTvPage .guide-channelHeaderCell {
+  border: 3px solid transparent !important;
+  border-radius: 17px;
+  background: rgba(var(--white), 0.07) padding-box;
+}
+#liveTvPage .programCell {
+  border: 2px solid transparent !important;
+  border-radius: 14px;
+  background-color: rgba(var(--white), 0.045);
+  background-clip: padding-box;
+}
+#liveTvPage .programCell:hover,
+#liveTvPage .programCell:focus {
+  background-color: rgba(var(--white), 0.11);
+}
+#liveTvPage .programCell-active {
+  background-color: rgba(var(--white), 0.17) !important;
+}
+#liveTvPage .programCell-active .guideProgramName {
+  font-weight: 700;
+  color: rgb(var(--white));
+}
+#liveTvPage .guideProgramName {
+  font-size: 15px;
+}
+#liveTvPage .timeslotHeader {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: rgba(var(--white), 0.6);
+}
+#liveTvPage .timeslotHeaders {
+  scrollbar-width: none;
+}
+#liveTvPage .timeslotHeaders::-webkit-scrollbar {
+  display: none;
+}
+@media (orientation: portrait) {
+  :root {
+    --zgp-g: 3.9vw;
+    --zgp-top: 8px;
+    --zgp-card-h: min(calc((100vw - 2 * var(--zgp-g)) * 9 / 16), 42vh);
+    --zgp-poster-h: clamp(120px, calc(var(--zgp-card-h) * 0.62), 230px);
+    --zgp-poster-w: calc(var(--zgp-poster-h) * 2 / 3);
+    --zgp-drop: calc(var(--zgp-poster-h) * 0.42);
+  }
+  .layout-mobile body:has(.itemDetailPage:not(.hide) > .itemBackdrop[style*="url"]) .backgroundContainer {
+    background-color: rgb(var(--darkest)) !important;
+    background-image: none !important;
+  }
+  .layout-mobile body:has(.itemDetailPage:not(.hide) > .itemBackdrop[style*="url"]) .MuiAppBar-root {
+    background-color: rgb(var(--darkest)) !important;
+  }
+  .layout-mobile body:has(.itemDetailPage:not(.hide) > .itemBackdrop[style*="url"]) .MuiAppBar-root::before {
+    display: none !important;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemBackdrop {
+    position: absolute !important;
+    top: var(--zgp-top) !important;
+    right: var(--zgp-g);
+    left: var(--zgp-g);
+    width: auto;
+    height: var(--zgp-card-h) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background-size: 0 0;
+    background-position: center 30%;
+    background-attachment: scroll;
+    filter: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+    animation: none;
+    pointer-events: none;
+    z-index: 0 !important;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemBackdrop::before,
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemBackdrop::after {
+    content: "";
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: auto;
+    height: auto;
+    background: inherit;
+    background-size: cover;
+    border-radius: 22px;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemBackdrop::before {
+    inset: -3%;
+    filter: blur(44px) saturate(1.7);
+    opacity: 0.5;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailLogo {
+    position: absolute !important;
+    top: calc(var(--zgp-top) + var(--zgp-card-h) + 10px) !important;
+    right: var(--zgp-g) !important;
+    left: calc(var(--zgp-g) + var(--zgp-poster-w) + 46px) !important;
+    width: auto !important;
+    height: calc(var(--zgp-drop) - 4px) !important;
+    margin: 0 !important;
+    transform: none !important;
+    background-position: left center;
+    background-size: contain;
+    z-index: 1;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailPageWrapperContainer,
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailPagePrimaryContainer {
+    position: static;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailPagePrimaryContainer {
+    display: block;
+    background: none;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailRibbon {
+    position: static;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start !important;
+    align-items: flex-start;
+    width: auto;
+    height: auto !important;
+    margin: 0 !important;
+    padding: calc(var(--zgp-top) + var(--zgp-card-h) + var(--zgp-drop) + 18px) 0 6px !important;
+    background: none !important;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .infoWrapper {
+    position: static !important;
+    flex: 0 0 auto !important;
+    width: 100%;
+    height: auto !important;
+    padding: 0 !important;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .nameContainer,
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemMiscInfo,
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .mainDetailButtons,
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailPagePrimaryContent,
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailPageSecondaryContainer {
+    position: relative;
+    z-index: 1;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .infoWrapper .detailImageContainer {
+    display: block !important;
+    position: absolute !important;
+    z-index: 2;
+    left: calc(var(--zgp-g) + 12px);
+    top: calc(var(--zgp-top) + var(--zgp-card-h) + var(--zgp-drop));
+    transform: translateY(-100%);
+    width: var(--zgp-poster-w);
+    height: auto;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 5px solid rgb(var(--darkest));
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.6);
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .infoWrapper .detailImageContainer .card {
+    display: block !important;
+    position: static !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: none;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .infoWrapper .detailImageContainer .cardBox {
+    margin: 0 !important;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):has(.infoWrapper .backdropCard) .infoWrapper .detailImageContainer {
+    width: calc(var(--zgp-poster-w) * 1.9);
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):has(.infoWrapper .backdropCard) .detailLogo {
+    left: calc(var(--zgp-g) + var(--zgp-poster-w) * 1.9 + 46px) !important;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):has(.infoWrapper .squareCard):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .infoWrapper .detailImageContainer {
+    width: calc(var(--zgp-poster-w) * 1.3);
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):has(.infoWrapper .squareCard):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailLogo {
+    left: calc(var(--zgp-g) + var(--zgp-poster-w) * 1.3 + 46px) !important;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="/Images/Primary"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemBackdrop::after {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="/Images/Primary"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .infoWrapper .detailImageContainer {
+    display: none !important;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="/Images/Primary"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailLogo {
+    left: var(--zgp-g) !important;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .mainDetailButtons {
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 2px;
+    width: auto;
+    margin: 14px 0 0 !important;
+    padding: 0 !important;
+    background: none !important;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .mainDetailButtons .btnPlay {
+    flex: 0 0 auto;
+    width: auto;
+    height: 48px;
+    margin-right: 6px;
+    padding: 0 22px 0 16px;
+    border-radius: 24px !important;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .mainDetailButtons .detailButton:not(.btnPlay) {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    margin: 0 !important;
+    justify-content: center;
+  }
+  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .mainDetailButtons .detailButton:not(.btnPlay)::after {
+    content: none;
+  }
+}
+:root {
+  --zpp-w: clamp(130px, min(38vw, 46vh), 300px);
+  --zpp-h: calc(var(--zpp-w) * 1.5);
+}
+.layout-mobile body:has(.itemDetailPage:not(.hide) .infoWrapper .portraitCard .cardImageIcon.person) .backgroundContainer {
+  background-color: rgb(var(--darkest)) !important;
+  background-image: none !important;
+}
+.layout-mobile body:has(.itemDetailPage:not(.hide) .infoWrapper .portraitCard .cardImageIcon.person) .MuiAppBar-root {
+  background-color: rgb(var(--darkest)) !important;
+}
+.layout-mobile body:has(.itemDetailPage:not(.hide) .infoWrapper .portraitCard .cardImageIcon.person) .MuiAppBar-root::before {
+  display: none !important;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .itemBackdrop {
+  display: none !important;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .detailPageWrapperContainer,
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .detailPagePrimaryContainer {
+  position: static;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .detailPagePrimaryContainer {
+  display: flow-root;
+  background: none;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .detailPagePrimaryContainer::before {
+  content: "";
+  float: left;
+  width: calc(var(--zpp-w) + 20px);
+  height: calc(var(--zpp-h) + 30px);
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .detailRibbon {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start !important;
+  align-items: flex-start;
+  width: auto;
+  height: auto !important;
+  min-height: 0;
+  margin: 0 !important;
+  padding: 16px 0 0 !important;
+  background: none !important;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper {
+  position: static !important;
+  flex: 0 0 auto !important;
+  width: 100%;
+  height: auto !important;
+  padding: 0 !important;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer {
+  display: block !important;
+  position: absolute !important;
+  top: 12px;
+  left: 3.4vw !important;
+  transform: none !important;
+  width: var(--zpp-w);
+  height: var(--zpp-h);
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .card {
+  display: block !important;
+  position: static !important;
+  transform: none !important;
+  width: 100% !important;
+  max-width: none;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .card,
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardBox,
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardScalable,
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardImageContainer {
+  contain: none !important;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardBox,
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardScalable,
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardImageContainer {
+  margin: 0 !important;
+  overflow: visible !important;
+  border-radius: 0;
+  box-shadow: none;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardPadder {
+  padding-bottom: 150%;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardImageContainer {
+  background-size: 0 0 !important;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardImageContainer::before,
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardImageContainer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  background-size: cover;
+  background-position: center top;
+  border-radius: 18px;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardImageContainer::before {
+  inset: -5%;
+  filter: blur(40px) saturate(1.6);
+  opacity: 0.5;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .nameContainer,
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .mainDetailButtons,
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .detailPagePrimaryContent {
+  position: relative;
+  z-index: 1;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .itemName {
+  margin: 0;
+  font-size: clamp(26px, 6.6vw, 46px);
+  font-weight: 700;
+  line-height: 1.04;
+  color: rgb(var(--white));
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .mainDetailButtons {
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 2px;
+  width: auto;
+  margin: 10px 0 0 !important;
+  padding: 0 !important;
+  background: none !important;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .mainDetailButtons .detailButton {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin: 0 !important;
+  justify-content: center;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .mainDetailButtons .detailButton::after {
+  content: none;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .detailPagePrimaryContent {
+  margin-top: 6px;
+  padding-top: 0;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .detailPagePrimaryContent .verticalSection {
+  clear: both;
+}
+.layout-desktop body:has(.itemDetailPage:not(.hide) .detailImageContainer .portraitCard .cardImageIcon.person) .backgroundContainer {
+  background-color: rgb(var(--darkest)) !important;
+  background-image: none !important;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .itemBackdrop {
+  display: none !important;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailPageWrapperContainer {
+  margin-top: 0 !important;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailPagePrimaryContainer {
+  grid-template-columns: clamp(210px, 18vw, 320px) minmax(0, 1fr);
+  column-gap: 2.6em;
+  padding-top: 2.4em;
+  background: none;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer {
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .card {
+  width: 100% !important;
+  margin: 0 !important;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .card,
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .cardBox,
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .cardScalable,
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .cardImageContainer {
+  contain: none !important;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .cardBox,
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .cardScalable,
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .cardImageContainer {
+  margin: 0 !important;
+  overflow: visible !important;
+  border-radius: 0;
+  box-shadow: none;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .cardImageContainer {
+  background-size: 0 0 !important;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .cardImageContainer::before,
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .cardImageContainer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  background-size: cover;
+  background-position: center top;
+  border-radius: 18px;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .cardImageContainer::before {
+  inset: -5%;
+  filter: blur(44px) saturate(1.6);
+  opacity: 0.5;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailRibbon,
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailPagePrimaryContent {
+  position: relative;
+  z-index: 1;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailRibbon {
+  height: auto;
+  padding: 0 !important;
+  background: none !important;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .itemName {
+  margin: 0;
+  font-size: clamp(34px, 3.4vw, 56px);
+  font-weight: 700;
+  line-height: 1.04;
+  color: rgb(var(--white));
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .mainDetailButtons {
+  margin-top: 12px;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailPagePrimaryContent {
+  max-width: none;
+  padding-top: 10px;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailSectionContent {
+  max-width: 62em;
+}
+.layout-mobile body:has(.itemDetailPage:not(.hide) .infoWrapper .squareCard .cardImageIcon.person) .backgroundContainer {
+  background-color: rgb(var(--darkest)) !important;
+  background-image: none !important;
+}
+.layout-mobile body:has(.itemDetailPage:not(.hide) .infoWrapper .squareCard .cardImageIcon.person) .MuiAppBar-root {
+  background-color: rgb(var(--darkest)) !important;
+}
+.layout-mobile body:has(.itemDetailPage:not(.hide) .infoWrapper .squareCard .cardImageIcon.person) .MuiAppBar-root::before {
+  display: none !important;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .itemBackdrop,
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .detailLogo {
+  display: none !important;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .detailPageWrapperContainer,
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .detailPagePrimaryContainer {
+  position: static;
+  display: block;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  background: none;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .detailRibbon {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end !important;
+  align-items: flex-start;
+  width: auto;
+  height: auto !important;
+  min-height: calc(var(--zln-cover) + 12px);
+  margin: 18px 0 0 !important;
+  padding: 0 calc(var(--zln-cover) + 30px) 0 0 !important;
+  background: none !important;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .infoWrapper {
+  position: static !important;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto !important;
+  width: 100%;
+  height: auto !important;
+  padding: 0 !important;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .infoWrapper .detailImageContainer {
+  display: block !important;
+  position: absolute !important;
+  right: 8px;
+  bottom: 8px;
+  width: var(--zln-cover);
+  height: auto;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: rotate(3deg);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.7);
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .infoWrapper .detailImageContainer .card {
+  display: block !important;
+  position: static !important;
+  transform: none !important;
+  width: 100% !important;
+  max-width: none;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardBox {
+  margin: 0 !important;
+  border-radius: 0;
+  box-shadow: none;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .itemMiscInfo-primary {
+  order: -1;
+  width: auto;
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(var(--white), 0.6);
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .nameContainer {
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin: 0;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .itemName {
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  font-size: clamp(40px, 8.2vw, 104px);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: rgb(var(--white));
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .itemName > bdi:nth-child(1) {
+  display: block !important;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .parentName {
+  margin: 14px 0 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .mainDetailButtons {
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 2px;
+  width: auto;
+  margin: 16px 0 0 !important;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .mainDetailButtons .btnPlay {
+  flex: 0 0 auto;
+  width: auto;
+  height: 48px;
+  margin-right: 6px;
+  padding: 0 22px 0 16px;
+  border-radius: 24px !important;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .mainDetailButtons .detailButton:not(.btnPlay) {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin: 0 !important;
+  justify-content: center;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .mainDetailButtons .detailButton:not(.btnPlay)::after {
+  content: none;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .detailPagePrimaryContent {
+  margin-top: 22px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(var(--white), 0.16);
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .detailSection {
+  display: flex;
+  flex-direction: column;
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .detailSectionContent {
+  order: 2;
+}
+@media (max-width: 37.49em) and (orientation: portrait) {
+  :root {
+    --zln-cover: 46vw;
+  }
+  .layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .detailRibbon {
+    justify-content: flex-start !important;
+    padding: calc(var(--zln-cover) + 30px) 0 0 !important;
+  }
+  .layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .infoWrapper .detailImageContainer {
+    top: 6px;
+    right: auto;
+    bottom: auto;
+    left: 8px;
+  }
+  .layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .itemName {
+    font-size: clamp(38px, 12.5vw, 64px);
+  }
+}
+.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .infoWrapper .detailImageContainer {
+  transform: none !important;
+  border-radius: 50%;
+}
+.layout-desktop body:has(.itemDetailPage:not(.hide) .detailImageContainer .squareCard .cardImageIcon.person) .backgroundContainer {
+  background-color: rgb(var(--darkest)) !important;
+  background-image: none !important;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .itemBackdrop,
+.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .detailLogo {
+  display: none !important;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .detailPageWrapperContainer {
+  margin-top: 0 !important;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .detailPagePrimaryContainer {
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "ribbon poster" "content content";
+  column-gap: 3em;
+  align-items: end;
+  padding-top: 2.2em;
+  background: none;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .detailImageContainer {
+  width: clamp(170px, 18vw, 264px);
+  height: auto;
+  margin: 0 0.8em 0.8em 0;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .detailImageContainer .card {
+  width: 100% !important;
+  margin: 0 !important;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .detailImageContainer .cardBox {
+  margin: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.7);
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .detailRibbon {
+  width: auto;
+  min-width: 0;
+  height: auto;
+  padding: 0 !important;
+  background: none !important;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .infoWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .itemMiscInfo-primary {
+  order: -1;
+  width: auto;
+  margin: 0 0 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(var(--white), 0.6);
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .nameContainer {
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .itemName {
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  font-size: clamp(52px, 7.6vw, 104px);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: rgb(var(--white));
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .itemName > bdi:nth-child(1) {
+  display: block !important;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .mainDetailButtons {
+  margin-top: 18px;
+}
+.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .detailPagePrimaryContent {
+  max-width: none;
+  margin-top: 26px;
+  padding: 16px 0 0;
+  border-top: 1px solid rgba(var(--white), 0.16);
+}
+#musicPage .vertical-wrap .cardText {
+  text-align: left !important;
+}
+#musicPage .vertical-wrap .cardText-first {
+  font-size: 16px;
+  font-weight: 600;
+}
+#musicPage .vertical-wrap .cardText:not(.cardText-first) {
+  font-size: 13px;
+  color: rgba(var(--white), 0.65);
+}
+#musicPage .vertical-wrap .cardScalable {
+  border-radius: 12px;
+  overflow: hidden;
+}
+#musicPage .listItem {
+  margin: 0;
+  padding: 5px 0;
+  break-inside: avoid;
+  border-bottom: 1px solid rgba(var(--white), 0.09) !important;
+  border-radius: 0 !important;
+  background: none;
+}
+#musicPage .listItem:hover {
+  background: rgba(var(--white), 0.06);
+}
+#musicPage .listItemImage {
+  flex: none;
+  width: 40px !important;
+  height: 40px !important;
+  margin: 0 16px 0 6px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+#musicPage .listItemImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#musicPage .listItemBody {
+  padding: 4px 0;
+}
+#musicPage .listItemBody .primary {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+#musicPage .listItemBody .secondary {
+  font-size: 13px;
+  color: rgba(var(--white), 0.65);
+}
+#musicPage .listItem .listItemMediaInfo {
+  display: flex !important;
+  margin: 0 10px 0 12px;
+}
+#musicPage .listItem .mediaInfoItem {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  color: rgba(var(--white), 0.65);
+}
+@media (min-width: 43.75em) {
+  #musicPage .listItemBody > div {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+}
+@media (min-width: 75em) {
+  #musicPage div:has(> .listItem) {
+    columns: 2;
+    column-gap: 56px;
+  }
+}
+.appfooter:has(.nowPlayingBar) {
+  background: none !important;
+  box-shadow: none !important;
+  pointer-events: none;
+}
+.nowPlayingBar {
+  margin: 0 3.4vw 12px;
+  border: 1px solid rgba(var(--white), 0.1);
+  border-radius: 22px;
+  background: rgba(var(--dark), 0.94) !important;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  pointer-events: auto;
+}
+.nowPlayingBar .nowPlayingBarTop {
+  height: 68px;
+  padding: 0 12px 0 10px;
+}
+.nowPlayingBar .nowPlayingBarPositionContainer {
+  right: 24px;
+  left: 24px;
+  width: auto;
+}
+.nowPlayingBar .nowPlayingImage {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  margin-right: 12px;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+}
+.nowPlayingBar .nowPlayingBarText {
+  font-size: 16px;
+  font-weight: 700;
+}
+.nowPlayingBar .nowPlayingBarSecondaryText {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(var(--white), 0.65);
+}
+.nowPlayingBar .mediaButton {
+  color: rgba(var(--white), 0.86);
+}
+.nowPlayingBar .playPauseButton {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgb(var(--accent)) !important;
+  color: rgb(var(--on-accent)) !important;
+}
+.nowPlayingBar .nowPlayingBarCurrentTime {
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: rgba(var(--white), 0.7);
+}
+#nowPlayingPage .nowPlayingInfoContainer {
+  display: grid;
+  grid-template-columns: min(38vw, 46vh, 440px) minmax(0, 1fr);
+  column-gap: clamp(20px, 4vw, 60px);
+  align-items: center;
+  margin: 2vh 0 26px;
+}
+#nowPlayingPage .nowPlayingPageImageContainer {
+  width: 100%;
+  margin: 0;
+}
+#nowPlayingPage .nowPlayingPageImage {
+  width: 100% !important;
+  max-width: none;
+  height: auto !important;
+  max-height: none;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+}
+#nowPlayingPage .nowPlayingInfoControls {
+  min-width: 0;
+}
+#nowPlayingPage .nowPlayingInfoContainerMedia {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+#nowPlayingPage .nowPlayingSongName {
+  margin: 0 0 14px;
+  font-size: clamp(34px, min(8vw, 16vh), 124px);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: rgb(var(--white));
+}
+#nowPlayingPage .nowPlayingArtist,
+#nowPlayingPage .nowPlayingAlbum {
+  height: auto;
+  margin: 0;
+  line-height: 1.35;
+}
+#nowPlayingPage .nowPlayingArtist {
+  order: 1;
+  font-size: 19px;
+  font-weight: 500;
+  color: rgba(var(--white), 0.86);
+}
+#nowPlayingPage .nowPlayingAlbum {
+  order: 2;
+  font-size: 15px;
+  color: rgba(var(--white), 0.6);
+}
+#nowPlayingPage .nowPlayingInfoControls > .sliderContainer {
+  margin-top: 24px;
+}
+#nowPlayingPage .positionTime,
+#nowPlayingPage .runtime {
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: rgba(var(--white), 0.7);
+}
+#nowPlayingPage .nowPlayingButtonsContainer {
+  margin-top: 12px;
+}
+#nowPlayingPage .nowPlayingInfoButtons .btnPlayPause {
+  width: 64px;
+  height: 64px;
+  margin: 0 8px;
+  padding: 0;
+  background: none;
+  color: rgb(var(--accent));
+}
+#nowPlayingPage .nowPlayingInfoButtons .btnPlayPause .material-icons {
+  font-size: 64px;
+}
+#nowPlayingPage .playlistSection {
+  border-top: 1px solid rgba(var(--white), 0.16);
+  padding-top: 6px;
+}
+#nowPlayingPage #playlist .listItem {
+  margin: 0;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(var(--white), 0.09) !important;
+  border-radius: 0 !important;
+  background: none;
+}
+#nowPlayingPage #playlist .listItemImage {
+  flex: none;
+  width: 40px !important;
+  height: 40px !important;
+  margin: 0 16px 0 6px;
+  border-radius: 6px;
+  overflow: hidden;
+  background-size: cover;
+}
+#nowPlayingPage #playlist .listItemBodyText:not(.secondary) {
+  font-size: 17px;
+  font-weight: 600;
+}
+#nowPlayingPage #playlist .secondary.listItemBodyText {
+  font-size: 13px;
+  color: rgba(var(--white), 0.6);
+}
+#nowPlayingPage #playlist .listItemMediaInfo {
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  color: rgba(var(--white), 0.6);
+}
+@media (orientation: portrait) and (max-width: 50em) {
+  #nowPlayingPage .nowPlayingInfoContainer {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 22px;
+    justify-items: start;
+  }
+  #nowPlayingPage .nowPlayingPageImageContainer {
+    width: min(100%, 46vh);
+    justify-self: center;
+  }
+  #nowPlayingPage .nowPlayingInfoControls {
+    width: 100%;
+  }
+  #nowPlayingPage .nowPlayingSongName {
+    font-size: clamp(34px, 11vw, 72px);
+  }
+}
+:root {
+  --zf-s: clamp(168px, 19.2vw, 290px);
+  --zf-text: 30px;
+  --zf-gap: 16px;
+  --zf-f-h: calc(2 * (var(--zf-s) * 0.5625 + var(--zf-text)) + var(--zf-gap));
+  --zf-f: min(calc(var(--zf-f-h) * 16 / 9), calc(93vw - 30px));
+  --zf-n: clamp(250px, 29vw, 373px);
+}
+#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .itemsContainer {
+  display: grid !important;
+  grid-template-rows: repeat(2, auto);
+  grid-auto-flow: column;
+  grid-auto-columns: var(--zf-s);
+  gap: var(--zf-gap);
+  align-items: start;
+  white-space: normal;
+}
+#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card {
+  width: auto !important;
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  contain: none;
+}
+#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card .cardBox {
+  position: relative;
+  margin: 0 !important;
+}
+#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card .cardScalable {
+  border-radius: 14px;
+  overflow: hidden;
+}
+#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card .cardText {
+  height: auto;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  text-align: left !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card .cardText-first {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: var(--zf-text);
+}
+#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card .cardText-secondary {
+  display: none;
+}
+@media (min-width: 37.5em), (orientation: landscape) {
+  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .itemsContainer {
+    grid-template-columns: var(--zf-f);
+  }
+  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child {
+    grid-row: 1 / span 2;
+    justify-self: start;
+    width: var(--zf-s) !important;
+    overflow: visible;
+  }
+  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardBox {
+    width: var(--zf-f);
+  }
+  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardPadder {
+    height: var(--zf-f-h);
+    padding-bottom: 0;
+  }
+  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardBox,
+  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardScalable,
+  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardImageContainer {
+    contain: none !important;
+    overflow: visible !important;
+  }
+  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardImageContainer {
+    background-size: 0 0 !important;
+    border-radius: 22px;
+  }
+  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardImageContainer::before,
+  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardImageContainer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    background-size: cover;
+    background-position: center;
+    border-radius: 22px;
+  }
+  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardImageContainer::before {
+    inset: -3%;
+    z-index: -1;
+    filter: blur(40px) saturate(1.6);
+    opacity: 0.5;
+  }
+  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardScalable::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 60%;
+    border-radius: 0 0 22px 22px;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
+    pointer-events: none;
+  }
+  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .innerCardFooter {
+    z-index: 2;
+    padding: 0 22px 14px;
+  }
+  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardText {
+    position: absolute;
+    right: 22px;
+    left: 22px;
+    z-index: 2;
+  }
+  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardText-first {
+    bottom: 52px;
+    font-size: clamp(20px, 2.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardText-secondary {
+    display: block;
+    bottom: 28px;
+    font-size: 15px;
+    color: rgba(var(--white), 0.86);
+  }
+}
+@media (max-width: 37.49em) and (orientation: portrait) {
+  :root {
+    --zf-s: 58vw;
+  }
+  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .itemsContainer {
+    grid-template-rows: auto;
+  }
+  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card .cardText-first {
+    margin-top: 6px;
+    line-height: 1.3;
+  }
+  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card .cardText-secondary {
+    display: block;
+    font-size: 13px;
+    line-height: 1.35;
+    color: rgba(var(--white), 0.65);
+  }
+}
+#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card:not([data-positionticks])) .card {
+  width: var(--zf-n) !important;
+  max-width: none;
+}
+#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card:not([data-positionticks])) .cardBox {
+  display: grid;
+  grid-template-columns: clamp(110px, 40%, 150px) minmax(0, 1fr);
+  grid-template-rows: 1fr auto auto 1fr;
+  column-gap: 14px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(var(--white), 0.08);
+}
+#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card:not([data-positionticks])) .cardScalable {
+  grid-column: 1;
+  grid-row: 1 / -1;
+  border-radius: 0;
+}
+#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card:not([data-positionticks])) .cardText {
+  grid-column: 2;
+  height: auto;
+  margin: 0;
+  padding: 0 12px 0 0;
+  overflow: hidden;
+  text-align: left !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card:not([data-positionticks])) .cardText-first {
+  grid-row: 2;
+  font-size: 17px;
+  font-weight: 600;
+}
+#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card:not([data-positionticks])) .cardText-secondary {
+  grid-row: 3;
+  font-size: 13px;
+  color: rgba(var(--white), 0.65);
+}
+.itemProgressBar,
+.MuiLinearProgress-root.itemLinearProgress {
+  height: 4px;
+  border-radius: 2px;
+  overflow: hidden;
+  background: rgba(var(--white), 0.24);
+}
+.itemProgressBar .itemProgressBarForeground,
+.MuiLinearProgress-root.itemLinearProgress .MuiLinearProgress-bar {
+  border-radius: 2px;
+  background-color: rgb(var(--accent));
+}
+.nowPlayingBar .mdl-slider-background-flex,
+#nowPlayingPage .mdl-slider-background-flex {
+  height: 4px;
+  margin-top: -2px;
+  border-radius: 2px;
+  background: rgba(var(--white), 0.24);
+}
+.nowPlayingBar .mdl-slider-background-flex-inner,
+#nowPlayingPage .mdl-slider-background-flex-inner {
+  border-radius: 2px;
+}
+.nowPlayingBar .mdl-slider-background-upper,
+#nowPlayingPage .mdl-slider-background-upper {
+  background: none;
+}
+.nowPlayingBar .mdl-slider-background-lower,
+#nowPlayingPage .mdl-slider-background-lower {
+  border-radius: 2px;
+  background-color: rgb(var(--accent)) !important;
+}
+.nowPlayingBar .nowPlayingBarPositionSlider::-webkit-slider-thumb {
+  opacity: 0;
+}
+.nowPlayingBar .nowPlayingBarPositionSlider:hover::-webkit-slider-thumb {
+  opacity: 1;
+}
+.nowPlayingBar .nowPlayingBarPositionSlider::-moz-range-thumb {
+  opacity: 0;
+}
+.nowPlayingBar .nowPlayingBarPositionSlider:hover::-moz-range-thumb {
+  opacity: 1;
+}
+#nowPlayingPage .mdl-slider::-webkit-slider-thumb,
+.nowPlayingBar .mdl-slider::-webkit-slider-thumb {
+  background: rgb(var(--accent)) !important;
+}
+#nowPlayingPage .mdl-slider::-moz-range-thumb,
+.nowPlayingBar .mdl-slider::-moz-range-thumb {
+  background: rgb(var(--accent)) !important;
+}
+body:has(#loginPage:not(.hide)):has(.backdropImage[style*="Splashscreen"]) #loginPage {
+  background-image: none;
+  animation: none;
+}
+body:has(#loginPage:not(.hide)):has(.backdropImage[style*="Splashscreen"]) .backgroundContainer {
+  background: none !important;
+}
+body:has(#loginPage:not(.hide)):has(.backdropImage[style*="Splashscreen"]) .backdropImage {
+  filter: none;
+}
+body:has(#loginPage:not(.hide)):has(.backdropImage[style*="Splashscreen"]) #loginPage::before {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(var(--darkest), 0.9) 0%,
+      rgba(var(--darkest), 0.2) 50%,
+      rgba(var(--darkest), 0) 100%
+    ),
+    radial-gradient(
+      110% 90% at 74% 50%,
+      rgba(var(--darkest), 0) 0%,
+      rgba(var(--darkest), 0.4) 100%
+    );
+}
+@media (orientation: portrait) {
+  .layout-mobile body:has(#loginPage:not(.hide)):has(.backdropImage[style*="Splashscreen"]) #loginPage::before {
+    background: linear-gradient(
+      180deg,
+      rgba(var(--darkest), 0) 0%,
+      rgba(var(--darkest), 0.3) 26%,
+      rgba(var(--darkest), 0.9) 48%,
+      rgb(var(--darkest)) 62%
+    );
+  }
+}
+@media (orientation: landscape) {
+  .layout-mobile #loginPage::before {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(var(--darkest), 0.97) 0%,
+        rgba(var(--darkest), 0.66) 52%,
+        rgba(var(--darkest), 0.46) 100%
+      ),
+      radial-gradient(
+        100% 78% at 74% 50%,
+        rgba(var(--darkest), 0) 0%,
+        rgba(var(--darkest), 0.82) 100%
+      );
+  }
+  .layout-mobile #loginPage .padded-left.padded-right.padded-bottom-page {
+    inset: 0 auto 0 0;
+    width: min(36rem, 46vw);
+    padding: 1.25rem clamp(1.5rem, 4.2vw, 5.25rem) !important;
+    justify-content: center;
+    justify-content: safe center;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: rgb(var(--darkest));
+  }
+}
+@media (orientation: landscape) and (max-height: 34em) {
+  .layout-mobile #loginPage .padded-left.padded-right.padded-bottom-page {
+    padding-top: 0.6rem !important;
+    padding-bottom: 0.6rem !important;
+  }
+  .layout-mobile #loginPage .padded-bottom-page::before {
+    margin-bottom: 0.4rem;
+  }
+  .layout-mobile #loginPage .sectionTitle {
+    margin: 0 0 0.5rem !important;
+    font-size: 1.15rem;
+  }
+  .layout-mobile #loginPage .inputContainer {
+    margin-bottom: 0.5rem !important;
+  }
+  .layout-mobile #loginPage .emby-input {
+    height: 2.4rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+  }
+  .layout-mobile #loginPage .checkboxContainer {
+    margin-bottom: 0.6rem !important;
+  }
+  .layout-mobile #loginPage .button-submit,
+  .layout-mobile #loginPage .btnQuick {
+    margin-top: 0.3rem !important;
+    padding-top: 0.6rem !important;
+    padding-bottom: 0.6rem !important;
+  }
+  .layout-mobile #loginPage .btnForgotPassword,
+  .layout-mobile #loginPage .btnSelectServer {
+    margin-top: 0.2rem !important;
+    padding-top: 0.4rem !important;
+    padding-bottom: 0.4rem !important;
+  }
+}
+.layout-mobile #loginPage .manualLoginForm,
+.layout-mobile #loginPage .readOnlyContent {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 24rem;
+}
+@media (orientation: portrait) and (min-width: 37.5em) {
+  .layout-mobile #loginPage .manualLoginForm,
+  .layout-mobile #loginPage .readOnlyContent,
+  .layout-mobile #loginPage .padded-bottom-page::before {
+    align-self: center;
+  }
+  .layout-mobile #loginPage .padded-bottom-page::before {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 24rem;
+  }
 }
