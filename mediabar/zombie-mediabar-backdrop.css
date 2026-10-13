@@ -1,7 +1,10 @@
+/* Zombie Revived CSS Theme
+ * Version: v18.1 */
+
 @media (max-width: 46.875em) and (orientation: portrait) {
   :root {
     --zmb-card-h: 214px;
-    --zmb-info-h: 150px;
+    --zmb-info-h: 166px;
     --zmb-sections-pull: 41px;
   }
   #slides-container.layout-marquee .backdrop-container {
@@ -15,6 +18,7 @@
   #slides-container.layout-marquee .slide-content {
     top: calc(var(--zmb-card-top) + var(--zmb-card-h));
     align-items: flex-start;
+    max-height: none !important;
     text-align: left;
   }
   #slides-container.layout-marquee .spec-line {
@@ -83,6 +87,10 @@
     left: auto !important;
     right: calc(var(--zmb-gutter) + 12px) !important;
     transform: none;
+    top: calc(var(--zmb-card-top) + var(--zmb-card-h) - 22px) !important;
+  }
+  #slides-container.layout-marquee:has(.slide.active .video-player)
+    .dots-container {
     top: calc(var(--zmb-card-top) + var(--zmb-card-h) - 22px) !important;
   }
   #slides-container.layout-marquee

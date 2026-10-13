@@ -1,3 +1,6 @@
+/* Zombie Revived CSS Theme
+ * Version: v18.1 */
+
 :root {
   --zmb-gutter: clamp(1.25rem, 3.9vw, 4rem);
   --zmb-radius: 26px;
@@ -7,7 +10,7 @@
     calc((100vw - 2 * var(--zmb-gutter)) / 3.4)
   );
   --zmb-gap: 2rem;
-  --zmb-info-h: 17.5rem;
+  --zmb-info-h: 19.5rem;
   --zmb-info-bottom: 1rem;
   --zmb-sections-pull: 3.6rem;
   --zmb-poster-w: 12.25rem;
@@ -147,7 +150,7 @@ body:has(#slides-container.layout-marquee) .homeSectionsContainer {
   position: absolute;
   left: var(--zmb-gutter);
   right: var(--zmb-gutter);
-  top: auto;
+  top: calc(var(--zmb-card-top) + var(--zmb-card-h) + var(--zmb-gap));
   bottom: var(--zmb-info-bottom);
   width: auto;
   max-width: none;
@@ -155,6 +158,7 @@ body:has(#slides-container.layout-marquee) .homeSectionsContainer {
   grid-template-columns: var(--zmb-poster-w) minmax(0, 1fr) auto;
   column-gap: 2.4rem;
   align-items: start;
+  align-content: start;
   padding: 0;
   background: transparent !important;
   -webkit-backdrop-filter: none !important;
@@ -330,7 +334,7 @@ body:has(#slides-container.layout-marquee) .homeSectionsContainer {
     --zmb-gap: 0px;
     --zmb-poster-h: calc((100vw - 2 * var(--zmb-gutter)) * 1.5);
     --zmb-video-h: calc((100vw - 2 * var(--zmb-gutter)) * 0.5625);
-    --zmb-info-h: calc(var(--zmb-poster-h) + 164px);
+    --zmb-info-h: calc(var(--zmb-poster-h) + 191px);
     --zmb-sections-pull: 41px;
   }
   #slides-container.layout-marquee .backdrop-container {
@@ -346,6 +350,7 @@ body:has(#slides-container.layout-marquee) .homeSectionsContainer {
     align-items: center;
     text-align: center;
     gap: 0;
+    max-height: calc(var(--zmb-info-h) - 4px) !important;
     background: transparent !important;
   }
   #slides-container.layout-marquee .poster-container {
@@ -461,6 +466,10 @@ body:has(#slides-container.layout-marquee) .homeSectionsContainer {
     bottom: auto !important;
     top: calc(var(--zmb-card-top) + var(--zmb-poster-h) - 24px) !important;
     transform: translateX(-50%);
+  }
+  #slides-container.layout-marquee:has(.slide.active .video-player)
+    .dots-container {
+    top: calc(var(--zmb-card-top) + var(--zmb-video-h) - 24px) !important;
   }
   #slides-container.layout-marquee
     .slide:has(.video-player)

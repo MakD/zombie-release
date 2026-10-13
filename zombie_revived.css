@@ -1,3 +1,6 @@
+/* Zombie Revived CSS Theme
+ * Version: v18.1 */
+
 @import url(https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&display=swap);
 body,
 h1,
@@ -7,7 +10,7 @@ h4 {
   font-family: "Archivo Narrow", sans-serif;
 }
 :root {
-  --zombieFooterText: "Zombie v2.0.12";
+  --zombieFooterText: "Zombie v18.1";
   --accent: 255, 255, 255;
   --on-accent: 12, 12, 12;
   --bg-wash: 0, 0, 0;
@@ -441,10 +444,20 @@ body:has(#loginPage:not(.hide)) {
   padding-top: 1.25em;
 }
 .layout-desktop .trackSelections .selectContainer .detailTrackSelect {
-  width: 20vw;
+  width: auto;
+  max-width: 24vw;
+  field-sizing: content;
+  text-overflow: ellipsis;
+}
+.layout-desktop
+  .trackSelections
+  .selectContainer
+  .detailTrackSelect:not([disabled]) {
+  padding-right: 2em !important;
 }
 .layout-desktop .trackSelections {
   display: flex;
+  column-gap: 1.4em;
 }
 .trackSelections .selectContainer .selectLabel {
   display: flex;
@@ -996,7 +1009,15 @@ imgLogoIcon {
 .layout-desktop .material-icons.detailButton-icon.favorite,
 .layout-desktop .material-icons.detailButton-icon.more_vert,
 .layout-desktop .material-icons.detailButton-icon.replay,
-.layout-desktop .material-icons.detailButton-icon.theaters {
+.layout-desktop .material-icons.detailButton-icon.theaters,
+.layout-desktop .material-icons.detailButton-icon.watchlist,
+.layout-desktop
+  .jellyseerr-report-issue-icon
+  .material-icons.detailButton-icon.warning,
+.layout-desktop
+  .mainDetailButtons
+  .jellyseerr-report-issue-icon
+  .jellyseerr-issue-count-badge {
   display: none;
 }
 .layout-desktop .btnMoreCommands::after,
@@ -1004,13 +1025,26 @@ imgLogoIcon {
 .layout-desktop .btnPlayTrailer::after,
 .layout-desktop .btnPlaystate::after,
 .layout-desktop .btnUserRating::after,
-.layout-desktop .btntheaters::after {
+.layout-desktop .btntheaters::after,
+.layout-desktop .mainDetailButtons .watchlist-icon::after,
+.layout-desktop .mainDetailButtons .jellyseerr-report-issue-icon::after {
   content: attr(title);
+}
+.layout-desktop
+  .mainDetailButtons
+  .detailButton.jellyseerr-report-issue-icon.has-open-issues {
+  color: #f97316;
+}
+.layout-desktop .btnReplay::after {
+  content: "Play from beginning";
 }
 .emby-select-withcolor {
   color: inherit;
   background: #fff0;
   border: #fff0;
+}
+.trackSelections .detailTrackSelect.emby-select-withcolor {
+  background: none;
 }
 .layout-desktop .btnPlay {
   background-color: rgb(var(--accent));
@@ -2350,7 +2384,7 @@ layout-mobile .detailPagePrimaryContent {
   [dir="ltr"] .mainDetailButtons {
     padding-left: 1em !important;
   }
-  .detailPagePrimaryContent {
+  :where(html:not(.layout-desktop)) .detailPagePrimaryContent {
     padding-left: 2em !important;
     padding-right: 2em !important;
   }
@@ -2379,13 +2413,13 @@ layout-mobile .detailPagePrimaryContent {
   [dir="ltr"] .mainDetailButtons {
     padding-left: 2em !important;
   }
-  .detailLogo {
+  :where(html:not(.layout-desktop)) .detailLogo {
     display: block;
     left: 6% !important;
     top: 20vh !important;
     width: 5em !important;
   }
-  .detailPagePrimaryContent {
+  :where(html:not(.layout-desktop)) .detailPagePrimaryContent {
     padding-left: 3em !important;
     padding-right: 0em !important;
   }
@@ -2398,11 +2432,11 @@ layout-mobile .detailPagePrimaryContent {
   [dir="ltr"] .mainDetailButtons {
     padding-left: 2em !important;
   }
-  .detailPagePrimaryContent {
+  :where(html:not(.layout-desktop)) .detailPagePrimaryContent {
     padding-left: 3em !important;
     padding-right: 0em !important;
   }
-  .detailLogo {
+  :where(html:not(.layout-desktop)) .detailLogo {
     display: block;
     left: 6% !important;
     top: 20vh !important;
@@ -2435,7 +2469,7 @@ layout-mobile .detailPagePrimaryContent {
   [dir="ltr"] .mainDetailButtons {
     padding-left: 1em !important;
   }
-  .detailPagePrimaryContent {
+  :where(html:not(.layout-desktop)) .detailPagePrimaryContent {
     padding-left: 2em !important;
     padding-right: 2em !important;
   }
@@ -2780,11 +2814,14 @@ layout-mobile .detailPagePrimaryContent {
   padding-top: 0.35em;
 }
 .layout-desktop .mainDetailButtons {
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.35em;
 }
 .layout-desktop .mainDetailButtons .detailButton {
+  flex-shrink: 0;
   height: 3em;
+  white-space: nowrap;
   border-radius: var(--rounding-circle) !important;
   transition:
     background-color 0.16s ease,
@@ -3586,21 +3623,36 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
     --zgl-logo-h: calc(var(--zgl-card-h) * 0.3);
     --zgl-stage: calc(var(--zgl-top) + var(--zgl-card-h) + 34px);
   }
-  .layout-mobile body:has(.itemDetailPage:not(.hide) > .itemBackdrop[style*="url"]) .backgroundContainer {
+  .layout-mobile
+    body:has(
+      .itemDetailPage:not(.hide)
+        > .itemBackdrop:is([style*="url"], .lazy-hidden)
+    )
+    .backgroundContainer {
     background-color: rgb(var(--darkest)) !important;
     background-image: none !important;
   }
-  .layout-mobile body:has(.itemDetailPage:not(.hide) > .itemBackdrop[style*="url"]) .MuiAppBar-root {
+  .layout-mobile
+    body:has(
+      .itemDetailPage:not(.hide)
+        > .itemBackdrop:is([style*="url"], .lazy-hidden)
+    )
+    .MuiAppBar-root {
     background-color: rgb(var(--darkest)) !important;
   }
   .layout-mobile
-    body:has(.itemDetailPage:not(.hide) > .itemBackdrop[style*="url"])
+    body:has(
+      .itemDetailPage:not(.hide)
+        > .itemBackdrop:is([style*="url"], .lazy-hidden)
+    )
     .MuiAppBar-root::before {
     display: none !important;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemBackdrop {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .itemBackdrop {
     position: absolute !important;
     top: var(--zgl-top) !important;
     right: var(--zgl-gutter);
@@ -3619,12 +3671,16 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
     pointer-events: none;
     z-index: 0 !important;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemBackdrop::before,
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemBackdrop::after {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .itemBackdrop::before,
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .itemBackdrop::after {
     content: "";
     display: block;
     position: absolute;
@@ -3635,16 +3691,20 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
     background-size: cover;
     border-radius: 22px;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemBackdrop::before {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .itemBackdrop::before {
     inset: -3%;
     filter: blur(44px) saturate(1.7);
     opacity: 0.5;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailLogo {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .detailLogo {
     position: absolute !important;
     left: var(--zgl-gutter) !important;
     top: calc(var(--zgl-top) + 14px) !important;
@@ -3654,25 +3714,33 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
     background-size: contain;
     z-index: 1;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailPageWrapperContainer,
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailPagePrimaryContainer {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .detailPageWrapperContainer,
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .detailPagePrimaryContainer {
     position: static;
     margin-top: 0 !important;
     padding-top: 0 !important;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailPagePrimaryContainer {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .detailPagePrimaryContainer {
     display: block;
     background: none;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailRibbon {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .detailRibbon {
     position: static;
     box-sizing: border-box;
     display: flex;
@@ -3688,16 +3756,18 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
     margin: 0 !important;
     padding: calc(var(--zgl-top) + var(--zgl-logo-h) + 22px) 0 20px !important;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .infoWrapper {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .infoWrapper {
     flex: 0 0 auto !important;
     height: auto !important;
     padding: 0 !important;
   }
   .layout-mobile
-    .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
     ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
     .detailLogo.hide
     ~ .detailPageWrapperContainer
@@ -3705,27 +3775,40 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
     justify-content: center !important;
     padding-top: var(--zgl-top) !important;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .nameContainer,
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemMiscInfo,
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .mainDetailButtons,
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailPagePrimaryContent,
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailPageSecondaryContainer {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .nameContainer,
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .itemMiscInfo,
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .mainDetailButtons,
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .detailPagePrimaryContent,
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .detailPageSecondaryContainer {
     position: relative;
     z-index: 1;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .infoWrapper .detailImageContainer {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .infoWrapper
+    .detailImageContainer {
     display: block !important;
     position: absolute;
     z-index: 2;
@@ -3743,9 +3826,13 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
     overflow: hidden;
     box-shadow: 0 16px 34px rgba(0, 0, 0, 0.6);
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .infoWrapper .detailImageContainer .card {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .infoWrapper
+    .detailImageContainer
+    .card {
     display: block !important;
     position: static !important;
     transform: none !important;
@@ -3754,41 +3841,50 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
     margin: 0 !important;
     padding: 0 !important;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .infoWrapper .detailImageContainer .cardBox {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .infoWrapper
+    .detailImageContainer
+    .cardBox {
     margin: 0 !important;
     border-radius: 0;
     box-shadow: none;
   }
   .layout-mobile
-    .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
     ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
     .infoWrapper
     .detailImageContainer:has(.backdropCard) {
     width: calc(var(--zgl-poster-w) * 1.9);
   }
   .layout-mobile
-    .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
     ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
     .infoWrapper
     .detailImageContainer:has(.squareCard) {
     width: calc(var(--zgl-poster-w) * 1.3);
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .mainDetailButtons {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .mainDetailButtons {
     flex-wrap: nowrap;
     align-items: center;
     gap: 2px;
     width: auto;
     margin: 14px 0 0 !important;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .mainDetailButtons .btnPlay {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .mainDetailButtons
+    .btnPlay {
     flex: 0 0 auto;
     width: auto;
     height: 48px;
@@ -3796,9 +3892,12 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
     padding: 0 22px 0 16px;
     border-radius: 24px !important;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
-    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .mainDetailButtons .detailButton:not(.btnPlay) {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .mainDetailButtons
+    .detailButton:not(.btnPlay) {
     flex: 0 0 44px;
     width: 44px;
     height: 44px;
@@ -3807,8 +3906,8 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
     justify-content: center;
   }
   .layout-mobile
-    .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
     ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
     .mainDetailButtons
     .detailButton:not(.btnPlay)::after {
@@ -3817,15 +3916,15 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
 }
 @media (orientation: landscape) and (min-width: 73em) and (min-height: 34.01em) {
   .layout-mobile
-    .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
     ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
     .detailPagePrimaryContainer {
     display: flow-root;
   }
   .layout-mobile
-    .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
     ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
     .detailPagePrimaryContainer::before {
     content: "";
@@ -3834,8 +3933,8 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
     height: var(--zgl-stage);
   }
   .layout-mobile
-    .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
     ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
     .detailRibbon {
     width: auto;
@@ -3843,8 +3942,8 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
     padding-bottom: 4px !important;
   }
   .layout-mobile
-    .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(
-      :has(.musicParentName):has(.listItem[data-type="Audio"])
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
     ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
     .detailPagePrimaryContent
     .verticalSection {
@@ -3958,35 +4057,27 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
 }
 .layout-desktop
   body:has(.itemDetailPage:not(.hide) .musicParentName):has(
-    .itemDetailPage:not(.hide) #childrenContent .listItem[data-type="Audio"]
+    .itemDetailPage:not(.hide) .detailImageContainer .squareCard
   )
   .backgroundContainer {
   background-color: rgb(var(--darkest)) !important;
   background-image: none !important;
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   .itemBackdrop,
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   .detailLogo {
   display: none !important;
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   .detailPageWrapperContainer {
   margin-top: 0 !important;
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   .detailPagePrimaryContainer {
   grid-template-columns: minmax(0, 1fr) auto;
   grid-template-areas: "ribbon poster" "content content";
@@ -3996,9 +4087,7 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   background: none;
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   .detailImageContainer {
   width: clamp(170px, 18vw, 264px);
   height: auto;
@@ -4006,18 +4095,14 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   transform: rotate(3deg);
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   .detailImageContainer
   .card {
   width: 100% !important;
   margin: 0 !important;
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   .detailImageContainer
   .cardBox {
   margin: 0;
@@ -4026,9 +4111,7 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   box-shadow: 0 22px 44px rgba(0, 0, 0, 0.7);
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   .detailRibbon {
   width: auto;
   min-width: 0;
@@ -4037,18 +4120,14 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   background: none !important;
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   .infoWrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   .itemMiscInfo-primary {
   order: -1;
   width: auto;
@@ -4060,18 +4139,14 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   color: rgba(var(--white), 0.6);
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   .nameContainer {
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   .itemName {
   height: auto;
   margin: 0;
@@ -4085,33 +4160,25 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   color: rgb(var(--white));
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   .itemName
   > bdi:nth-child(1) {
   display: block !important;
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   .parentName {
   margin: 18px 0 0;
   font-size: 18px;
   font-weight: 600;
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   .mainDetailButtons {
   margin-top: 18px;
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   .detailPagePrimaryContent {
   max-width: none;
   margin-top: 26px;
@@ -4119,9 +4186,7 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   border-top: 1px solid rgba(var(--white), 0.16);
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   #childrenContent
   .itemsContainer {
   display: block;
@@ -4130,9 +4195,7 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   padding: 0;
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   #childrenContent
   .listItem {
   width: auto;
@@ -4144,9 +4207,7 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   background: none;
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   .listItem-indexnumberleft {
   flex: none;
   width: 58px;
@@ -4159,36 +4220,28 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   color: rgba(var(--white), 0.3);
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   #childrenContent
   .listItem:hover
   .listItem-indexnumberleft {
   color: rgb(var(--accent));
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   #childrenContent
   .listItemBodyText:not(.secondary) {
   font-size: 19px;
   font-weight: 600;
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   #childrenContent
   .secondary.listItemBodyText {
   font-size: 13px;
   color: rgba(var(--white), 0.55);
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   #childrenContent
   .listItemMediaInfo {
   font-size: 14px;
@@ -4196,62 +4249,76 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   color: rgba(var(--white), 0.6);
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   #childrenContent
   .listItemBody {
   padding-top: 6px;
   padding-bottom: 6px;
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   .itemGenres:empty {
   display: none;
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   .detailSection {
   display: flex;
   flex-direction: column;
 }
 .layout-desktop
-  .itemDetailPage:has(.musicParentName):has(
-    #childrenContent .listItem[data-type="Audio"]
-  )
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
   .detailSectionContent {
   order: 2;
 }
 :root {
   --zln-cover: clamp(120px, 19vw, 264px);
 }
-.layout-mobile body:has(.itemDetailPage:not(.hide) .musicParentName):has(.itemDetailPage:not(.hide) #childrenContent .listItem[data-type="Audio"]) .backgroundContainer {
+.layout-mobile
+  body:has(.itemDetailPage:not(.hide) .musicParentName):has(
+    .itemDetailPage:not(.hide) .detailImageContainer .squareCard
+  )
+  .backgroundContainer {
   background-color: rgb(var(--darkest)) !important;
   background-image: none !important;
 }
-.layout-mobile body:has(.itemDetailPage:not(.hide) .musicParentName):has(.itemDetailPage:not(.hide) #childrenContent .listItem[data-type="Audio"]) .MuiAppBar-root {
+.layout-mobile
+  body:has(.itemDetailPage:not(.hide) .musicParentName):has(
+    .itemDetailPage:not(.hide) .detailImageContainer .squareCard
+  )
+  .MuiAppBar-root {
   background-color: rgb(var(--darkest)) !important;
 }
-.layout-mobile body:has(.itemDetailPage:not(.hide) .musicParentName):has(.itemDetailPage:not(.hide) #childrenContent .listItem[data-type="Audio"]) .MuiAppBar-root::before {
+.layout-mobile
+  body:has(.itemDetailPage:not(.hide) .musicParentName):has(
+    .itemDetailPage:not(.hide) .detailImageContainer .squareCard
+  )
+  .MuiAppBar-root::before {
   display: none !important;
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .itemBackdrop,
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .detailLogo {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .itemBackdrop,
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .detailLogo {
   display: none !important;
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .detailPageWrapperContainer,
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .detailPagePrimaryContainer {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .detailPageWrapperContainer,
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .detailPagePrimaryContainer {
   position: static;
   display: block;
   margin-top: 0 !important;
   padding-top: 0 !important;
   background: none;
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .detailRibbon {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .detailRibbon {
   position: relative;
   box-sizing: border-box;
   display: flex;
@@ -4265,7 +4332,9 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   padding: 0 calc(var(--zln-cover) + 30px) 0 0 !important;
   background: none !important;
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .infoWrapper {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .infoWrapper {
   position: static !important;
   display: flex;
   flex-direction: column;
@@ -4274,7 +4343,10 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   height: auto !important;
   padding: 0 !important;
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .infoWrapper .detailImageContainer {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .infoWrapper
+  .detailImageContainer {
   display: block !important;
   position: absolute !important;
   right: 8px;
@@ -4288,7 +4360,11 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   overflow: hidden;
   box-shadow: 0 18px 36px rgba(0, 0, 0, 0.7);
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .infoWrapper .detailImageContainer .card {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .infoWrapper
+  .detailImageContainer
+  .card {
   display: block !important;
   position: static !important;
   transform: none !important;
@@ -4297,12 +4373,18 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   margin: 0 !important;
   padding: 0 !important;
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .infoWrapper .detailImageContainer .cardBox {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .infoWrapper
+  .detailImageContainer
+  .cardBox {
   margin: 0 !important;
   border-radius: 0;
   box-shadow: none;
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .itemMiscInfo-primary {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .itemMiscInfo-primary {
   order: -1;
   width: auto;
   margin: 0 0 12px;
@@ -4312,13 +4394,17 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   text-transform: uppercase;
   color: rgba(var(--white), 0.6);
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .nameContainer {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .nameContainer {
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
   margin: 0;
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .itemName {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .itemName {
   height: auto;
   margin: 0;
   overflow: visible;
@@ -4330,22 +4416,32 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   text-wrap: balance;
   color: rgb(var(--white));
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .itemName > bdi:nth-child(1) {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .itemName
+  > bdi:nth-child(1) {
   display: block !important;
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .parentName {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .parentName {
   margin: 14px 0 0;
   font-size: 17px;
   font-weight: 600;
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .mainDetailButtons {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .mainDetailButtons {
   flex-wrap: nowrap;
   align-items: center;
   gap: 2px;
   width: auto;
   margin: 16px 0 0 !important;
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .mainDetailButtons .btnPlay {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .mainDetailButtons
+  .btnPlay {
   flex: 0 0 auto;
   width: auto;
   height: 48px;
@@ -4353,7 +4449,10 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   padding: 0 22px 0 16px;
   border-radius: 24px !important;
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .mainDetailButtons .detailButton:not(.btnPlay) {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .mainDetailButtons
+  .detailButton:not(.btnPlay) {
   flex: 0 0 44px;
   width: 44px;
   height: 44px;
@@ -4361,26 +4460,41 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   margin: 0 !important;
   justify-content: center;
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .mainDetailButtons .detailButton:not(.btnPlay)::after {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .mainDetailButtons
+  .detailButton:not(.btnPlay)::after {
   content: none;
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .detailPagePrimaryContent {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .detailPagePrimaryContent {
   margin-top: 22px;
   padding-top: 10px;
   border-top: 1px solid rgba(var(--white), 0.16);
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .detailSection {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .detailSection {
   display: flex;
   flex-direction: column;
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .detailSectionContent {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .detailSectionContent {
   order: 2;
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) #childrenContent .itemsContainer {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  #childrenContent
+  .itemsContainer {
   display: block;
   padding: 0;
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) #childrenContent .listItem {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  #childrenContent
+  .listItem {
   width: auto;
   margin: 0;
   padding: 4px 0;
@@ -4389,7 +4503,9 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   border-radius: 0 !important;
   background: none;
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .listItem-indexnumberleft {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  .listItem-indexnumberleft {
   flex: none;
   width: 50px;
   margin: 0;
@@ -4400,25 +4516,40 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   font-variant-numeric: tabular-nums;
   color: rgba(var(--white), 0.3);
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) #childrenContent .listItemBody {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  #childrenContent
+  .listItemBody {
   padding-top: 6px;
   padding-bottom: 6px;
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) #childrenContent .listItemBodyText:not(.secondary) {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  #childrenContent
+  .listItemBodyText:not(.secondary) {
   font-size: 18px;
   font-weight: 600;
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) #childrenContent .secondary.listItemBodyText {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  #childrenContent
+  .secondary.listItemBodyText {
   font-size: 13px;
   color: rgba(var(--white), 0.55);
 }
-.layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) #childrenContent .listItemMediaInfo {
+.layout-mobile
+  .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+  #childrenContent
+  .listItemMediaInfo {
   font-size: 14px;
   font-variant-numeric: tabular-nums;
   color: rgba(var(--white), 0.6);
 }
 @media (min-width: 43.75em) {
-  .layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) #childrenContent .itemsContainer {
+  .layout-mobile
+    .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+    #childrenContent
+    .itemsContainer {
     columns: 2;
     column-gap: 44px;
   }
@@ -4427,17 +4558,24 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   :root {
     --zln-cover: 46vw;
   }
-  .layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .detailRibbon {
+  .layout-mobile
+    .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+    .detailRibbon {
     justify-content: flex-start !important;
     padding: calc(var(--zln-cover) + 30px) 0 0 !important;
   }
-  .layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .infoWrapper .detailImageContainer {
+  .layout-mobile
+    .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+    .infoWrapper
+    .detailImageContainer {
     top: 6px;
     right: auto;
     bottom: auto;
     left: 8px;
   }
-  .layout-mobile .itemDetailPage:has(.musicParentName):has(#childrenContent .listItem[data-type="Audio"]) .itemName {
+  .layout-mobile
+    .itemDetailPage:has(.musicParentName):has(.detailImageContainer .squareCard)
+    .itemName {
     font-size: clamp(38px, 12.5vw, 64px);
   }
 }
@@ -4511,7 +4649,10 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   font-weight: 700;
   line-height: 1.04;
 }
-#musicPage > .verticalSection:first-child .card:first-child .cardText:not(.cardText-first) {
+#musicPage
+  > .verticalSection:first-child
+  .card:first-child
+  .cardText:not(.cardText-first) {
   grid-row: 3;
   margin-top: 10px;
   font-size: 17px;
@@ -4589,14 +4730,20 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   grid-column: 1;
   grid-row: 1 / -1;
 }
-#liveTvPage > .verticalSection:first-child .card:first-child .cardImageContainer::after {
+#liveTvPage
+  > .verticalSection:first-child
+  .card:first-child
+  .cardImageContainer::after {
   content: "";
   position: absolute;
   inset: 40% 0 0;
   background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
   pointer-events: none;
 }
-#liveTvPage > .verticalSection:first-child .card:first-child .itemLinearProgress {
+#liveTvPage
+  > .verticalSection:first-child
+  .card:first-child
+  .itemLinearProgress {
   z-index: 1;
 }
 #liveTvPage > .verticalSection:first-child .card:first-child .cardText {
@@ -4618,7 +4765,10 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   grid-template-rows: 1fr auto auto auto 1fr;
   column-gap: 14px;
 }
-#liveTvPage > .verticalSection:first-child .card:not(:first-child) .cardScalable {
+#liveTvPage
+  > .verticalSection:first-child
+  .card:not(:first-child)
+  .cardScalable {
   grid-column: 1;
   grid-row: 1 / -1;
   border-radius: 10px;
@@ -4630,7 +4780,10 @@ body:has(.backdropPage:not(.selfBackdropPage)) .backgroundContainer::after {
   font-size: 13px;
   color: rgba(var(--white), 0.65);
 }
-#liveTvPage > .verticalSection:first-child .card:not(:first-child) .cardText-first {
+#liveTvPage
+  > .verticalSection:first-child
+  .card:not(:first-child)
+  .cardText-first {
   font-size: 17px;
   font-weight: 600;
   color: rgb(var(--white));
@@ -4681,10 +4834,17 @@ W:focus-within .cardBox {
 #liveTvPage .vertical-wrap .card:has(.coveredImage-contain) .cardPadder {
   padding-bottom: 58%;
 }
-#liveTvPage .vertical-wrap .card:has(.coveredImage-contain) .cardImageContainer {
+#liveTvPage
+  .vertical-wrap
+  .card:has(.coveredImage-contain)
+  .cardImageContainer {
   border-radius: 0;
 }
-#liveTvPage .vertical-wrap .card:has(.coveredImage-contain) .cardImageContainer img {
+#liveTvPage
+  .vertical-wrap
+  .card:has(.coveredImage-contain)
+  .cardImageContainer
+  img {
   box-sizing: border-box;
   padding: 9% 20%;
 }
@@ -4707,12 +4867,18 @@ W:focus-within .cardBox {
 #liveTvPage .vertical-wrap .card:has(.coveredImage-contain) .cardText:empty {
   display: none;
 }
-#liveTvPage .vertical-wrap .card:has(.coveredImage-contain) .cardText:nth-child(4) {
+#liveTvPage
+  .vertical-wrap
+  .card:has(.coveredImage-contain)
+  .cardText:nth-child(4) {
   font-size: 15px;
   font-weight: 500;
   color: rgba(var(--white), 0.9);
 }
-#liveTvPage .vertical-wrap .card:has(.coveredImage-contain) .cardText:nth-child(4)::before {
+#liveTvPage
+  .vertical-wrap
+  .card:has(.coveredImage-contain)
+  .cardText:nth-child(4)::before {
   content: "";
   display: inline-block;
   width: 8px;
@@ -4790,17 +4956,36 @@ W:focus-within .cardBox {
     --zgp-poster-w: calc(var(--zgp-poster-h) * 2 / 3);
     --zgp-drop: calc(var(--zgp-poster-h) * 0.42);
   }
-  .layout-mobile body:has(.itemDetailPage:not(.hide) > .itemBackdrop[style*="url"]) .backgroundContainer {
+  .layout-mobile
+    body:has(
+      .itemDetailPage:not(.hide)
+        > .itemBackdrop:is([style*="url"], .lazy-hidden)
+    )
+    .backgroundContainer {
     background-color: rgb(var(--darkest)) !important;
     background-image: none !important;
   }
-  .layout-mobile body:has(.itemDetailPage:not(.hide) > .itemBackdrop[style*="url"]) .MuiAppBar-root {
+  .layout-mobile
+    body:has(
+      .itemDetailPage:not(.hide)
+        > .itemBackdrop:is([style*="url"], .lazy-hidden)
+    )
+    .MuiAppBar-root {
     background-color: rgb(var(--darkest)) !important;
   }
-  .layout-mobile body:has(.itemDetailPage:not(.hide) > .itemBackdrop[style*="url"]) .MuiAppBar-root::before {
+  .layout-mobile
+    body:has(
+      .itemDetailPage:not(.hide)
+        > .itemBackdrop:is([style*="url"], .lazy-hidden)
+    )
+    .MuiAppBar-root::before {
     display: none !important;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemBackdrop {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .itemBackdrop {
     position: absolute !important;
     top: var(--zgp-top) !important;
     right: var(--zgp-g);
@@ -4819,8 +5004,16 @@ W:focus-within .cardBox {
     pointer-events: none;
     z-index: 0 !important;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemBackdrop::before,
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemBackdrop::after {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .itemBackdrop::before,
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .itemBackdrop::after {
     content: "";
     display: block;
     position: absolute;
@@ -4831,12 +5024,20 @@ W:focus-within .cardBox {
     background-size: cover;
     border-radius: 22px;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemBackdrop::before {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .itemBackdrop::before {
     inset: -3%;
     filter: blur(44px) saturate(1.7);
     opacity: 0.5;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailLogo {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .detailLogo {
     position: absolute !important;
     top: calc(var(--zgp-top) + var(--zgp-card-h) + 10px) !important;
     right: var(--zgp-g) !important;
@@ -4849,17 +5050,33 @@ W:focus-within .cardBox {
     background-size: contain;
     z-index: 1;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailPageWrapperContainer,
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailPagePrimaryContainer {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .detailPageWrapperContainer,
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .detailPagePrimaryContainer {
     position: static;
     margin-top: 0 !important;
     padding-top: 0 !important;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailPagePrimaryContainer {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .detailPagePrimaryContainer {
     display: block;
     background: none;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailRibbon {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .detailRibbon {
     position: static;
     box-sizing: border-box;
     display: flex;
@@ -4869,25 +5086,55 @@ W:focus-within .cardBox {
     width: auto;
     height: auto !important;
     margin: 0 !important;
-    padding: calc(var(--zgp-top) + var(--zgp-card-h) + var(--zgp-drop) + 18px) 0 6px !important;
+    padding: calc(var(--zgp-top) + var(--zgp-card-h) + var(--zgp-drop) + 18px) 0
+      6px !important;
     background: none !important;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .infoWrapper {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .infoWrapper {
     position: static !important;
     flex: 0 0 auto !important;
     width: 100%;
     height: auto !important;
     padding: 0 !important;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .nameContainer,
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemMiscInfo,
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .mainDetailButtons,
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailPagePrimaryContent,
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailPageSecondaryContainer {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .nameContainer,
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .itemMiscInfo,
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .mainDetailButtons,
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .detailPagePrimaryContent,
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .detailPageSecondaryContainer {
     position: relative;
     z-index: 1;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .infoWrapper .detailImageContainer {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .infoWrapper
+    .detailImageContainer {
     display: block !important;
     position: absolute !important;
     z-index: 2;
@@ -4903,7 +5150,13 @@ W:focus-within .cardBox {
     overflow: hidden;
     box-shadow: 0 16px 34px rgba(0, 0, 0, 0.6);
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .infoWrapper .detailImageContainer .card {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .infoWrapper
+    .detailImageContainer
+    .card {
     display: block !important;
     position: static !important;
     transform: none !important;
@@ -4912,35 +5165,80 @@ W:focus-within .cardBox {
     margin: 0 !important;
     padding: 0 !important;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .infoWrapper .detailImageContainer .cardBox {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .infoWrapper
+    .detailImageContainer
+    .cardBox {
     margin: 0 !important;
     border-radius: 0;
     box-shadow: none;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):has(.infoWrapper .backdropCard) .infoWrapper .detailImageContainer {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):has(
+      .infoWrapper .backdropCard
+    )
+    .infoWrapper
+    .detailImageContainer {
     width: calc(var(--zgp-poster-w) * 1.9);
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):has(.infoWrapper .backdropCard) .detailLogo {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):has(
+      .infoWrapper .backdropCard
+    )
+    .detailLogo {
     left: calc(var(--zgp-g) + var(--zgp-poster-w) * 1.9 + 46px) !important;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):has(.infoWrapper .squareCard):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .infoWrapper .detailImageContainer {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):has(
+      .infoWrapper .squareCard
+    ):not(:has(.musicParentName):has(.infoWrapper .squareCard)):not(
+      :has(.infoWrapper .squareCard .cardImageIcon.person)
+    )
+    .infoWrapper
+    .detailImageContainer {
     width: calc(var(--zgp-poster-w) * 1.3);
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):has(.infoWrapper .squareCard):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailLogo {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):has(
+      .infoWrapper .squareCard
+    ):not(:has(.musicParentName):has(.infoWrapper .squareCard)):not(
+      :has(.infoWrapper .squareCard .cardImageIcon.person)
+    )
+    .detailLogo {
     left: calc(var(--zgp-g) + var(--zgp-poster-w) * 1.3 + 46px) !important;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="/Images/Primary"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .itemBackdrop::after {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop[style*="/Images/Primary"]):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .itemBackdrop::after {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="/Images/Primary"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .infoWrapper .detailImageContainer {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop[style*="/Images/Primary"]):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .infoWrapper
+    .detailImageContainer {
     display: none !important;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="/Images/Primary"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .detailLogo {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop[style*="/Images/Primary"]):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .detailLogo {
     left: var(--zgp-g) !important;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .mainDetailButtons {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .mainDetailButtons {
     flex-wrap: nowrap;
     align-items: center;
     gap: 2px;
@@ -4949,7 +5247,12 @@ W:focus-within .cardBox {
     padding: 0 !important;
     background: none !important;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .mainDetailButtons .btnPlay {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .mainDetailButtons
+    .btnPlay {
     flex: 0 0 auto;
     width: auto;
     height: 48px;
@@ -4957,7 +5260,12 @@ W:focus-within .cardBox {
     padding: 0 22px 0 16px;
     border-radius: 24px !important;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .mainDetailButtons .detailButton:not(.btnPlay) {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .mainDetailButtons
+    .detailButton:not(.btnPlay) {
     flex: 0 0 44px;
     width: 44px;
     height: 44px;
@@ -4965,7 +5273,12 @@ W:focus-within .cardBox {
     margin: 0 !important;
     justify-content: center;
   }
-  .layout-mobile .itemDetailPage:has(> .itemBackdrop[style*="url"]):not(:has(.musicParentName):has(.listItem[data-type="Audio"])):not(:has(.infoWrapper .squareCard .cardImageIcon.person)) .mainDetailButtons .detailButton:not(.btnPlay)::after {
+  .layout-mobile
+    .itemDetailPage:has(> .itemBackdrop:is([style*="url"], .lazy-hidden)):not(
+      :has(.musicParentName):has(.infoWrapper .squareCard)
+    ):not(:has(.infoWrapper .squareCard .cardImageIcon.person))
+    .mainDetailButtons
+    .detailButton:not(.btnPlay)::after {
     content: none;
   }
 }
@@ -4973,36 +5286,60 @@ W:focus-within .cardBox {
   --zpp-w: clamp(130px, min(38vw, 46vh), 300px);
   --zpp-h: calc(var(--zpp-w) * 1.5);
 }
-.layout-mobile body:has(.itemDetailPage:not(.hide) .infoWrapper .portraitCard .cardImageIcon.person) .backgroundContainer {
+.layout-mobile
+  body:has(
+    .itemDetailPage:not(.hide) .infoWrapper .portraitCard .cardImageIcon.person
+  )
+  .backgroundContainer {
   background-color: rgb(var(--darkest)) !important;
   background-image: none !important;
 }
-.layout-mobile body:has(.itemDetailPage:not(.hide) .infoWrapper .portraitCard .cardImageIcon.person) .MuiAppBar-root {
+.layout-mobile
+  body:has(
+    .itemDetailPage:not(.hide) .infoWrapper .portraitCard .cardImageIcon.person
+  )
+  .MuiAppBar-root {
   background-color: rgb(var(--darkest)) !important;
 }
-.layout-mobile body:has(.itemDetailPage:not(.hide) .infoWrapper .portraitCard .cardImageIcon.person) .MuiAppBar-root::before {
+.layout-mobile
+  body:has(
+    .itemDetailPage:not(.hide) .infoWrapper .portraitCard .cardImageIcon.person
+  )
+  .MuiAppBar-root::before {
   display: none !important;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .itemBackdrop {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .itemBackdrop {
   display: none !important;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .detailPageWrapperContainer,
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .detailPagePrimaryContainer {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .detailPageWrapperContainer,
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .detailPagePrimaryContainer {
   position: static;
   margin-top: 0 !important;
   padding-top: 0 !important;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .detailPagePrimaryContainer {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .detailPagePrimaryContainer {
   display: flow-root;
   background: none;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .detailPagePrimaryContainer::before {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .detailPagePrimaryContainer::before {
   content: "";
   float: left;
   width: calc(var(--zpp-w) + 20px);
   height: calc(var(--zpp-h) + 30px);
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .detailRibbon {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .detailRibbon {
   position: static;
   display: flex;
   flex-direction: column;
@@ -5015,14 +5352,19 @@ W:focus-within .cardBox {
   padding: 16px 0 0 !important;
   background: none !important;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .infoWrapper {
   position: static !important;
   flex: 0 0 auto !important;
   width: 100%;
   height: auto !important;
   padding: 0 !important;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .infoWrapper
+  .detailImageContainer {
   display: block !important;
   position: absolute !important;
   top: 12px;
@@ -5034,7 +5376,11 @@ W:focus-within .cardBox {
   padding: 0 !important;
   overflow: visible;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .card {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .infoWrapper
+  .detailImageContainer
+  .card {
   display: block !important;
   position: static !important;
   transform: none !important;
@@ -5043,15 +5389,43 @@ W:focus-within .cardBox {
   margin: 0 !important;
   padding: 0 !important;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .card,
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardBox,
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardScalable,
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardImageContainer {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .infoWrapper
+  .detailImageContainer
+  .card,
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .infoWrapper
+  .detailImageContainer
+  .cardBox,
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .infoWrapper
+  .detailImageContainer
+  .cardScalable,
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .infoWrapper
+  .detailImageContainer
+  .cardImageContainer {
   contain: none !important;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardBox,
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardScalable,
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardImageContainer {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .infoWrapper
+  .detailImageContainer
+  .cardBox,
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .infoWrapper
+  .detailImageContainer
+  .cardScalable,
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .infoWrapper
+  .detailImageContainer
+  .cardImageContainer {
   margin: 0 !important;
   overflow: visible !important;
   border-radius: 0;
@@ -5059,14 +5433,30 @@ W:focus-within .cardBox {
   -webkit-mask-image: none !important;
   mask-image: none !important;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardPadder {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .infoWrapper
+  .detailImageContainer
+  .cardPadder {
   padding-bottom: 150%;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardImageContainer {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .infoWrapper
+  .detailImageContainer
+  .cardImageContainer {
   background-size: 0 0 !important;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardImageContainer::before,
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardImageContainer::after {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .infoWrapper
+  .detailImageContainer
+  .cardImageContainer::before,
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .infoWrapper
+  .detailImageContainer
+  .cardImageContainer::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -5075,25 +5465,39 @@ W:focus-within .cardBox {
   background-position: center top;
   border-radius: 18px;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardImageContainer::before {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .infoWrapper
+  .detailImageContainer
+  .cardImageContainer::before {
   inset: -5%;
   filter: blur(40px) saturate(1.6);
   opacity: 0.5;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .nameContainer,
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .mainDetailButtons,
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .detailPagePrimaryContent {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .nameContainer,
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .mainDetailButtons,
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .detailPagePrimaryContent {
   position: relative;
   z-index: 1;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .itemName {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .itemName {
   margin: 0;
   font-size: clamp(26px, 6.6vw, 46px);
   font-weight: 700;
   line-height: 1.04;
   color: rgb(var(--white));
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .mainDetailButtons {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .mainDetailButtons {
   flex-wrap: nowrap;
   align-items: center;
   gap: 2px;
@@ -5102,7 +5506,10 @@ W:focus-within .cardBox {
   padding: 0 !important;
   background: none !important;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .mainDetailButtons .detailButton {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .mainDetailButtons
+  .detailButton {
   flex: 0 0 44px;
   width: 44px;
   height: 44px;
@@ -5110,50 +5517,97 @@ W:focus-within .cardBox {
   margin: 0 !important;
   justify-content: center;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .mainDetailButtons .detailButton::after {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .mainDetailButtons
+  .detailButton::after {
   content: none;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .detailPagePrimaryContent {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .detailPagePrimaryContent {
   margin-top: 6px;
   padding-top: 0;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person) .detailPagePrimaryContent .verticalSection {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .portraitCard .cardImageIcon.person)
+  .detailPagePrimaryContent
+  .verticalSection {
   clear: both;
 }
-.layout-desktop body:has(.itemDetailPage:not(.hide) .detailImageContainer .portraitCard .cardImageIcon.person) .backgroundContainer {
+.layout-desktop
+  body:has(
+    .itemDetailPage:not(.hide)
+      .detailImageContainer
+      .portraitCard
+      .cardImageIcon.person
+  )
+  .backgroundContainer {
   background-color: rgb(var(--darkest)) !important;
   background-image: none !important;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .itemBackdrop {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .itemBackdrop {
   display: none !important;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailPageWrapperContainer {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .detailPageWrapperContainer {
   margin-top: 0 !important;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailPagePrimaryContainer {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .detailPagePrimaryContainer {
   grid-template-columns: clamp(210px, 18vw, 320px) minmax(0, 1fr);
   column-gap: 2.6em;
   padding-top: 2.4em;
   background: none;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .detailImageContainer {
   width: auto;
   height: auto;
   margin: 0;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .card {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .detailImageContainer
+  .card {
   width: 100% !important;
   margin: 0 !important;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .card,
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .cardBox,
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .cardScalable,
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .cardImageContainer {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .detailImageContainer
+  .card,
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .detailImageContainer
+  .cardBox,
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .detailImageContainer
+  .cardScalable,
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .detailImageContainer
+  .cardImageContainer {
   contain: none !important;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .cardBox,
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .cardScalable,
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .cardImageContainer {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .detailImageContainer
+  .cardBox,
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .detailImageContainer
+  .cardScalable,
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .detailImageContainer
+  .cardImageContainer {
   margin: 0 !important;
   overflow: visible !important;
   border-radius: 0;
@@ -5161,11 +5615,20 @@ W:focus-within .cardBox {
   -webkit-mask-image: none !important;
   mask-image: none !important;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .cardImageContainer {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .detailImageContainer
+  .cardImageContainer {
   background-size: 0 0 !important;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .cardImageContainer::before,
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .cardImageContainer::after {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .detailImageContainer
+  .cardImageContainer::before,
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .detailImageContainer
+  .cardImageContainer::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -5174,61 +5637,100 @@ W:focus-within .cardBox {
   background-position: center top;
   border-radius: 18px;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailImageContainer .cardImageContainer::before {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .detailImageContainer
+  .cardImageContainer::before {
   inset: -5%;
   filter: blur(44px) saturate(1.6);
   opacity: 0.5;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailRibbon,
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailPagePrimaryContent {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .detailRibbon,
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .detailPagePrimaryContent {
   position: relative;
   z-index: 1;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailRibbon {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .detailRibbon {
   height: auto;
   padding: 0 !important;
   background: none !important;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .itemName {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .itemName {
   margin: 0;
   font-size: clamp(34px, 3.4vw, 56px);
   font-weight: 700;
   line-height: 1.04;
   color: rgb(var(--white));
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .mainDetailButtons {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .mainDetailButtons {
   margin-top: 12px;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailPagePrimaryContent {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .detailPagePrimaryContent {
   max-width: none;
   padding-top: 10px;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person) .detailSectionContent {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .portraitCard .cardImageIcon.person)
+  .detailSectionContent {
   max-width: 62em;
 }
-.layout-mobile body:has(.itemDetailPage:not(.hide) .infoWrapper .squareCard .cardImageIcon.person) .backgroundContainer {
+.layout-mobile
+  body:has(
+    .itemDetailPage:not(.hide) .infoWrapper .squareCard .cardImageIcon.person
+  )
+  .backgroundContainer {
   background-color: rgb(var(--darkest)) !important;
   background-image: none !important;
 }
-.layout-mobile body:has(.itemDetailPage:not(.hide) .infoWrapper .squareCard .cardImageIcon.person) .MuiAppBar-root {
+.layout-mobile
+  body:has(
+    .itemDetailPage:not(.hide) .infoWrapper .squareCard .cardImageIcon.person
+  )
+  .MuiAppBar-root {
   background-color: rgb(var(--darkest)) !important;
 }
-.layout-mobile body:has(.itemDetailPage:not(.hide) .infoWrapper .squareCard .cardImageIcon.person) .MuiAppBar-root::before {
+.layout-mobile
+  body:has(
+    .itemDetailPage:not(.hide) .infoWrapper .squareCard .cardImageIcon.person
+  )
+  .MuiAppBar-root::before {
   display: none !important;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .itemBackdrop,
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .detailLogo {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .itemBackdrop,
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .detailLogo {
   display: none !important;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .detailPageWrapperContainer,
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .detailPagePrimaryContainer {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .detailPageWrapperContainer,
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .detailPagePrimaryContainer {
   position: static;
   display: block;
   margin-top: 0 !important;
   padding-top: 0 !important;
   background: none;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .detailRibbon {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .detailRibbon {
   position: relative;
   box-sizing: border-box;
   display: flex;
@@ -5242,7 +5744,9 @@ W:focus-within .cardBox {
   padding: 0 calc(var(--zln-cover) + 30px) 0 0 !important;
   background: none !important;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .infoWrapper {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .infoWrapper {
   position: static !important;
   display: flex;
   flex-direction: column;
@@ -5251,7 +5755,10 @@ W:focus-within .cardBox {
   height: auto !important;
   padding: 0 !important;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .infoWrapper .detailImageContainer {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .infoWrapper
+  .detailImageContainer {
   display: block !important;
   position: absolute !important;
   right: 8px;
@@ -5265,7 +5772,11 @@ W:focus-within .cardBox {
   overflow: hidden;
   box-shadow: 0 18px 36px rgba(0, 0, 0, 0.7);
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .infoWrapper .detailImageContainer .card {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .infoWrapper
+  .detailImageContainer
+  .card {
   display: block !important;
   position: static !important;
   transform: none !important;
@@ -5274,12 +5785,18 @@ W:focus-within .cardBox {
   margin: 0 !important;
   padding: 0 !important;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .infoWrapper .detailImageContainer .cardBox {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .infoWrapper
+  .detailImageContainer
+  .cardBox {
   margin: 0 !important;
   border-radius: 0;
   box-shadow: none;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .itemMiscInfo-primary {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .itemMiscInfo-primary {
   order: -1;
   width: auto;
   margin: 0 0 12px;
@@ -5289,13 +5806,17 @@ W:focus-within .cardBox {
   text-transform: uppercase;
   color: rgba(var(--white), 0.6);
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .nameContainer {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .nameContainer {
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
   margin: 0;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .itemName {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .itemName {
   height: auto;
   margin: 0;
   overflow: visible;
@@ -5307,22 +5828,32 @@ W:focus-within .cardBox {
   text-wrap: balance;
   color: rgb(var(--white));
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .itemName > bdi:nth-child(1) {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .itemName
+  > bdi:nth-child(1) {
   display: block !important;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .parentName {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .parentName {
   margin: 14px 0 0;
   font-size: 17px;
   font-weight: 600;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .mainDetailButtons {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .mainDetailButtons {
   flex-wrap: nowrap;
   align-items: center;
   gap: 2px;
   width: auto;
   margin: 16px 0 0 !important;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .mainDetailButtons .btnPlay {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .mainDetailButtons
+  .btnPlay {
   flex: 0 0 auto;
   width: auto;
   height: 48px;
@@ -5330,7 +5861,10 @@ W:focus-within .cardBox {
   padding: 0 22px 0 16px;
   border-radius: 24px !important;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .mainDetailButtons .detailButton:not(.btnPlay) {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .mainDetailButtons
+  .detailButton:not(.btnPlay) {
   flex: 0 0 44px;
   width: 44px;
   height: 44px;
@@ -5338,55 +5872,89 @@ W:focus-within .cardBox {
   margin: 0 !important;
   justify-content: center;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .mainDetailButtons .detailButton:not(.btnPlay)::after {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .mainDetailButtons
+  .detailButton:not(.btnPlay)::after {
   content: none;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .detailPagePrimaryContent {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .detailPagePrimaryContent {
   margin-top: 22px;
   padding-top: 10px;
   border-top: 1px solid rgba(var(--white), 0.16);
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .detailSection {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .detailSection {
   display: flex;
   flex-direction: column;
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .detailSectionContent {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .detailSectionContent {
   order: 2;
 }
 @media (max-width: 37.49em) and (orientation: portrait) {
   :root {
     --zln-cover: 46vw;
   }
-  .layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .detailRibbon {
+  .layout-mobile
+    .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+    .detailRibbon {
     justify-content: flex-start !important;
     padding: calc(var(--zln-cover) + 30px) 0 0 !important;
   }
-  .layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .infoWrapper .detailImageContainer {
+  .layout-mobile
+    .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+    .infoWrapper
+    .detailImageContainer {
     top: 6px;
     right: auto;
     bottom: auto;
     left: 8px;
   }
-  .layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .itemName {
+  .layout-mobile
+    .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+    .itemName {
     font-size: clamp(38px, 12.5vw, 64px);
   }
 }
-.layout-mobile .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person) .infoWrapper .detailImageContainer {
+.layout-mobile
+  .itemDetailPage:has(.infoWrapper .squareCard .cardImageIcon.person)
+  .infoWrapper
+  .detailImageContainer {
   transform: none !important;
   border-radius: 50%;
 }
-.layout-desktop body:has(.itemDetailPage:not(.hide) .detailImageContainer .squareCard .cardImageIcon.person) .backgroundContainer {
+.layout-desktop
+  body:has(
+    .itemDetailPage:not(.hide)
+      .detailImageContainer
+      .squareCard
+      .cardImageIcon.person
+  )
+  .backgroundContainer {
   background-color: rgb(var(--darkest)) !important;
   background-image: none !important;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .itemBackdrop,
-.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .detailLogo {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person)
+  .itemBackdrop,
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person)
+  .detailLogo {
   display: none !important;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .detailPageWrapperContainer {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person)
+  .detailPageWrapperContainer {
   margin-top: 0 !important;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .detailPagePrimaryContainer {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person)
+  .detailPagePrimaryContainer {
   grid-template-columns: minmax(0, 1fr) auto;
   grid-template-areas: "ribbon poster" "content content";
   column-gap: 3em;
@@ -5394,34 +5962,48 @@ W:focus-within .cardBox {
   padding-top: 2.2em;
   background: none;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .detailImageContainer {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person)
+  .detailImageContainer {
   width: clamp(170px, 18vw, 264px);
   height: auto;
   margin: 0 0.8em 0.8em 0;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .detailImageContainer .card {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person)
+  .detailImageContainer
+  .card {
   width: 100% !important;
   margin: 0 !important;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .detailImageContainer .cardBox {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person)
+  .detailImageContainer
+  .cardBox {
   margin: 0;
   border-radius: 50%;
   overflow: hidden;
   box-shadow: 0 22px 44px rgba(0, 0, 0, 0.7);
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .detailRibbon {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person)
+  .detailRibbon {
   width: auto;
   min-width: 0;
   height: auto;
   padding: 0 !important;
   background: none !important;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .infoWrapper {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person)
+  .infoWrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .itemMiscInfo-primary {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person)
+  .itemMiscInfo-primary {
   order: -1;
   width: auto;
   margin: 0 0 14px;
@@ -5431,12 +6013,16 @@ W:focus-within .cardBox {
   text-transform: uppercase;
   color: rgba(var(--white), 0.6);
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .nameContainer {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person)
+  .nameContainer {
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .itemName {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person)
+  .itemName {
   height: auto;
   margin: 0;
   overflow: visible;
@@ -5448,13 +6034,20 @@ W:focus-within .cardBox {
   text-wrap: balance;
   color: rgb(var(--white));
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .itemName > bdi:nth-child(1) {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person)
+  .itemName
+  > bdi:nth-child(1) {
   display: block !important;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .mainDetailButtons {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person)
+  .mainDetailButtons {
   margin-top: 18px;
 }
-.layout-desktop .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person) .detailPagePrimaryContent {
+.layout-desktop
+  .itemDetailPage:has(.detailImageContainer .squareCard .cardImageIcon.person)
+  .detailPagePrimaryContent {
   max-width: none;
   margin-top: 26px;
   padding: 16px 0 0;
@@ -5731,7 +6324,12 @@ W:focus-within .cardBox {
   --zf-f: min(calc(var(--zf-f-h) * 16 / 9), calc(93vw - 30px));
   --zf-n: clamp(250px, 29vw, 373px);
 }
-#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .itemsContainer {
+#indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+      > .card[data-positionticks]
+  ):not(:has(a[href*="type=nextup"]))
+  .itemsContainer {
   display: grid !important;
   grid-template-rows: repeat(2, auto);
   grid-auto-flow: column;
@@ -5740,7 +6338,12 @@ W:focus-within .cardBox {
   align-items: start;
   white-space: normal;
 }
-#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card {
+#indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+      > .card[data-positionticks]
+  ):not(:has(a[href*="type=nextup"]))
+  .card {
   width: auto !important;
   min-width: 0;
   max-width: none;
@@ -5748,15 +6351,33 @@ W:focus-within .cardBox {
   padding: 0;
   contain: none;
 }
-#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card .cardBox {
+#indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+      > .card[data-positionticks]
+  ):not(:has(a[href*="type=nextup"]))
+  .card
+  .cardBox {
   position: relative;
   margin: 0 !important;
 }
-#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card .cardScalable {
+#indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+      > .card[data-positionticks]
+  ):not(:has(a[href*="type=nextup"]))
+  .card
+  .cardScalable {
   border-radius: 14px;
   overflow: hidden;
 }
-#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card .cardText {
+#indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+      > .card[data-positionticks]
+  ):not(:has(a[href*="type=nextup"]))
+  .card
+  .cardText {
   height: auto;
   margin: 0;
   padding: 0;
@@ -5765,43 +6386,113 @@ W:focus-within .cardBox {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card .cardText-first {
+#indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+      > .card[data-positionticks]
+  ):not(:has(a[href*="type=nextup"]))
+  .card
+  .cardText-first {
   font-size: 15px;
   font-weight: 600;
   line-height: var(--zf-text);
 }
-#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card .cardText-secondary {
+#indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+      > .card[data-positionticks]
+  ):not(:has(a[href*="type=nextup"]))
+  .card
+  .cardText-secondary {
   display: none;
 }
 @media (min-width: 37.5em), (orientation: landscape) {
-  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .itemsContainer {
+  #indexPage
+    .verticalSection:has(
+      .itemsContainer[data-monitor="videoplayback,markplayed"]
+        > .card[data-positionticks]
+    ):not(:has(a[href*="type=nextup"]))
+    .itemsContainer {
     grid-template-columns: var(--zf-f);
   }
-  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child {
+  #indexPage
+    .verticalSection:has(
+      .itemsContainer[data-monitor="videoplayback,markplayed"]
+        > .card[data-positionticks]
+    ):not(:has(a[href*="type=nextup"]))
+    .card:first-child {
     grid-row: 1 / span 2;
     justify-self: start;
     width: var(--zf-s) !important;
     overflow: visible;
   }
-  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardBox {
+  #indexPage
+    .verticalSection:has(
+      .itemsContainer[data-monitor="videoplayback,markplayed"]
+        > .card[data-positionticks]
+    ):not(:has(a[href*="type=nextup"]))
+    .card:first-child
+    .cardBox {
     width: var(--zf-f);
   }
-  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardPadder {
+  #indexPage
+    .verticalSection:has(
+      .itemsContainer[data-monitor="videoplayback,markplayed"]
+        > .card[data-positionticks]
+    ):not(:has(a[href*="type=nextup"]))
+    .card:first-child
+    .cardPadder {
     height: var(--zf-f-h);
     padding-bottom: 0;
   }
-  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardBox,
-  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardScalable,
-  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardImageContainer {
+  #indexPage
+    .verticalSection:has(
+      .itemsContainer[data-monitor="videoplayback,markplayed"]
+        > .card[data-positionticks]
+    ):not(:has(a[href*="type=nextup"]))
+    .card:first-child
+    .cardBox,
+  #indexPage
+    .verticalSection:has(
+      .itemsContainer[data-monitor="videoplayback,markplayed"]
+        > .card[data-positionticks]
+    ):not(:has(a[href*="type=nextup"]))
+    .card:first-child
+    .cardScalable,
+  #indexPage
+    .verticalSection:has(
+      .itemsContainer[data-monitor="videoplayback,markplayed"]
+        > .card[data-positionticks]
+    ):not(:has(a[href*="type=nextup"]))
+    .card:first-child
+    .cardImageContainer {
     contain: none !important;
     overflow: visible !important;
   }
-  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardImageContainer {
+  #indexPage
+    .verticalSection:has(
+      .itemsContainer[data-monitor="videoplayback,markplayed"]
+        > .card[data-positionticks]
+    ):not(:has(a[href*="type=nextup"]))
+    .card:first-child
+    .cardImageContainer {
     background-size: 0 0 !important;
     border-radius: 22px;
   }
-  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardImageContainer::before,
-  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardImageContainer::after {
+  #indexPage
+    .verticalSection:has(
+      .itemsContainer[data-monitor="videoplayback,markplayed"]
+        > .card[data-positionticks]
+    ):not(:has(a[href*="type=nextup"]))
+    .card:first-child
+    .cardImageContainer::before,
+  #indexPage
+    .verticalSection:has(
+      .itemsContainer[data-monitor="videoplayback,markplayed"]
+        > .card[data-positionticks]
+    ):not(:has(a[href*="type=nextup"]))
+    .card:first-child
+    .cardImageContainer::after {
     content: "";
     position: absolute;
     inset: 0;
@@ -5810,13 +6501,25 @@ W:focus-within .cardBox {
     background-position: center;
     border-radius: 22px;
   }
-  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardImageContainer::before {
+  #indexPage
+    .verticalSection:has(
+      .itemsContainer[data-monitor="videoplayback,markplayed"]
+        > .card[data-positionticks]
+    ):not(:has(a[href*="type=nextup"]))
+    .card:first-child
+    .cardImageContainer::before {
     inset: -3%;
     z-index: -1;
     filter: blur(40px) saturate(1.6);
     opacity: 0.5;
   }
-  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardScalable::after {
+  #indexPage
+    .verticalSection:has(
+      .itemsContainer[data-monitor="videoplayback,markplayed"]
+        > .card[data-positionticks]
+    ):not(:has(a[href*="type=nextup"]))
+    .card:first-child
+    .cardScalable::after {
     content: "";
     position: absolute;
     right: 0;
@@ -5827,23 +6530,61 @@ W:focus-within .cardBox {
     background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
     pointer-events: none;
   }
-  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .innerCardFooter {
+  #indexPage
+    .verticalSection:has(
+      .itemsContainer[data-monitor="videoplayback,markplayed"]
+        > .card[data-positionticks]
+    ):not(:has(a[href*="type=nextup"]))
+    .card:first-child
+    .innerCardFooter {
     z-index: 2;
-    padding: 0 22px 14px;
+    display: flex;
+    align-items: flex-end;
+    height: 22px;
+    overflow: hidden;
+    border-radius: 0 0 22px 22px;
   }
-  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardText {
+  #indexPage
+    .verticalSection:has(
+      .itemsContainer[data-monitor="videoplayback,markplayed"]
+        > .card[data-positionticks]
+    ):not(:has(a[href*="type=nextup"]))
+    .card:first-child
+    .innerCardFooter
+    > .itemProgressBar {
+    flex: 1 1 auto;
+  }
+  #indexPage
+    .verticalSection:has(
+      .itemsContainer[data-monitor="videoplayback,markplayed"]
+        > .card[data-positionticks]
+    ):not(:has(a[href*="type=nextup"]))
+    .card:first-child
+    .cardText {
     position: absolute;
     right: 22px;
     left: 22px;
     z-index: 2;
   }
-  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardText-first {
+  #indexPage
+    .verticalSection:has(
+      .itemsContainer[data-monitor="videoplayback,markplayed"]
+        > .card[data-positionticks]
+    ):not(:has(a[href*="type=nextup"]))
+    .card:first-child
+    .cardText-first {
     bottom: 52px;
     font-size: clamp(20px, 2.5vw, 32px);
     font-weight: 700;
     line-height: 1.1;
   }
-  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card:first-child .cardText-secondary {
+  #indexPage
+    .verticalSection:has(
+      .itemsContainer[data-monitor="videoplayback,markplayed"]
+        > .card[data-positionticks]
+    ):not(:has(a[href*="type=nextup"]))
+    .card:first-child
+    .cardText-secondary {
     display: block;
     bottom: 28px;
     font-size: 15px;
@@ -5854,25 +6595,56 @@ W:focus-within .cardBox {
   :root {
     --zf-s: 58vw;
   }
-  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .itemsContainer {
+  #indexPage
+    .verticalSection:has(
+      .itemsContainer[data-monitor="videoplayback,markplayed"]
+        > .card[data-positionticks]
+    ):not(:has(a[href*="type=nextup"]))
+    .itemsContainer {
     grid-template-rows: auto;
   }
-  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card .cardText-first {
+  #indexPage
+    .verticalSection:has(
+      .itemsContainer[data-monitor="videoplayback,markplayed"]
+        > .card[data-positionticks]
+    ):not(:has(a[href*="type=nextup"]))
+    .card
+    .cardText-first {
     margin-top: 6px;
     line-height: 1.3;
   }
-  #indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card[data-positionticks]) .card .cardText-secondary {
+  #indexPage
+    .verticalSection:has(
+      .itemsContainer[data-monitor="videoplayback,markplayed"]
+        > .card[data-positionticks]
+    ):not(:has(a[href*="type=nextup"]))
+    .card
+    .cardText-secondary {
     display: block;
     font-size: 13px;
     line-height: 1.35;
     color: rgba(var(--white), 0.65);
   }
 }
-#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card:not([data-positionticks])) .card {
+#indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+  ):is(
+    :has(a[href*="type=nextup"]),
+    :not(:has(.itemsContainer > .card[data-positionticks]))
+  )
+  .card {
   width: var(--zf-n) !important;
   max-width: none;
 }
-#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card:not([data-positionticks])) .cardBox {
+#indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+  ):is(
+    :has(a[href*="type=nextup"]),
+    :not(:has(.itemsContainer > .card[data-positionticks]))
+  )
+  .cardBox {
   display: grid;
   grid-template-columns: clamp(110px, 40%, 150px) minmax(0, 1fr);
   grid-template-rows: 1fr auto auto 1fr;
@@ -5881,12 +6653,26 @@ W:focus-within .cardBox {
   overflow: hidden;
   background: rgba(var(--white), 0.08);
 }
-#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card:not([data-positionticks])) .cardScalable {
+#indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+  ):is(
+    :has(a[href*="type=nextup"]),
+    :not(:has(.itemsContainer > .card[data-positionticks]))
+  )
+  .cardScalable {
   grid-column: 1;
   grid-row: 1 / -1;
   border-radius: 0;
 }
-#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card:not([data-positionticks])) .cardText {
+#indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+  ):is(
+    :has(a[href*="type=nextup"]),
+    :not(:has(.itemsContainer > .card[data-positionticks]))
+  )
+  .cardText {
   grid-column: 2;
   height: auto;
   margin: 0;
@@ -5896,12 +6682,26 @@ W:focus-within .cardBox {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card:not([data-positionticks])) .cardText-first {
+#indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+  ):is(
+    :has(a[href*="type=nextup"]),
+    :not(:has(.itemsContainer > .card[data-positionticks]))
+  )
+  .cardText-first {
   grid-row: 2;
   font-size: 17px;
   font-weight: 600;
 }
-#indexPage .verticalSection:has(.itemsContainer[data-monitor="videoplayback,markplayed"] > .card:not([data-positionticks])) .cardText-secondary {
+#indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+  ):is(
+    :has(a[href*="type=nextup"]),
+    :not(:has(.itemsContainer > .card[data-positionticks]))
+  )
+  .cardText-secondary {
   grid-row: 3;
   font-size: 13px;
   color: rgba(var(--white), 0.65);
@@ -5909,14 +6709,26 @@ W:focus-within .cardBox {
 .itemProgressBar,
 .MuiLinearProgress-root.itemLinearProgress {
   height: 4px;
-  border-radius: 2px;
+  border-radius: var(--rounding-circle);
   overflow: hidden;
-  background: rgba(var(--white), 0.24);
+  background: rgba(var(--white-off), 0.18);
 }
 .itemProgressBar .itemProgressBarForeground,
 .MuiLinearProgress-root.itemLinearProgress .MuiLinearProgress-bar {
-  border-radius: 2px;
+  border-radius: var(--rounding-circle);
   background-color: rgb(var(--accent));
+}
+.card .innerCardFooter:has(> .itemProgressBar) {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
 }
 .nowPlayingBar .mdl-slider-background-flex,
 #nowPlayingPage .mdl-slider-background-flex {
@@ -5958,17 +6770,21 @@ W:focus-within .cardBox {
 .nowPlayingBar .mdl-slider::-moz-range-thumb {
   background: rgb(var(--accent)) !important;
 }
-body:has(#loginPage:not(.hide)):has(.backdropImage[style*="Splashscreen"]) #loginPage {
+body:has(#loginPage:not(.hide)):has(.backdropImage[style*="Splashscreen"])
+  #loginPage {
   background-image: none;
   animation: none;
 }
-body:has(#loginPage:not(.hide)):has(.backdropImage[style*="Splashscreen"]) .backgroundContainer {
+body:has(#loginPage:not(.hide)):has(.backdropImage[style*="Splashscreen"])
+  .backgroundContainer {
   background: none !important;
 }
-body:has(#loginPage:not(.hide)):has(.backdropImage[style*="Splashscreen"]) .backdropImage {
+body:has(#loginPage:not(.hide)):has(.backdropImage[style*="Splashscreen"])
+  .backdropImage {
   filter: none;
 }
-body:has(#loginPage:not(.hide)):has(.backdropImage[style*="Splashscreen"]) #loginPage::before {
+body:has(#loginPage:not(.hide)):has(.backdropImage[style*="Splashscreen"])
+  #loginPage::before {
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
   background:
@@ -5985,7 +6801,9 @@ body:has(#loginPage:not(.hide)):has(.backdropImage[style*="Splashscreen"]) #logi
     );
 }
 @media (orientation: portrait) {
-  .layout-mobile body:has(#loginPage:not(.hide)):has(.backdropImage[style*="Splashscreen"]) #loginPage::before {
+  .layout-mobile
+    body:has(#loginPage:not(.hide)):has(.backdropImage[style*="Splashscreen"])
+    #loginPage::before {
     background: linear-gradient(
       180deg,
       rgba(var(--darkest), 0) 0%,
@@ -6073,5 +6891,74 @@ body:has(#loginPage:not(.hide)):has(.backdropImage[style*="Splashscreen"]) #logi
     box-sizing: border-box;
     width: 100%;
     max-width: 24rem;
+  }
+}
+.layout-desktop .detailPagePrimaryContent:has(.collectionItems:not(.hide)) {
+  max-width: none;
+}
+.layout-desktop
+  .detailSection:has(> .collectionItems:not(.hide))
+  > .detailSectionContent,
+.layout-desktop
+  .detailSection:has(> .collectionItems:not(.hide))
+  > .itemDetailsGroup {
+  max-width: 62em;
+}
+.layout-desktop .collectionItemsContainer .portraitCard,
+.layout-desktop .collectionItemsContainer .squareCard {
+  width: clamp(150px, 13vw, 200px);
+}
+.layout-desktop .collectionItemsContainer .backdropCard {
+  width: clamp(240px, 22vw, 340px);
+}
+.MuiAppBar-root > .MuiToolbar-root:first-of-type > .MuiStack-root {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(auto, max-content);
+  align-items: center;
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+}
+.MuiAppBar-root > .MuiToolbar-root:first-of-type > .MuiBox-root {
+  flex-shrink: 0;
+}
+.MuiAppBar-root
+  > .MuiToolbar-root:first-of-type
+  > .MuiStack-root
+  > .MuiButton-root {
+  min-width: max-content;
+  white-space: nowrap;
+}
+.MuiAppBar-root
+  > .MuiToolbar-root:first-of-type
+  > .MuiStack-root
+  > a.MuiButton-sizeMedium {
+  display: block;
+  min-width: 3.4em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.MuiAppBar-root
+  > .MuiToolbar-root:first-of-type
+  > .MuiStack-root
+  > a.MuiButton-sizeMedium
+  .MuiButton-startIcon {
+  display: inline-flex;
+  vertical-align: middle;
+}
+@media (max-width: 1999px) {
+  .MuiAppBar-root
+    > .MuiToolbar-root:first-of-type
+    > .MuiStack-root
+    > a.MuiButton-sizeMedium
+    .MuiButton-startIcon {
+    display: none;
+  }
+  .MuiAppBar-root
+    > .MuiToolbar-root:first-of-type
+    > .MuiStack-root
+    > .MuiButton-sizeMedium {
+    letter-spacing: 0.06em;
   }
 }
