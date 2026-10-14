@@ -1,0 +1,37 @@
+/* Zombie Revived CSS Theme
+ * Version: v18.2 */
+
+.cardOverlayContainer > .cardOverlayButton-br {
+  display: flex;
+  gap: 0.3em;
+  z-index: 2;
+  right: 0.5em;
+  bottom: 0.5em;
+  padding: 0;
+}
+.cardOverlayContainer > .cardOverlayButton-br .cardOverlayButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2em;
+  height: 2.2em;
+  margin: 0;
+  padding: 0;
+  background: none !important;
+  color: rgb(var(--white));
+  filter: drop-shadow(0 1px 4px rgba(var(--darkest), 0.8));
+  transition: color 0.16s ease;
+}
+.cardOverlayContainer > .cardOverlayButton-br .cardOverlayButtonIcon {
+  font-size: 1.15em;
+  color: inherit;
+}
+.cardOverlayContainer > .cardOverlayButton-br .cardOverlayButton:hover {
+  color: rgb(var(--accent)) !important;
+}
+.cardOverlayContainer > .cardOverlayButton-br .playstatebutton-icon-played {
+  color: rgb(var(--jade-green));
+}
+.cardOverlayContainer > .cardOverlayButton-br .ratingbutton-icon-withrating {
+  color: rgb(var(--cherry-red));
+}

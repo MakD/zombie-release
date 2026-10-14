@@ -1,5 +1,5 @@
 /* Zombie Revived CSS Theme
- * Version: v18.1 */
+ * Version: v18.2 */
 
 @media (max-width: 46.875em) and (orientation: portrait) {
   :root {
@@ -82,6 +82,9 @@
   }
   #slides-container.layout-marquee .action-label {
     display: none;
+  }
+  #slides-container.layout-marquee .button-container .watchlist-button::after {
+    content: none;
   }
   #slides-container.layout-marquee .dots-container {
     left: auto !important;

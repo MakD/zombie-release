@@ -1,5 +1,5 @@
 /* Zombie Revived CSS Theme
- * Version: v18.1 */
+ * Version: v18.2 */
 
 @import url(https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&display=swap);
 body,
@@ -2845,6 +2845,16 @@ layout-mobile .detailPagePrimaryContent {
 .layout-desktop .mainDetailButtons .detailButton:not(.btnPlay):hover {
   background-color: rgba(var(--accent), 0.12) !important;
   color: rgb(var(--white));
+}
+.layout-desktop
+  .mainDetailButtons
+  .detailButton.btnPlaystate.playstatebutton-played {
+  color: rgb(var(--jade-green)) !important;
+}
+.layout-desktop
+  .mainDetailButtons
+  .detailButton.btnUserRating.ratingbutton-withrating {
+  color: rgb(var(--cherry-red)) !important;
 }
 .layout-desktop .mainDetailButtons .btnPlay {
   padding: 0 1.5em 0 1.15em;

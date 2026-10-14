@@ -1,0 +1,33 @@
+/* Zombie Revived CSS Theme
+ * Version: v18.2 */
+
+.layout-desktop .mainDetailButtons .detailButton:not(.btnPlay) {
+  border: 1px solid rgba(var(--white-off), 0.24) !important;
+  transition:
+    background-color 0.16s ease,
+    border-color 0.16s ease,
+    color 0.16s ease;
+}
+.layout-desktop .mainDetailButtons .detailButton:not(.btnPlay):hover {
+  border-color: rgba(var(--white-off), 0.5) !important;
+}
+.layout-desktop
+  .mainDetailButtons
+  .detailButton.btnPlaystate.playstatebutton-played {
+  border-color: rgba(var(--jade-green), 0.6) !important;
+}
+.layout-desktop
+  .mainDetailButtons
+  .detailButton.btnUserRating.ratingbutton-withrating {
+  border-color: rgba(var(--cherry-red), 0.6) !important;
+}
+.layout-desktop
+  .mainDetailButtons
+  .detailButton.watchlist-icon[data-active="true"] {
+  border-color: rgb(34 197 94 / 0.6) !important;
+}
+.layout-desktop
+  .mainDetailButtons
+  .detailButton.jellyseerr-report-issue-icon.has-open-issues {
+  border-color: rgb(249 115 22 / 0.6) !important;
+}

@@ -1,5 +1,5 @@
 /* Zombie Revived CSS Theme
- * Version: v18.1 */
+ * Version: v18.2 */
 
 :root {
   --zmb-gutter: clamp(1.25rem, 3.9vw, 4rem);
@@ -296,6 +296,11 @@ body:has(#slides-container.layout-marquee) .homeSectionsContainer {
   box-shadow: none;
   padding: 0 1.9rem;
 }
+#slides-container.layout-marquee
+  .button-container
+  .watchlist-button[data-active="true"]::before {
+  color: rgb(34 197 94);
+}
 #slides-container.layout-marquee .button-container .play-button:hover {
   background: rgb(var(--accent, 255 255 255));
   filter: brightness(0.92);
@@ -404,7 +409,8 @@ body:has(#slides-container.layout-marquee) .homeSectionsContainer {
   #slides-container.layout-marquee .button-container {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
     column-gap: 8px;
     row-gap: 0;
     margin: 20px 0 0;
@@ -459,6 +465,9 @@ body:has(#slides-container.layout-marquee) .homeSectionsContainer {
     font-weight: 500;
     letter-spacing: 0;
     color: #96969c;
+  }
+  #slides-container.layout-marquee .button-container .watchlist-button::after {
+    content: "Watchlist";
   }
   #slides-container.layout-marquee .dots-container {
     left: 50% !important;

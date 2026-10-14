@@ -193,6 +193,30 @@ On phones held upright the hero shows the poster. To show the backdrop instead, 
 
 </details>
 
+## Optional modules
+
+Small add-ons for things not everyone wants. Add any of them below the main Zombie import.
+
+### Card buttons
+
+Zombie hides the buttons Jellyfin shows when you hover over a card (mark played, favourite and more), to keep cards clean. This brings them back:
+
+```css
+@import url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/modules/card-buttons.css);
+```
+
+If you use [KefinTweaks](https://github.com/ranaldsgift/KefinTweaks), this also brings back its Watchlist button on cards. Its Watchlist button in the media bar shows either way.
+
+Hover buttons only exist in the desktop layout; phones and tablets don't show them.
+
+### Outlined detail buttons
+
+On desktop, the buttons on a movie or show page (Mark played, Add to favorites, More) are plain text, coloured by state: green once watched, red once a favourite, green for the KefinTweaks Watchlist button when the item is on your watchlist, and orange for the Jellyfin Enhanced report button when there are open issues. This adds a thin outline so they read as buttons; the outline takes the same state colour.
+
+```css
+@import url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/modules/detail-buttons.css);
+```
+
 ## Login background
 
 If the splash screen is enabled in Jellyfin (Dashboard, General), the login page uses it as its background. If it is off, the theme shows its own image. To use your own image in that case, add this to your custom CSS:
